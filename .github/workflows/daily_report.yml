@@ -1,0 +1,36 @@
+name: Daily Morning Report & Portfolio Tracker
+
+on:
+  schedule:
+    # Chạy vào 01:30 UTC = 08:30 sáng giờ Việt Nam (Thứ 2 đến Thứ 6)
+    - cron: '30 1 * * 1-5'
+  workflow_dispatch: # Cho phép kích hoạt thủ công từ tab Actions trên GitHub
+
+jobs:
+  run-daily-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài đặt Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cài đặt thư viện phụ thuộc
+        run: pip install -r requirements.txt
+
+      - name: Chạy Báo Cáo Sáng & Theo Dõi Danh Mục
+        run: python3 daily_report.py
+
+      - name: Tự động lưu báo cáo mới vào Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/ journal/
+          git commit -m "Auto: Cập nhật Bản tin chiến lược & Nhật ký danh mục ngày $(date +'%d/%m/%Y')" || exit 0
+          git push
