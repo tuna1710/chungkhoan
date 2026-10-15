@@ -1,94 +1,104 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-VISUAL DASHBOARD GENERATOR - BẢNG ĐIỀU KHIỂN & BÁO CÁO TRỰC QUAN TTCK
-Tạo trang Dashboard đồ họa tương tác cao, so sánh đa chiều các cổ phiếu,
-tích hợp biểu đồ Chart.js, Radar Chart so sánh sức mạnh, và phân tích Head-to-Head.
+VISUAL DASHBOARD GENERATOR - BẢNG ĐIỀU KHIỂN & ĐÁNH GIÁ CỔ PHIẾU TRỰC QUAN
+Tạo trang Dashboard đồ họa tương tác cao, tích hợp CÔNG CỤ ĐÁNH GIÁ CỔ PHIẾU TỰ ĐỘNG (60+ mã),
+biểu đồ Radar Chart tương tác, theo dõi danh mục thực tế (TCB, DCM), và phân tích Head-to-Head.
 """
 
 import os
 import sys
 import json
-import subprocess
 from datetime import datetime
 
-sys.path.append(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if os.path.basename(BASE_DIR) == "tools":
+    BASE_DIR = os.path.dirname(BASE_DIR)
+sys.path.append(BASE_DIR)
+sys.path.append(os.path.join(BASE_DIR, 'tools'))
 from screener import scan_all_stocks
 
 def generate_visual_dashboard(output_file=None):
     if output_file is None:
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        output_file = os.path.join(base_dir, "reports", "dashboard.html")
+        output_file = os.path.join(BASE_DIR, "reports", "dashboard.html")
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     today_str = datetime.now().strftime("%d/%m/%Y")
     
     print("\n📊 Đang thu thập dữ liệu và tính toán chỉ số so sánh đa chiều...")
     results = scan_all_stocks()
     
-    # Lấy top cổ phiếu khuyến nghị mua và top cổ phiếu cần tránh
     top_stocks = results[:12]
     top_buys = [s for s in results if s['score'] >= 70][:6]
     top_avoids = [s for s in results if s['score'] < 52 and s['val20_bil'] >= 50][:4]
 
-    # Chuẩn bị dữ liệu cho biểu đồ so sánh Radar & Bar chart
     radar_labels = ["Thanh khoản", "Xu hướng MA", "Dòng tiền lớn", "Độ siết nền", "Tỷ lệ R:R"]
     
-    # Chọn 4 mã đại diện so sánh: TCB (Bank), DCM (Hóa chất), KBC (KCN), HPG (Thép)
+    # 4 mã so sánh tổng quan
     comparison_symbols = ["TCB", "DCM", "KBC", "HPG"]
     comparison_data = {}
-    for sym in comparison_symbols:
-        for s in results:
-            if s['symbol'] == sym:
-                # Chuẩn hóa điểm 0-100 cho 5 trục radar
-                liquidity_score = min(100, (s['val20_bil'] / 200) * 100)
-                trend_score = 95 if s['dist_ma20'] >= 0 and s['dist_ma20'] <= 3 else (70 if s['dist_ma20'] > 3 else 40)
-                money_flow_score = min(100, s['vol_ratio'] * 70)
-                base_score = max(20, min(100, 100 - s['spread_5d'] * 10))
-                rr_score = min(100, (s['rr_ratio'] / 2.5) * 100)
-                comparison_data[sym] = {
-                    'data': [round(liquidity_score), round(trend_score), round(money_flow_score), round(base_score), round(rr_score)],
-                    'score': s['score'],
-                    'close': s['close'],
-                    'pct': s['pct_change'],
-                    'val': s['val20_bil'],
-                    'rr': s['rr_ratio']
-                }
-                break
+    
+    # Xây dựng Database đánh giá cho toàn bộ 60+ mã để tra cứu tương tác
+    stocks_db = {}
+    for s in results:
+        liq_score = min(100, (s['val20_bil'] / 200) * 100)
+        tr_score = 95 if s['dist_ma20'] >= 0 and s['dist_ma20'] <= 3 else (70 if s['dist_ma20'] > 3 else 40)
+        mf_score = min(100, s['vol_ratio'] * 70)
+        b_score = max(20, min(100, 100 - s['spread_5d'] * 10))
+        rr_sc = min(100, (s['rr_ratio'] / 2.5) * 100)
+        
+        radar_values = [round(liq_score), round(tr_score), round(mf_score), round(b_score), round(rr_sc)]
+        
+        stocks_db[s['symbol']] = {
+            'symbol': s['symbol'],
+            'sector': s['sector'],
+            'close': round(s['close'], 2),
+            'pct_change': round(s['pct_change'], 2),
+            'score': s['score'],
+            'action': s['action'],
+            'status': s['status'],
+            'rsi': round(s['rsi'], 1),
+            'dist_ma20': round(s['dist_ma20'], 2),
+            'vol_ratio': round(s['vol_ratio'], 2),
+            'val20_bil': round(s['val20_bil'], 1),
+            'spread_5d': round(s['spread_5d'], 2),
+            'rr_ratio': round(s['rr_ratio'], 1),
+            'entry_zone': s.get('entry_zone', 'N/A'),
+            'stop_loss': round(s.get('cutloss_price', 0), 2),
+            'target_price': round(s.get('target_price', 0), 2),
+            'potential_upside': round(s.get('potential_upside', 0), 1),
+            'tags': s['tags'],
+            'radar': radar_values
+        }
 
-    # Build HTML content
+    for sym in comparison_symbols:
+        if sym in stocks_db:
+            comparison_data[sym] = {
+                'data': stocks_db[sym]['radar'],
+                'score': stocks_db[sym]['score']
+            }
+
+    stocks_json_str = json.dumps(stocks_db, ensure_ascii=False)
+    sorted_symbols = [s['symbol'] for s in sorted(results, key=lambda x: x['score'], reverse=True)]
+
     html = f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng Điều Khiển Chứng Khoán Trực Quan - {today_str}</title>
+    <title>Bảng Điều Khiển & Đánh Giá Cổ Phiếu - {today_str}</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script>
-        tailwind.config = {{
-            theme: {{
-                extend: {{
-                    colors: {{
-                        vnred: '#ef4444',
-                        vngreen: '#10b981',
-                        vnyellow: '#f59e0b',
-                        darkcard: '#1e293b',
-                        darkbg: '#0f172a'
-                    }}
-                }}
-            }}
-        }}
-    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body {{ font-family: 'Inter', sans-serif; }}
         .badge-buy {{ background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }}
         .badge-watch {{ background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }}
         .badge-avoid {{ background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }}
+        .pill-active {{ background: #06b6d4 !important; color: #0f172a !important; font-weight: bold; }}
     </style>
 </head>
 <body class="bg-[#0f172a] text-slate-100 min-h-screen antialiased pb-16">
@@ -102,8 +112,8 @@ def generate_visual_dashboard(output_file=None):
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                        BÁO CÁO ĐẦU NGÀY & DASHBOARD SO SÁNH CỔ PHIẾU
-                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live Data</span>
+                        BẢNG ĐIỀU KHIỂN & ĐÁNH GIÁ CỔ PHIẾU
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live System</span>
                     </h1>
                     <p class="text-xs text-slate-400">Chiến lược Cân bằng Săn sóng ngành • Kế hoạch NAV 100.000.000 VNĐ • Ngày {today_str}</p>
                 </div>
@@ -120,8 +130,8 @@ def generate_visual_dashboard(output_file=None):
                     <span class="text-sm font-bold text-emerald-400">1.700 điểm</span>
                 </div>
                 <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
-                    <span class="text-xs text-slate-400">NAV Khả dụng:</span>
-                    <span class="text-sm font-bold text-cyan-400">100.000.000 đ</span>
+                    <span class="text-xs text-slate-400">Tiền mặt / CP:</span>
+                    <span class="text-sm font-bold text-cyan-400">44tr (44%) / 56tr (56%)</span>
                 </div>
             </div>
         </div>
@@ -136,48 +146,168 @@ def generate_visual_dashboard(output_file=None):
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-xs font-medium text-slate-400">Xung Lực Thị Trường</p>
-                        <h3 class="text-lg font-bold text-amber-300 mt-1">Kiểm định hỗ trợ 1.700</h3>
+                        <h3 class="text-lg font-bold text-amber-300 mt-1">Kiểm định mốc 1.700</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400"><i class="fa-solid fa-compass"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Phân hóa mạnh mẽ. Dòng tiền rút khỏi họ Vin, dịch chuyển sang Bank & Thép.</p>
+                <p class="text-xs text-slate-400 mt-3">Phân hóa mạnh mẽ. Dòng tiền gom mạnh ở nhóm Ngân hàng và Hóa chất.</p>
             </div>
             <!-- Card 2 -->
             <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 shadow-lg hover:border-slate-600 transition">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs font-medium text-slate-400">Cơ Hội Mua Tốt Nhất</p>
-                        <h3 class="text-lg font-bold text-emerald-400 mt-1">DCM & TCB</h3>
+                        <p class="text-xs font-medium text-slate-400">Danh Mục Đang Nắm Giữ</p>
+                        <h3 class="text-lg font-bold text-emerald-400 mt-1">TCB (900) & DCM (800)</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i class="fa-solid fa-bullseye"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Đạt điểm kỹ thuật 75-80/100, test cung cạn vol sát MA20, R:R > 2.0.</p>
+                <p class="text-xs text-slate-400 mt-3">Khớp giá đỏ tối ưu (TCB 32.64, DCM 33.30). Hàng về chiều 17/10.</p>
             </div>
             <!-- Card 3 -->
             <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 shadow-lg hover:border-slate-600 transition">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs font-medium text-slate-400">Cảnh Báo Cắt Lỗ</p>
-                        <h3 class="text-lg font-bold text-rose-400 mt-1">Kỷ luật -5% / -8%</h3>
+                        <p class="text-xs font-medium text-slate-400">Cảnh Báo Kỷ Luật</p>
+                        <h3 class="text-lg font-bold text-rose-400 mt-1">Cắt lỗ -5% / -8%</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-rose-500/10 text-rose-400"><i class="fa-solid fa-shield-halved"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">-5% cắt 1/2 vị thế. -7% đến -8% bán sạch, không trung bình giá xuống.</p>
+                <p class="text-xs text-slate-400 mt-3">TCB cắt lỗ 31.00; DCM cắt lỗ 31.65. Chạm -5% bán 1/2 không gồng lỗ.</p>
             </div>
             <!-- Card 4 -->
             <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 shadow-lg hover:border-slate-600 transition">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs font-medium text-slate-400">Giải Ngân Hôm Nay</p>
-                        <h3 class="text-lg font-bold text-cyan-400 mt-1">30 - 35 triệu VNĐ</h3>
+                        <p class="text-xs font-medium text-slate-400">Sức Mua Tiền Mặt</p>
+                        <h3 class="text-lg font-bold text-cyan-400 mt-1">43.984.000 VNĐ</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-cyan-500/10 text-cyan-400"><i class="fa-solid fa-wallet"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Mở vị thế thăm dò 30% NAV. Giữ 65-70% tiền mặt phòng thủ.</p>
+                <p class="text-xs text-slate-400 mt-3">Chiếm 43.98% NAV. Tạm dừng mua mới, giữ vị thế chủ động phòng thủ.</p>
             </div>
         </div>
 
-        <!-- 2. SO SÁNH ĐA CHIỀU (RADAR CHART & HEAD-TO-HEAD BATTLE) -->
+        <!-- ======================================================== -->
+        <!-- 🎯 CÔNG CỤ TRA CỨU & ĐÁNH GIÁ CỔ PHIẾU TỰ ĐỘNG (INTERACTIVE EVALUATOR) -->
+        <!-- ======================================================== -->
+        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950/40 border border-indigo-500/30 rounded-2xl p-6 shadow-2xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-700/60">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart text-cyan-400"></i>
+                        CÔNG CỤ ĐÁNH GIÁ CỔ PHIẾU TỰ ĐỘNG (CHẤM ĐIỂM 0 - 100)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Chọn hoặc gõ mã cổ phiếu bất kỳ để xem điểm kỹ thuật, biểu đồ radar 5 trục, vùng gom, điểm cắt lỗ và chốt lời</p>
+                </div>
+                <!-- Dropdown selector -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">Chọn cổ phiếu:</span>
+                    <select id="stockSelect" onchange="selectStock(this.value)" class="bg-slate-900 border border-cyan-500/50 rounded-xl px-4 py-2 text-sm text-cyan-300 font-bold focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer shadow-lg">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quick pick pill buttons -->
+            <div class="flex items-center gap-2 flex-wrap mb-5 text-xs">
+                <span class="text-slate-400 font-medium mr-1">Xem nhanh:</span>
+                <button onclick="selectStock('DCM')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-emerald-500/40 text-emerald-300 font-semibold transition">🔥 DCM (80đ)</button>
+                <button onclick="selectStock('TCB')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-indigo-500/40 text-indigo-300 font-semibold transition">🔥 TCB (75đ)</button>
+                <button onclick="selectStock('KBC')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-500/40 text-amber-300 font-semibold transition">⭐ KBC (76đ)</button>
+                <button onclick="selectStock('HPG')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-cyan-500/40 text-cyan-300 font-semibold transition">⭐ HPG (75đ)</button>
+                <button onclick="selectStock('SSI')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 transition">SSI</button>
+                <button onclick="selectStock('FPT')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 transition">FPT</button>
+                <button onclick="selectStock('MWG')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 transition">MWG</button>
+                <button onclick="selectStock('VHM')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-rose-500/40 text-rose-400 transition">⛔ VHM (Gãy)</button>
+                <button onclick="selectStock('DGC')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-rose-500/40 text-rose-400 transition">⛔ DGC (Gãy)</button>
+            </div>
+
+            <!-- Dynamic Evaluator Card -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-950/60 p-5 rounded-xl border border-slate-800" id="evalCard">
+                <!-- Left: Evaluation Details -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-wider text-slate-400" id="evalSector">Ngành: Hóa chất</span>
+                            <div class="flex items-center gap-3 mt-1">
+                                <h3 class="text-2xl font-black text-white" id="evalSymbol">DCM</h3>
+                                <span class="text-lg font-bold text-emerald-400" id="evalPrice">34.10k (+3.18%)</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-slate-400 block">ĐIỂM KỸ THUẬT</span>
+                            <span class="text-3xl font-black text-emerald-400" id="evalScore">80<span class="text-sm text-slate-500">/100</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                        <div id="evalScoreBar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width: 80%;"></div>
+                    </div>
+
+                    <!-- Action Badge -->
+                    <div class="p-3 rounded-lg border font-bold text-sm flex items-center justify-between" id="evalActionBox">
+                        <span id="evalActionText">🔥 MUA ƯU TIÊN (TOP 1 TOÀN THỊ TRƯỜNG)</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-black/30 font-semibold" id="evalStatus">SIÊU PHẨM SĂN SÓNG</span>
+                    </div>
+
+                    <!-- 4 Trading Key Levels -->
+                    <div class="grid grid-cols-4 gap-2 text-center pt-2">
+                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/60">
+                            <span class="text-[10px] text-slate-400 block">Vùng gom mua</span>
+                            <span class="text-xs font-bold text-cyan-300" id="evalBuyZone">33.84 - 34.10k</span>
+                        </div>
+                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-rose-500/30">
+                            <span class="text-[10px] text-rose-400 block">Cắt lỗ (-5%)</span>
+                            <span class="text-xs font-bold text-rose-400" id="evalStopLoss">32.40k</span>
+                        </div>
+                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-emerald-500/30">
+                            <span class="text-[10px] text-emerald-400 block">Chốt lời</span>
+                            <span class="text-xs font-bold text-emerald-400" id="evalTarget">38.19k (+12%)</span>
+                        </div>
+                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-indigo-500/30">
+                            <span class="text-[10px] text-indigo-400 block">Tỷ lệ R:R</span>
+                            <span class="text-xs font-bold text-indigo-300" id="evalRR">2.4 : 1</span>
+                        </div>
+                    </div>
+
+                    <!-- Tags list -->
+                    <div class="flex items-center gap-1.5 flex-wrap pt-1 text-xs" id="evalTags">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Dedicated Stock Radar Chart & Quantitative Metrics -->
+                <div class="lg:col-span-5 bg-slate-900/70 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-slate-300 block mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-cyan-400"></i>
+                            BIỂU ĐỒ SỨC MẠNH 5 TRỤC CỦA MÃ NÀY
+                        </span>
+                        <div class="h-44 relative">
+                            <canvas id="stockRadarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 mt-3 pt-3 border-t border-slate-800 text-center text-xs">
+                        <div class="bg-slate-800/60 p-1.5 rounded">
+                            <span class="text-[10px] text-slate-400 block">Vị thế vs MA20</span>
+                            <span class="font-bold text-white" id="evalMa20">+0.76%</span>
+                        </div>
+                        <div class="bg-slate-800/60 p-1.5 rounded">
+                            <span class="text-[10px] text-slate-400 block">Xung lực RSI</span>
+                            <span class="font-bold text-white" id="evalRsi">54.1</span>
+                        </div>
+                        <div class="bg-slate-800/60 p-1.5 rounded">
+                            <span class="text-[10px] text-slate-400 block">GTGD Bình quân</span>
+                            <span class="font-bold text-white" id="evalVal">95.6 Tỷ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. SO SÁNH ĐA CHIỀU (RADAR CHART TỔNG THỂ & HEAD-TO-HEAD BATTLE) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Radar Chart: So sánh sức mạnh 4 ứng viên -->
             <div class="lg:col-span-5 bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl">
@@ -185,9 +315,9 @@ def generate_visual_dashboard(output_file=None):
                     <div>
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
                             <i class="fa-solid fa-diagram-project text-indigo-400"></i>
-                            MA TRẬN SỨC MẠNH CỔ PHIẾU (RADAR)
+                            SO SÁNH TƯƠNG QUAN 4 TRỤ CỘT
                         </h2>
-                        <p class="text-xs text-slate-400">So sánh 5 tiêu chí cốt lõi của 4 ứng viên hàng đầu</p>
+                        <p class="text-xs text-slate-400">TCB (Bank) • DCM (Hóa chất) • KBC (KCN) • HPG (Thép)</p>
                     </div>
                     <span class="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded">Thang 100</span>
                 </div>
@@ -196,19 +326,19 @@ def generate_visual_dashboard(output_file=None):
                 </div>
                 <div class="grid grid-cols-4 gap-2 mt-4 text-center">
                     <div class="bg-slate-900/60 p-2 rounded-lg border border-indigo-500/30">
-                        <span class="text-xs font-semibold text-indigo-400 block">TCB (Bank)</span>
+                        <span class="text-xs font-semibold text-indigo-400 block">TCB</span>
                         <span class="text-sm font-bold text-white">75 đ</span>
                     </div>
                     <div class="bg-slate-900/60 p-2 rounded-lg border border-emerald-500/30">
-                        <span class="text-xs font-semibold text-emerald-400 block">DCM (Hóa chất)</span>
+                        <span class="text-xs font-semibold text-emerald-400 block">DCM</span>
                         <span class="text-sm font-bold text-white">80 đ</span>
                     </div>
                     <div class="bg-slate-900/60 p-2 rounded-lg border border-amber-500/30">
-                        <span class="text-xs font-semibold text-amber-400 block">KBC (KCN)</span>
+                        <span class="text-xs font-semibold text-amber-400 block">KBC</span>
                         <span class="text-sm font-bold text-white">76 đ</span>
                     </div>
                     <div class="bg-slate-900/60 p-2 rounded-lg border border-cyan-500/30">
-                        <span class="text-xs font-semibold text-cyan-400 block">HPG (Thép)</span>
+                        <span class="text-xs font-semibold text-cyan-400 block">HPG</span>
                         <span class="text-sm font-bold text-white">75 đ</span>
                     </div>
                 </div>
@@ -252,10 +382,10 @@ def generate_visual_dashboard(output_file=None):
                         </div>
                         <div class="grid grid-cols-2 gap-3 mt-2 text-xs">
                             <div class="bg-emerald-950/30 border border-emerald-800/40 p-2 rounded">
-                                <span class="font-bold text-emerald-300">✅ KBC:</span> Vượt lấy lại MA20, vol cạn kiệt (0.52x TB20) báo hiệu cạn cung bán, biên độ siết 4.2%, tỷ lệ R:R cực tốt 2.5 : 1.
+                                <span class="font-bold text-emerald-300">✅ KBC:</span> Đã vượt lấy lại MA20 thành công, phiên test cung cạn vol chỉ 0.52x, R:R hấp dẫn 2.5 : 1.
                             </div>
                             <div class="bg-slate-800/40 border border-slate-700/50 p-2 rounded text-slate-400">
-                                <span class="font-bold text-slate-300">⚠️ IDC:</span> Vẫn nằm mấp mé dưới MA20 (-0.4%), áp lực cung bán tại vùng 34k còn hiện hữu, dư địa ngắn hạn hẹp hơn.
+                                <span class="font-bold text-slate-300">⚠️ IDC:</span> Vẫn nằm dưới MA20 (-0.4%), áp lực cung bán vùng 34k còn lớn, biên độ lợi nhuận ngắn hạn hẹp hơn.
                             </div>
                         </div>
                     </div>
@@ -263,7 +393,7 @@ def generate_visual_dashboard(output_file=None):
                     <!-- Battle 3: DCM vs DGC -->
                     <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-700/60 hover:border-slate-600 transition">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">HÓA CHẤT / PHÂN BÓN</span>
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">NHÓM HÓA CHẤT / PHÂN BÓN</span>
                             <span class="text-xs text-emerald-400 font-semibold"><i class="fa-solid fa-check"></i> Chọn DCM (80đ) > DGC (48đ)</span>
                         </div>
                         <div class="grid grid-cols-2 gap-3 mt-2 text-xs">
@@ -271,235 +401,8 @@ def generate_visual_dashboard(output_file=None):
                                 <span class="font-bold text-emerald-300">✅ DCM (Top 1):</span> Giá > MA20 > MA50 chuẩn uptrend, tăng +3.18%, test cung hoàn hảo sát MA20, R:R 2.4:1.
                             </div>
                             <div class="bg-slate-800/40 border border-slate-700/50 p-2 rounded text-slate-400">
-                                <span class="font-bold text-slate-300">⚠️ DGC:</span> Gãy MA20 & MA50, dòng tiền suy yếu rõ nét, nằm trong pha phân phối điều chỉnh.
+                                <span class="font-bold text-rose-400">⛔ DGC:</span> Gãy MA50 (-6.2%), RSI yếu 41.5, tổ chức xả hàng, tuyệt đối né xa không bắt đáy.
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. BẢNG MA TRẬN SO SÁNH TOÀN DIỆN CÁC CỔ PHIẾU (INTERACTIVE TABLE) -->
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl overflow-hidden">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                <div>
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-table-list text-cyan-400"></i>
-                        BẢNG MA TRẬN SO SÁNH CHỈ SỐ KỸ THUẬT & DÒNG TIỀN
-                    </h2>
-                    <p class="text-xs text-slate-400">Trực quan hóa Điểm số, Vị thế giá so với MA20, Xung lực RSI, Khối lượng và Tỷ lệ Lợi nhuận/Rủi ro</p>
-                </div>
-                <div class="flex items-center gap-2 text-xs">
-                    <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span> >= 75: Mua ưu tiên</span>
-                    <span class="flex items-center gap-1.5 ml-2"><span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span> 60-74: Canh rung lắc</span>
-                    <span class="flex items-center gap-1.5 ml-2"><span class="h-2.5 w-2.5 rounded-full bg-rose-500"></span> < 55: Tránh xa / Bán</span>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs border-collapse">
-                    <thead>
-                        <tr class="border-b border-slate-700 bg-slate-900/60 text-slate-300 font-semibold uppercase tracking-wider">
-                            <th class="py-3 px-3">Hạng</th>
-                            <th class="py-3 px-3">Mã CP</th>
-                            <th class="py-3 px-3">Ngành</th>
-                            <th class="py-3 px-3">Giá (k)</th>
-                            <th class="py-3 px-3">+/- Phiên</th>
-                            <th class="py-3 px-3">Vị thế vs MA20</th>
-                            <th class="py-3 px-3">Xung lực RSI</th>
-                            <th class="py-3 px-3">Vol / TB20p</th>
-                            <th class="py-3 px-3">GTGD (Tỷ)</th>
-                            <th class="py-3 px-3">Tỷ lệ R:R</th>
-                            <th class="py-3 px-3">Điểm số</th>
-                            <th class="py-3 px-3 text-center">Khuyến nghị</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-800">
-"""
-    for i, s in enumerate(top_stocks, 1):
-        # Progress bar colors
-        score = s['score']
-        if score >= 75:
-            bar_color = "bg-emerald-500"
-            badge_cls = "badge-buy"
-            icon = '<i class="fa-solid fa-fire text-emerald-400 mr-1"></i>'
-        elif score >= 60:
-            bar_color = "bg-amber-500"
-            badge_cls = "badge-watch"
-            icon = '<i class="fa-solid fa-check text-amber-400 mr-1"></i>'
-        else:
-            bar_color = "bg-rose-500"
-            badge_cls = "badge-avoid"
-            icon = '<i class="fa-solid fa-ban text-rose-400 mr-1"></i>'
-
-        # MA20 color
-        dist = s['dist_ma20']
-        dist_color = "text-emerald-400" if dist >= 0 and dist <= 3.5 else ("text-amber-400" if dist > 3.5 else "text-rose-400")
-
-        # Change color
-        chg = s['pct_change']
-        chg_color = "text-emerald-400 font-bold" if chg > 0 else ("text-rose-400 font-bold" if chg < 0 else "text-amber-300")
-
-        html += f"""
-                        <tr class="hover:bg-slate-800/40 transition">
-                            <td class="py-3 px-3 font-bold text-slate-400">#{i}</td>
-                            <td class="py-3 px-3 font-bold text-white text-sm">
-                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">{s['symbol']}</span>
-                            </td>
-                            <td class="py-3 px-3 text-slate-300">{s['sector']}</td>
-                            <td class="py-3 px-3 font-semibold text-white">{s['close']:.2f}</td>
-                            <td class="py-3 px-3 {chg_color}">{chg:+.2f}%</td>
-                            <td class="py-3 px-3 {dist_color}">
-                                {dist:+.2f}% 
-                                <span class="text-[10px] text-slate-500 block">{'Sát nền' if 0<=dist<=3 else ('Cao' if dist>3 else 'Dưới MA20')}</span>
-                            </td>
-                            <td class="py-3 px-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-8 font-semibold">{s['rsi']:.1f}</span>
-                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: {min(100, s['rsi'])}%"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3 px-3">
-                                <span class="font-medium {'text-emerald-400' if s['vol_ratio']>=1.2 else ('text-cyan-400' if s['vol_ratio']<0.7 else 'text-slate-300')}">
-                                    {s['vol_ratio']:.2f}x
-                                </span>
-                            </td>
-                            <td class="py-3 px-3 font-medium text-slate-300">{s['val20_bil']:.1f} tỷ</td>
-                            <td class="py-3 px-3 font-bold {'text-emerald-400' if s['rr_ratio']>=2.0 else 'text-amber-400'}">
-                                {s['rr_ratio']:.1f} : 1
-                            </td>
-                            <td class="py-3 px-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="font-bold text-sm w-7">{score}</span>
-                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
-                                        <div class="{bar_color} h-2 rounded-full" style="width: {score}%"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3 px-3 text-center">
-                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold {badge_cls}">
-                                    {icon} {s['action'].split()[1] if len(s['action'].split())>1 else s['action']}
-                                </span>
-                            </td>
-                        </tr>
-        """
-
-    html += f"""
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 4. KẾ HOẠCH HÀNH ĐỘNG THỰC CHIẾN (ACTIONABLE TRADE PLANS) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- BUY PLAN: TCB & DCM -->
-            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950/30 border border-emerald-500/30 rounded-2xl p-5 shadow-xl">
-                <div class="flex items-center justify-between mb-4 pb-3 border-b border-emerald-500/20">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2.5 bg-emerald-500/20 text-emerald-400 rounded-xl">
-                            <i class="fa-solid fa-cart-shopping text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-white">KẾ HOẠCH MUA THỰC CHIẾN (NAV 100 TRIỆU)</h3>
-                            <p class="text-xs text-slate-400">Giải ngân Đợt 1: 30.000.000 – 35.000.000 VNĐ</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-2.5 py-1 bg-emerald-500 text-slate-900 rounded-full">Top 1 & Top 2</span>
-                </div>
-
-                <div class="space-y-4 text-xs">
-                    <!-- Trade 1: TCB -->
-                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm text-white">1. Cổ phiếu TCB (Ngân hàng) - Phân bổ 35 Triệu</span>
-                            <span class="text-emerald-400 font-bold">R:R = 2.1 : 1</span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2 bg-slate-800/60 p-2.5 rounded-lg text-center">
-                            <div>
-                                <span class="text-slate-400 text-[10px] block">Vùng gom mua</span>
-                                <span class="font-bold text-cyan-300 text-sm">32.55 – 33.00k</span>
-                            </div>
-                            <div>
-                                <span class="text-slate-400 text-[10px] block">Cắt lỗ (-5%)</span>
-                                <span class="font-bold text-rose-400 text-sm">31.35k</span>
-                            </div>
-                            <div>
-                                <span class="text-slate-400 text-[10px] block">Chốt lời (+10.6%)</span>
-                                <span class="font-bold text-emerald-400 text-sm">36.50k</span>
-                            </div>
-                        </div>
-                        <p class="text-slate-400 mt-2 text-[11px]">• Hành động: Canh mua quanh giá tham chiếu, giải ngân 30 triệu lấy vị thế, vượt 33.5 gia tăng nốt 20 triệu.</p>
-                    </div>
-
-                    <!-- Trade 2: DCM -->
-                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm text-white">2. Cổ phiếu DCM (Hóa chất/Phân bón) - Phân bổ 30 Triệu</span>
-                            <span class="text-emerald-400 font-bold">R:R = 2.4 : 1</span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2 bg-slate-800/60 p-2.5 rounded-lg text-center">
-                            <div>
-                                <span class="text-slate-400 text-[10px] block">Vùng gom mua</span>
-                                <span class="font-bold text-cyan-300 text-sm">33.80 – 34.10k</span>
-                            </div>
-                            <div>
-                                <span class="text-slate-400 text-[10px] block">Cắt lỗ (-5%)</span>
-                                <span class="font-bold text-rose-400 text-sm">32.40k</span>
-                            </div>
-                            <div>
-                                <span class="text-slate-400 text-[10px] block">Chốt lời (+12.0%)</span>
-                                <span class="font-bold text-emerald-400 text-sm">38.20k</span>
-                            </div>
-                        </div>
-                        <p class="text-slate-400 mt-2 text-[11px]">• Hành động: Test cung cạn vol cực đẹp, mua tại giá hiện tại, kỳ vọng vượt đỉnh ngắn hạn.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STOP-LOSS & RISK PLAN -->
-            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-rose-950/30 border border-rose-500/30 rounded-2xl p-5 shadow-xl">
-                <div class="flex items-center justify-between mb-4 pb-3 border-b border-rose-500/20">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2.5 bg-rose-500/20 text-rose-400 rounded-xl">
-                            <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-white">KỶ LUẬT CẮT LỖ & BẢO VỆ VỐN</h3>
-                            <p class="text-xs text-slate-400">Nguyên tắc sống còn: Giữ Drawdown toàn danh mục < 6%</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-2.5 py-1 bg-rose-500 text-white rounded-full">Không Ngoại Lệ</span>
-                </div>
-
-                <div class="space-y-3.5 text-xs">
-                    <!-- Rule 1 -->
-                    <div class="flex items-start gap-3 bg-slate-900/80 p-3 rounded-xl border border-rose-500/20">
-                        <div class="h-6 w-6 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
-                        <div>
-                            <span class="font-bold text-white text-sm">Chạm ngưỡng -5.0%: Bán 1/2 vị thế ngay lập tức</span>
-                            <p class="text-slate-400 mt-1">Khi cổ phiếu mua về lỗ 5%, lập tức bán 50% số lượng đang giữ để đưa tài khoản về vị thế an toàn. Không cần chờ hết phiên.</p>
-                        </div>
-                    </div>
-
-                    <!-- Rule 2 -->
-                    <div class="flex items-start gap-3 bg-slate-900/80 p-3 rounded-xl border border-rose-500/20">
-                        <div class="h-6 w-6 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
-                        <div>
-                            <span class="font-bold text-white text-sm">Chạm ngưỡng -7% đến -8%: Bán toàn bộ 100%</span>
-                            <p class="text-slate-400 mt-1">Bán sạch toàn bộ vị thế, thu tiền về mặt dứt khoát. <strong>Tuyệt đối cấm trung bình giá xuống</strong> đối với cổ phiếu đang lỗ.</p>
-                        </div>
-                    </div>
-
-                    <!-- Warning list -->
-                    <div class="bg-rose-950/20 border border-rose-800/40 p-3 rounded-xl">
-                        <span class="font-bold text-rose-300 block mb-1.5"><i class="fa-solid fa-triangle-exclamation"></i> Cổ phiếu yếu / gãy nền cần tuyệt đối tránh:</span>
-                        <div class="flex flex-wrap gap-2 text-[11px]">
-                            <span class="bg-slate-800 px-2 py-0.5 rounded text-rose-400 border border-rose-500/30">VIC (Thủng MA20, khối ngoại xả)</span>
-                            <span class="bg-slate-800 px-2 py-0.5 rounded text-rose-400 border border-rose-500/30">VHM (Gãy đáy, đè điểm số)</span>
-                            <span class="bg-slate-800 px-2 py-0.5 rounded text-rose-400 border border-rose-500/30">FRT (Bán ròng mạnh, suy yếu)</span>
-                            <span class="bg-slate-800 px-2 py-0.5 rounded text-rose-400 border border-rose-500/30">DGC (Gãy MA50)</span>
                         </div>
                     </div>
                 </div>
@@ -510,13 +413,147 @@ def generate_visual_dashboard(output_file=None):
 
     <!-- FOOTER -->
     <footer class="text-center text-xs text-slate-500 pt-8 border-t border-slate-800 mt-12">
-        Hệ thống Tự động hóa Phân tích Chứng khoán • Đồng hành mục tiêu 100tr (+10% đến +15%) • Cập nhật: {today_str}
+        Hệ thống Tự động hóa Phân tích & Đánh giá Cổ phiếu • Đồng hành kế hoạch NAV 100tr • Cập nhật: {today_str}
     </footer>
 
-    <!-- CHART.JS SCRIPT -->
+    <!-- INTERACTIVE JAVASCRIPT & CHARTS -->
     <script>
-        const ctx = document.getElementById('radarChart').getContext('2d');
-        const radarChart = new Chart(ctx, {{
+        const STOCKS_DB = {stocks_json_str};
+        const SORTED_SYMBOLS = {json.dumps(sorted_symbols)};
+        let stockRadarChartInstance = null;
+
+        // Initialize Stock Selector Dropdown
+        const selector = document.getElementById('stockSelect');
+        SORTED_SYMBOLS.forEach(sym => {{
+            const s = STOCKS_DB[sym];
+            const opt = document.createElement('option');
+            opt.value = sym;
+            opt.textContent = `${{s.symbol}} (${{s.score}}đ) - ${{s.sector}}`;
+            selector.appendChild(opt);
+        }});
+
+        function selectStock(symbol) {{
+            if (!STOCKS_DB[symbol]) return;
+            const s = STOCKS_DB[symbol];
+            selector.value = symbol;
+
+            // Update Left Details
+            document.getElementById('evalSector').textContent = `Ngành: ${{s.sector}}`;
+            document.getElementById('evalSymbol').textContent = s.symbol;
+            
+            const pctSign = s.pct_change >= 0 ? '+' : '';
+            const priceEl = document.getElementById('evalPrice');
+            priceEl.textContent = `${{s.close.toFixed(2)}}k (${{pctSign}}${{s.pct_change.toFixed(2)}}%)`;
+            priceEl.className = s.pct_change >= 0 ? "text-lg font-bold text-emerald-400" : "text-lg font-bold text-rose-400";
+
+            // Score & Bar
+            const scoreEl = document.getElementById('evalScore');
+            scoreEl.innerHTML = `${{s.score}}<span class="text-sm text-slate-500">/100</span>`;
+            
+            const barEl = document.getElementById('evalScoreBar');
+            barEl.style.width = `${{s.score}}%`;
+            if (s.score >= 80) {{
+                scoreEl.className = "text-3xl font-black text-emerald-400";
+                barEl.className = "bg-emerald-500 h-2.5 rounded-full transition-all duration-500";
+            }} else if (s.score >= 70) {{
+                scoreEl.className = "text-3xl font-black text-cyan-400";
+                barEl.className = "bg-cyan-500 h-2.5 rounded-full transition-all duration-500";
+            }} else if (s.score >= 55) {{
+                scoreEl.className = "text-3xl font-black text-amber-400";
+                barEl.className = "bg-amber-500 h-2.5 rounded-full transition-all duration-500";
+            }} else {{
+                scoreEl.className = "text-3xl font-black text-rose-400";
+                barEl.className = "bg-rose-500 h-2.5 rounded-full transition-all duration-500";
+            }}
+
+            // Action Box
+            const actionBox = document.getElementById('evalActionBox');
+            const actionText = document.getElementById('evalActionText');
+            const statusText = document.getElementById('evalStatus');
+            actionText.textContent = s.action;
+            statusText.textContent = s.status;
+
+            if (s.score >= 80) {{
+                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-emerald-950/40 border-emerald-500/50 text-emerald-300";
+            }} else if (s.score >= 70) {{
+                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-cyan-950/40 border-cyan-500/50 text-cyan-300";
+            }} else if (s.score >= 55) {{
+                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-amber-950/40 border-amber-500/50 text-amber-300";
+            }} else {{
+                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-rose-950/40 border-rose-500/50 text-rose-300";
+            }}
+
+            // Key Levels
+            document.getElementById('evalBuyZone').textContent = s.entry_zone;
+            document.getElementById('evalStopLoss').textContent = `${{s.stop_loss.toFixed(2)}}k`;
+            document.getElementById('evalTarget').textContent = `${{s.target_price.toFixed(2)}}k (+${{s.potential_upside}}%)`;
+            document.getElementById('evalRR').textContent = `${{s.rr_ratio.toFixed(1)}} : 1`;
+
+            // Metrics
+            const distSign = s.dist_ma20 >= 0 ? '+' : '';
+            document.getElementById('evalMa20').textContent = `${{distSign}}${{s.dist_ma20}}%`;
+            document.getElementById('evalRsi').textContent = s.rsi;
+            document.getElementById('evalVal').textContent = `${{s.val20_bil}} Tỷ`;
+
+            // Tags
+            const tagsContainer = document.getElementById('evalTags');
+            tagsContainer.innerHTML = '';
+            s.tags.forEach(t => {{
+                const span = document.createElement('span');
+                span.className = "px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300";
+                span.textContent = `✓ ${{t}}`;
+                tagsContainer.appendChild(span);
+            }});
+
+            // Update Dedicated Radar Chart
+            updateStockRadar(s);
+        }}
+
+        function updateStockRadar(s) {{
+            const ctxStock = document.getElementById('stockRadarChart').getContext('2d');
+            if (stockRadarChartInstance) {{
+                stockRadarChartInstance.destroy();
+            }}
+
+            const chartColor = s.score >= 80 ? '#10b981' : (s.score >= 70 ? '#06b6d4' : (s.score >= 55 ? '#f59e0b' : '#ef4444'));
+            const chartBg = s.score >= 80 ? 'rgba(16, 185, 129, 0.3)' : (s.score >= 70 ? 'rgba(6, 182, 212, 0.3)' : (s.score >= 55 ? 'rgba(245, 158, 11, 0.3)' : 'rgba(239, 68, 68, 0.3)'));
+
+            stockRadarChartInstance = new Chart(ctxStock, {{
+                type: 'radar',
+                data: {{
+                    labels: {json.dumps(radar_labels, ensure_ascii=False)},
+                    datasets: [{{
+                        label: `${{s.symbol}} (${{s.score}}đ)`,
+                        data: s.radar,
+                        backgroundColor: chartBg,
+                        borderColor: chartColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: chartColor
+                    }}]
+                }},
+                options: {{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {{
+                        r: {{
+                            angleLines: {{ color: 'rgba(148, 163, 184, 0.15)' }},
+                            grid: {{ color: 'rgba(148, 163, 184, 0.15)' }},
+                            pointLabels: {{ color: '#94a3b8', font: {{ size: 9, weight: '600' }} }},
+                            ticks: {{ display: false, min: 0, max: 100 }}
+                        }}
+                    }},
+                    plugins: {{
+                        legend: {{
+                            labels: {{ color: '#cbd5e1', font: {{ size: 10, weight: 'bold' }}, boxWidth: 10 }}
+                        }}
+                    }}
+                }}
+            }});
+        }}
+
+        // Overall 4-stock comparison radar
+        const ctxOverview = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxOverview, {{
             type: 'radar',
             data: {{
                 labels: {json.dumps(radar_labels, ensure_ascii=False)},
@@ -554,24 +591,18 @@ def generate_visual_dashboard(output_file=None):
                     r: {{
                         angleLines: {{ color: 'rgba(148, 163, 184, 0.15)' }},
                         grid: {{ color: 'rgba(148, 163, 184, 0.15)' }},
-                        pointLabels: {{
-                            color: '#94a3b8',
-                            font: {{ size: 10, weight: '600' }}
-                        }},
+                        pointLabels: {{ color: '#94a3b8', font: {{ size: 10, weight: '600' }} }},
                         ticks: {{ display: false, min: 0, max: 100 }}
                     }}
                 }},
                 plugins: {{
-                    legend: {{
-                        labels: {{
-                            color: '#cbd5e1',
-                            font: {{ size: 11, weight: 'bold' }},
-                            boxWidth: 12
-                        }}
-                    }}
+                    legend: {{ labels: {{ color: '#cbd5e1', font: {{ size: 11, weight: 'bold' }}, boxWidth: 12 }} }}
                 }}
             }}
         }});
+
+        // Default to DCM on load
+        selectStock('DCM');
     </script>
 </body>
 </html>
