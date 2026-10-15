@@ -3,7 +3,8 @@
 """
 VISUAL DASHBOARD GENERATOR - BẢNG ĐIỀU KHIỂN & MA TRẬN SO SÁNH CỔ PHIẾU TRỰC QUAN
 Tạo trang Dashboard đồ họa tương tác cao với BẢNG MA TRẬN SO SÁNH TOÀN DIỆN hiển thị trực tiếp,
-kèm Bảng theo dõi danh mục thực tế (TCB, DCM), biểu đồ Radar đa chiều, và Kế hoạch kỷ luật vốn.
+kèm Bảng theo dõi danh mục thực tế (TCB, DCM), biểu đồ Radar đa chiều, Kế hoạch kỷ luật vốn,
+và TÍCH HỢP TÍNH NĂNG CHỌN XEM LẠI BÁO CÁO CŨ THEO TỪNG NGÀY (ARCHIVE VIEWER).
 """
 
 import os
@@ -26,8 +27,6 @@ def generate_visual_dashboard(output_file=None):
     
     print("\n📊 Đang thu thập dữ liệu và tính toán chỉ số so sánh đa chiều...")
     results = scan_all_stocks()
-    
-    # Lấy top cổ phiếu hiển thị trong bảng ma trận
     top_stocks = results[:20]
 
     radar_labels = ["Thanh khoản", "Xu hướng MA", "Dòng tiền lớn", "Độ siết nền", "Tỷ lệ R:R"]
@@ -48,6 +47,36 @@ def generate_visual_dashboard(output_file=None):
                 }
                 break
 
+    # Đọc kho báo cáo lịch sử theo ngày
+    reports_dir = os.path.join(BASE_DIR, "reports")
+    past_reports = {}
+    if os.path.exists(reports_dir):
+        for fname in sorted(os.listdir(reports_dir), reverse=True):
+            if fname.endswith(".md"):
+                filepath = os.path.join(reports_dir, fname)
+                try:
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        md_text = f.read()
+                    if fname.startswith("ban_tin_sang_"):
+                        parts = fname.replace("ban_tin_sang_", "").replace(".md", "").split("_")
+                        date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
+                        display_name = f"Bản tin sáng {date_label}"
+                    elif "kich_ban" in fname:
+                        display_name = "Kịch bản chiến lược 14/10"
+                    elif "ket_qua_loc" in fname:
+                        display_name = "Kết quả bộ lọc cổ phiếu"
+                    else:
+                        display_name = fname.replace(".md", "")
+                    
+                    past_reports[fname] = {
+                        "name": display_name,
+                        "content": md_text
+                    }
+                except Exception:
+                    pass
+
+    past_reports_json = json.dumps(past_reports, ensure_ascii=False)
+
     html = f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -58,6 +87,8 @@ def generate_visual_dashboard(output_file=None):
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Marked.js (Markdown renderer) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Auto-refresh every 5 minutes (300s) on browser -->
@@ -68,6 +99,16 @@ def generate_visual_dashboard(output_file=None):
         .badge-buy {{ background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }}
         .badge-watch {{ background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }}
         .badge-avoid {{ background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }}
+        
+        /* Markdown reader styles */
+        #reportViewerContent table {{ width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }}
+        #reportViewerContent th {{ background: #1e293b; padding: 10px 12px; border: 1px solid #334155; text-align: left; color: #94a3b8; font-weight: 700; }}
+        #reportViewerContent td {{ padding: 10px 12px; border: 1px solid #334155; color: #e2e8f0; }}
+        #reportViewerContent h1 {{ font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 12px; }}
+        #reportViewerContent h2 {{ font-size: 16px; font-weight: 700; color: #38bdf8; margin: 20px 0 10px 0; border-bottom: 1px solid #334155; padding-bottom: 6px; }}
+        #reportViewerContent h3 {{ font-size: 14px; font-weight: 700; color: #6ee7b7; margin: 14px 0 6px 0; }}
+        #reportViewerContent p, #reportViewerContent li {{ font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 6px 0; }}
+        #reportViewerContent blockquote {{ border-left: 3px solid #10b981; background: rgba(16, 185, 129, 0.1); padding: 10px 14px; border-radius: 6px; margin: 12px 0; }}
     </style>
 </head>
 <body class="bg-[#0f172a] text-slate-100 min-h-screen antialiased pb-16">
@@ -87,16 +128,21 @@ def generate_visual_dashboard(output_file=None):
                     <p class="text-xs text-slate-400">Chiến lược Cân bằng Săn sóng ngành • Kế hoạch NAV 100.000.000 VNĐ • Cập nhật: {today_str}</p>
                 </div>
             </div>
-            <!-- QUICK STATS PILLS -->
+
+            <!-- CONTROLS & STATS PILLS -->
             <div class="flex items-center gap-3 flex-wrap">
+                <!-- DROPDOWN CHỌN XEM LẠI NGÀY CŨ -->
+                <div class="flex items-center gap-2 bg-indigo-950/60 border border-indigo-500/40 rounded-xl px-3 py-1.5 shadow-lg">
+                    <i class="fa-solid fa-calendar-days text-indigo-400 text-xs"></i>
+                    <select id="reportHistorySelect" onchange="openReportModal(this.value)" class="bg-transparent text-xs text-indigo-200 font-bold focus:outline-none cursor-pointer">
+                        <option value="" class="bg-slate-900 text-slate-300">📅 Chọn ngày xem báo cáo cũ...</option>
+                    </select>
+                </div>
+
                 <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
                     <span class="text-xs text-slate-400">VN-Index:</span>
                     <span class="text-sm font-bold text-amber-400">1.704,87</span>
                     <span class="text-xs text-rose-400 font-semibold"><i class="fa-solid fa-arrow-trend-down"></i> -0.85%</span>
-                </div>
-                <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
-                    <span class="text-xs text-slate-400">Hỗ trợ cứng:</span>
-                    <span class="text-sm font-bold text-emerald-400">1.700 điểm</span>
                 </div>
                 <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
                     <span class="text-xs text-slate-400">Tiền mặt / CP:</span>
@@ -515,14 +561,67 @@ def generate_visual_dashboard(output_file=None):
 
     </main>
 
+    <!-- REPORT VIEWER MODAL (POPUP XEM BÁO CÁO CŨ) -->
+    <div id="reportModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-950/80">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-indigo-400"></i>
+                    <h3 class="font-bold text-white text-sm" id="modalReportTitle">Báo cáo lịch sử</h3>
+                </div>
+                <button onclick="closeReportModal()" class="text-slate-400 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold transition">
+                    <i class="fa-solid fa-xmark mr-1"></i> Đóng lại
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4" id="reportViewerContent">
+                <!-- Nội dung Markdown sẽ được render tại đây -->
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="text-center text-xs text-slate-500 pt-8 border-t border-slate-800 mt-12">
         Hệ thống Tự động hóa Phân tích & Đánh giá Cổ phiếu • Đồng hành kế hoạch NAV 100tr • Cập nhật: {today_str}
     </footer>
 
-    <!-- CHART.JS & TABLE FILTER SCRIPT -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Table search filter function
+        const PAST_REPORTS = {past_reports_json};
+
+        // Khởi tạo danh sách ngày vào Dropdown
+        const reportSelect = document.getElementById("reportHistorySelect");
+        for (const [fname, rdata] of Object.entries(PAST_REPORTS)) {{
+            const opt = document.createElement("option");
+            opt.value = fname;
+            opt.textContent = `📅 ${{rdata.name}}`;
+            opt.className = "bg-slate-900 text-slate-100";
+            reportSelect.appendChild(opt);
+        }}
+
+        // Hàm mở Popup xem báo cáo cũ
+        function openReportModal(fname) {{
+            if (!fname || !PAST_REPORTS[fname]) return;
+            const rdata = PAST_REPORTS[fname];
+            document.getElementById("modalReportTitle").textContent = rdata.name;
+            document.getElementById("reportViewerContent").innerHTML = marked.parse(rdata.content);
+            document.getElementById("reportModal").classList.remove("hidden");
+            reportSelect.value = ""; // reset dropdown
+        }}
+
+        // Đóng Popup
+        function closeReportModal() {{
+            document.getElementById("reportModal").classList.add("hidden");
+        }}
+
+        // Đóng khi bấm ra ngoài hoặc phím ESC
+        window.addEventListener("keydown", (e) => {{
+            if (e.key === "Escape") closeReportModal();
+        }});
+        document.getElementById("reportModal").addEventListener("click", (e) => {{
+            if (e.target.id === "reportModal") closeReportModal();
+        }});
+
+        // Bộ lọc nhanh trên Bảng ma trận
         function filterStockTable() {{
             const input = document.getElementById("filterInput");
             const filter = input.value.toUpperCase();
@@ -539,7 +638,7 @@ def generate_visual_dashboard(output_file=None):
             }});
         }}
 
-        // Radar chart 4 pillars
+        // Biểu đồ Radar 4 trụ cột
         const ctx = document.getElementById('radarChart').getContext('2d');
         new Chart(ctx, {{
             type: 'radar',
