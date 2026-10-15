@@ -161,14 +161,15 @@ File này lưu trữ tình trạng tài khoản và lịch sử giao dịch th�
 
 Dự án đã tích hợp sẵn workflow tại `.github/workflows/daily_report.yml`.
 
-### 1. Lịch chạy tự động:
-* **Khung giờ:** **08h30 sáng giờ Việt Nam** (tương đương 01:30 UTC) từ **Thứ 2 đến Thứ 6** hàng tuần.
+### 1. Lịch chạy tự động 3 lần mỗi ngày (Thứ 2 đến Thứ 6):
+* **Lần 1 - 08h30 sáng:** Bản tin chiến lược đầu ngày & chuẩn bị kế hoạch trước giờ mở cửa.
+* **Lần 2 - 11h35 trưa:** Cập nhật biến động giá, khối lượng và lãi/lỗ khi kết thúc phiên sáng.
+* **Lần 3 - 15h05 chiều:** Tổng kết toàn diện sau giờ đóng cửa phiên, rà soát kỷ luật cắt lỗ/chốt lời.
 * **Hành động tự động:**
-  1. Tự động khởi chạy trên server đám mây GitHub Actions.
-  2. Quét dữ liệu 60+ cổ phiếu và cập nhật danh mục thực tế.
-  3. Tạo file báo cáo mới vào thư mục `reports/`.
-  4. PUSH nội dung lên Web Rentry để có link xem trực tiếp.
-  5. Tự động `git commit` và `git push` lưu trữ báo cáo mới vào chính repo GitHub này.
+  1. Tự động khởi chạy trên server đám mây GitHub Actions (hoàn toàn miễn phí).
+  2. Quét dữ liệu 60+ cổ phiếu và cập nhật danh mục thực tế (TCB, DCM, TD6).
+  3. Tạo file báo cáo mới vào thư mục `reports/` và đẩy link lên Web Rentry.
+  4. Tự động vẽ lại trang web `index.html` và cập nhật trực tiếp lên **GitHub Pages**: `https://tuna1710.github.io/chungkhoan/`.
 
 ### 2. Cách chạy thủ công bất kỳ lúc nào trên GitHub:
 1. Vào repo trên GitHub: `https://github.com/tuna1710/chungkhoan`.

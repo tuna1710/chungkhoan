@@ -1,10 +1,14 @@
-name: Daily Morning Report & Portfolio Tracker
+name: Daily Stock Workflow & Live Dashboard
 
 on:
   schedule:
-    # Chạy vào 01:30 UTC = 08:30 sáng giờ Việt Nam (Thứ 2 đến Thứ 6)
+    # 1. 01:30 UTC = 08:30 sáng VN (Bản tin chiến lược trước giờ mở cửa)
     - cron: '30 1 * * 1-5'
-  workflow_dispatch: # Cho phép kích hoạt thủ công từ tab Actions trên GitHub
+    # 2. 04:35 UTC = 11:35 trưa VN (Cập nhật sau khi kết thúc phiên sáng)
+    - cron: '35 4 * * 1-5'
+    # 3. 08:05 UTC = 15:05 chiều VN (Tổng kết toàn diện sau khi đóng cửa phiên)
+    - cron: '5 8 * * 1-5'
+  workflow_dispatch: # Cho phép kích hoạt thủ công từ tab Actions trên GitHub bất cứ lúc nào
 
 jobs:
   run-daily-report:
@@ -24,18 +28,18 @@ jobs:
       - name: Cài đặt thư viện phụ thuộc
         run: pip install -r requirements.txt
 
-      - name: Chạy Báo Cáo Sáng & Theo Dõi Danh Mục
+      - name: Chạy Quét Thị Trường & Cập Nhật Danh Mục Thực Chiến
         run: python3 daily_report.py
 
-      - name: Cập nhật Trang Web Dashboard Trực Quan (GitHub Pages)
+      - name: Tạo Lại Trang Web Dashboard & Ma Trận Cổ Phiếu Mới Nhất
         run: |
           python3 tools/build_visual_dashboard.py
           cp reports/dashboard.html index.html
 
-      - name: Tự động lưu báo cáo và cập nhật Website
+      - name: Tự động lưu báo cáo và phát hành lên Website GitHub Pages
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add reports/ journal/ index.html
-          git commit -m "Auto: Cập nhật Bản tin chiến lược, Nhật ký danh mục & Website ngày $(date +'%d/%m/%Y')" || exit 0
+          git commit -m "Auto: Quét thị trường & cập nhật Website lúc $(date +'%H:%M %d/%m/%Y')" || exit 0
           git push

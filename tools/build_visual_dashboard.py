@@ -60,6 +60,8 @@ def generate_visual_dashboard(output_file=None):
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Auto-refresh every 5 minutes (300s) on browser -->
+    <meta http-equiv="refresh" content="300">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body {{ font-family: 'Inter', sans-serif; }}
