@@ -169,3 +169,46 @@ Nhằm đảm bảo tính trực quan, kỷ luật và giúp Nhà đầu tư the
 5. **Kế hoạch Hành động Dứt khoát (NAV 100 Triệu):**
    * **Thẻ Mua (Top Picks):** Vùng canh mua, giá cắt lỗ chuẩn (-5%), giá mục tiêu chốt lời (+10-15%), tỷ lệ R:R (>= 2:1), số tiền phân bổ giải ngân đợt 1 (30 - 35 triệu).
    * **Thẻ Cắt lỗ & Bảo vệ vốn:** Kỷ luật thép (-5% bán 1/2 vị thế ngay lập tức; -7% đến -8% bán toàn bộ 100%, không trung bình giá xuống). Cảnh báo danh sách các mã đang gãy trend cần tuyệt đối tránh xa.
+
+---
+
+## VII. HỆ THỐNG TRANG WEB DASHBOARD TRỰC QUAN 24/7 & XEM LẠI BÁO CÁO LỊCH SỬ
+
+Để Nhà đầu tư có thể theo dõi bảng điện, ma trận so sánh và danh mục mọi lúc mọi nơi trên điện thoại và máy tính mà không cần cài đặt phần mềm:
+
+* **Địa chỉ truy cập Website 24/7:** **https://tuna1710.github.io/chungkhoan/**
+* **Kho mã nguồn & Lưu trữ:** **https://github.com/tuna1710/chungkhoan**
+* **Các tính năng cốt lõi trên Web:**
+  1. **Bảng Ma trận so sánh Đa chiều toàn diện:** Hiển thị trực tiếp toàn bộ 60 cổ phiếu được xếp hạng, kèm đầy đủ chỉ số kỹ thuật: Vị thế MA20, Xung lực RSI, Khối lượng/TB20p, Tỷ lệ Lợi nhuận/Rủi ro (R:R), Điểm số (thang 100) và Nhãn khuyến nghị hành động.
+  2. **Bảng Theo dõi Danh mục Thực tế (Real-time Portfolio Tracker):** Cập nhật chính xác số lượng cổ phiếu đang nắm giữ, giá vốn, thị giá, tỷ lệ lãi/lỗ (%), ngày hàng về T+ và tỷ trọng Tiền mặt / Cổ phiếu.
+  3. **Bộ chọn ngày xem lại Lịch sử Báo cáo (History Report Viewer):**
+     - Đặt ngay trên thanh Header: `📅 Chọn ngày xem báo cáo cũ...`
+     - Tích hợp cửa sổ Popup Modal giúp mở xem lại toàn bộ nội dung chi tiết của bất kỳ bản tin nào trong quá khứ (14/10, 15/10...) ngay trên Web mà không làm mất giao diện bảng ma trận.
+
+---
+
+## VIII. LỊCH TRÌNH TỰ ĐỘNG HÓA QUÉT THỊ TRƯỜNG & CẬP NHẬT WEB 3 LẦN/NGÀY
+
+Hệ thống được cấu hình chạy tự động hoàn toàn thông qua **GitHub Actions** (Workflow file: `.github/workflows/daily_report.yml`), hoạt động ngầm trên đám mây mà không tốn chi phí và không cần mở máy tính:
+
+1. **Phiên sáng (08:30 VN Time / 01:30 UTC):** Quét dữ liệu trước phiên, phân tích vĩ mô, lập kịch bản mở cửa và bảng ma trận cơ hội.
+2. **Phiên trưa (11:35 VN Time / 04:35 UTC):** Quét cập nhật diễn biến sau khi kết thúc phiên sáng.
+3. **Phiên chiều (15:05 VN Time / 08:05 UTC):** Quét sau giờ đóng cửa ATC, tổng kết danh mục, cập nhật lãi/lỗ và khuyến nghị cho phiên tiếp theo.
+* **Cơ chế lưu trữ tự động:** Mỗi lần quét hoàn tất, hệ thống tự động sinh báo cáo markdown, lưu vào thư mục `reports/`, đóng gói vào dashboard và commit/push lên GitHub Pages để cập nhật Web tức thì.
+
+---
+
+## IX. THEO DÕI THỰC TẾ DANH MỤC & NHẬT KÝ LỆNH KHỚP (CẬP NHẬT 15/10/2026)
+
+* **Tình trạng giải ngân Đợt 1:** Đã mở vị thế thành công ngày 15/10/2026 theo đúng kế hoạch.
+* **Cơ cấu tài sản hiện tại (NAV ~ 100.9 triệu VNĐ):**
+  * **Tiền mặt:** **43.984.000 VNĐ** (Chiếm ~43.56% NAV) - Đảm bảo thế chủ động cao.
+  * **Cổ phiếu:** **56.985.000 VNĐ** (Chiếm ~56.44% NAV).
+
+| Mã CP | Khối lượng | Giá vốn (VNĐ) | Thị giá (15/10) | Trị giá TT (VNĐ) | Lãi/Lỗ (%) | Trạng thái T+ | Kế hoạch hành động cụ thể |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **TCB** | **900** | **32.64** | **33.00** | 29.700.000 | **+1.10%** | Khớp 15/10 (Hàng về chiều 17/10) | **Tiếp tục nắm giữ.** Chặn lỗ: 31.00 (-5%). Chốt lời 1: 35.90 (+10%), Chốt lời 2: 37.50 - 38.00 (+15%). |
+| **DCM** | **800** | **33.30** | **34.10** | 27.280.000 | **+2.40%** | Khớp 15/10 (Hàng về chiều 17/10) | **Tiếp tục nắm giữ.** Chặn lỗ: 31.65 (-5%). Chốt lời 1: 36.60 (+10%), Chốt lời 2: 38.20 (+14.7%). |
+| **TD6** *(TC6)* | **300** | **6.13** | **6.35** | 1.905.000 | **+3.59%** | Sẵn sàng GD (T+0) | **Canh bán chốt lời vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền mặt. |
+
+* **Kỷ luật bảo vệ vốn:** Tuyệt đối tuân thủ nguyên tắc cắt lỗ -5% (bán 1/2) và -7% (bán hết). Không trung bình giá xuống.
