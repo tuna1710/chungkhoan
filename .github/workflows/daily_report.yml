@@ -27,10 +27,15 @@ jobs:
       - name: Chạy Báo Cáo Sáng & Theo Dõi Danh Mục
         run: python3 daily_report.py
 
-      - name: Tự động lưu báo cáo mới vào Repository
+      - name: Cập nhật Trang Web Dashboard Trực Quan (GitHub Pages)
+        run: |
+          python3 tools/build_visual_dashboard.py
+          cp reports/dashboard.html index.html
+
+      - name: Tự động lưu báo cáo và cập nhật Website
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add reports/ journal/
-          git commit -m "Auto: Cập nhật Bản tin chiến lược & Nhật ký danh mục ngày $(date +'%d/%m/%Y')" || exit 0
+          git add reports/ journal/ index.html
+          git commit -m "Auto: Cập nhật Bản tin chiến lược, Nhật ký danh mục & Website ngày $(date +'%d/%m/%Y')" || exit 0
           git push
