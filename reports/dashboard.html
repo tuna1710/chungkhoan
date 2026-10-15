@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng Điều Khiển & Đánh Giá Cổ Phiếu - 15/10/2026</title>
+    <title>Bảng Điều Khiển Chứng Khoán Trực Quan - 15/10/2026</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -16,7 +16,6 @@
         .badge-buy { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
         .badge-watch { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }
         .badge-avoid { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .pill-active { background: #06b6d4 !important; color: #0f172a !important; font-weight: bold; }
     </style>
 </head>
 <body class="bg-[#0f172a] text-slate-100 min-h-screen antialiased pb-16">
@@ -30,10 +29,10 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                        BẢNG ĐIỀU KHIỂN & ĐÁNH GIÁ CỔ PHIẾU
-                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live System</span>
+                        BÁO CÁO ĐẦU NGÀY & BẢNG MA TRẬN SO SÁNH CỔ PHIẾU
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live Data</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Chiến lược Cân bằng Săn sóng ngành • Kế hoạch NAV 100.000.000 VNĐ • Ngày 15/10/2026</p>
+                    <p class="text-xs text-slate-400">Chiến lược Cân bằng Săn sóng ngành • Kế hoạch NAV 100.000.000 VNĐ • Cập nhật: 15/10/2026</p>
                 </div>
             </div>
             <!-- QUICK STATS PILLS -->
@@ -64,7 +63,7 @@
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-xs font-medium text-slate-400">Xung Lực Thị Trường</p>
-                        <h3 class="text-lg font-bold text-amber-300 mt-1">Kiểm định mốc 1.700</h3>
+                        <h3 class="text-lg font-bold text-amber-300 mt-1">Kiểm định hỗ trợ 1.700</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400"><i class="fa-solid fa-compass"></i></span>
                 </div>
@@ -101,131 +100,1042 @@
                     </div>
                     <span class="p-2 rounded-lg bg-cyan-500/10 text-cyan-400"><i class="fa-solid fa-wallet"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Chiếm 43.98% NAV. Tạm dừng mua mới, giữ vị thế chủ động phòng thủ.</p>
+                <p class="text-xs text-slate-400 mt-3">Chiếm 43.98% NAV. Tạm dừng mua mới, giữ tiền mặt dự phòng an toàn.</p>
             </div>
         </div>
 
         <!-- ======================================================== -->
-        <!-- 🎯 CÔNG CỤ TRA CỨU & ĐÁNH GIÁ CỔ PHIẾU TỰ ĐỘNG (INTERACTIVE EVALUATOR) -->
+        <!-- 💼 2. BẢNG THEO DÕI DANH MỤC THỰC CHIẾN (ƯU TIÊN SỐ 1) -->
         <!-- ======================================================== -->
-        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950/40 border border-indigo-500/30 rounded-2xl p-6 shadow-2xl">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-700/60">
+        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950/30 border border-emerald-500/30 rounded-2xl p-5 shadow-xl overflow-hidden">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-3 border-b border-emerald-500/20">
                 <div>
-                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass-chart text-cyan-400"></i>
-                        CÔNG CỤ ĐÁNH GIÁ CỔ PHIẾU TỰ ĐỘNG (CHẤM ĐIỂM 0 - 100)
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-wallet text-emerald-400"></i>
+                        THEO DÕI VỊ THẾ DANH MỤC THỰC CHIẾN & KHUYẾN NGHỊ HÀNH ĐỘNG
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">Chọn hoặc gõ mã cổ phiếu bất kỳ để xem điểm kỹ thuật, biểu đồ radar 5 trục, vùng gom, điểm cắt lỗ và chốt lời</p>
+                    <p class="text-xs text-slate-400">Tổng tài sản NAV: 100.000.000 VNĐ • Đã giải ngân Đợt 1 thành công 2 mã trụ cột</p>
                 </div>
-                <!-- Dropdown selector -->
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-400">Chọn cổ phiếu:</span>
-                    <select id="stockSelect" onchange="selectStock(this.value)" class="bg-slate-900 border border-cyan-500/50 rounded-xl px-4 py-2 text-sm text-cyan-300 font-bold focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer shadow-lg">
-                        <!-- Populated dynamically -->
-                    </select>
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold">56% Cổ phiếu / 44% Tiền mặt</span>
                 </div>
             </div>
 
-            <!-- Quick pick pill buttons -->
-            <div class="flex items-center gap-2 flex-wrap mb-5 text-xs">
-                <span class="text-slate-400 font-medium mr-1">Xem nhanh:</span>
-                <button onclick="selectStock('DCM')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-emerald-500/40 text-emerald-300 font-semibold transition">🔥 DCM (80đ)</button>
-                <button onclick="selectStock('TCB')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-indigo-500/40 text-indigo-300 font-semibold transition">🔥 TCB (75đ)</button>
-                <button onclick="selectStock('KBC')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-amber-500/40 text-amber-300 font-semibold transition">⭐ KBC (76đ)</button>
-                <button onclick="selectStock('HPG')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-cyan-500/40 text-cyan-300 font-semibold transition">⭐ HPG (75đ)</button>
-                <button onclick="selectStock('SSI')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 transition">SSI</button>
-                <button onclick="selectStock('FPT')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 transition">FPT</button>
-                <button onclick="selectStock('MWG')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 transition">MWG</button>
-                <button onclick="selectStock('VHM')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-rose-500/40 text-rose-400 transition">⛔ VHM (Gãy)</button>
-                <button onclick="selectStock('DGC')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-rose-500/40 text-rose-400 transition">⛔ DGC (Gãy)</button>
-            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-700 bg-slate-900/80 text-slate-300 font-semibold uppercase tracking-wider">
+                            <th class="py-3 px-3">Mã CP</th>
+                            <th class="py-3 px-3">Khối lượng</th>
+                            <th class="py-3 px-3">Giá vốn (k)</th>
+                            <th class="py-3 px-3">Thị giá (k)</th>
+                            <th class="py-3 px-3">Giá trị TT (VNĐ)</th>
+                            <th class="py-3 px-3">Tỷ trọng NAV</th>
+                            <th class="py-3 px-3">Lãi / Lỗ</th>
+                            <th class="py-3 px-3">Tình trạng T+</th>
+                            <th class="py-3 px-3 text-center">Khuyến nghị hành động dứt khoát</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <!-- Row 1: TCB -->
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-3 px-3 font-bold text-white text-sm">
+                                <span class="bg-indigo-950/60 text-indigo-300 px-2.5 py-1 rounded border border-indigo-500/40 font-black">TCB</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Ngân hàng</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-white">900 cp</td>
+                            <td class="py-3 px-3 font-semibold text-slate-300">32.64</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">33.20</td>
+                            <td class="py-3 px-3 font-bold text-white">29.880.000 đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">29.38%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+1.72% (+504k)</td>
+                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 15/10 (Chiều 17/10 về)</td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
+                                    <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ
+                                </span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Cắt lỗ: 31.00 (-5%) | Chốt lời: 35.9 - 38.0</span>
+                            </td>
+                        </tr>
 
-            <!-- Dynamic Evaluator Card -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-950/60 p-5 rounded-xl border border-slate-800" id="evalCard">
-                <!-- Left: Evaluation Details -->
-                <div class="lg:col-span-7 space-y-4">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <span class="text-xs uppercase tracking-wider text-slate-400" id="evalSector">Ngành: Hóa chất</span>
-                            <div class="flex items-center gap-3 mt-1">
-                                <h3 class="text-2xl font-black text-white" id="evalSymbol">DCM</h3>
-                                <span class="text-lg font-bold text-emerald-400" id="evalPrice">34.10k (+3.18%)</span>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-xs text-slate-400 block">ĐIỂM KỸ THUẬT</span>
-                            <span class="text-3xl font-black text-emerald-400" id="evalScore">80<span class="text-sm text-slate-500">/100</span></span>
-                        </div>
-                    </div>
+                        <!-- Row 2: DCM -->
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-3 px-3 font-bold text-white text-sm">
+                                <span class="bg-emerald-950/60 text-emerald-300 px-2.5 py-1 rounded border border-emerald-500/40 font-black">DCM</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Hóa chất - Phân bón</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-white">800 cp</td>
+                            <td class="py-3 px-3 font-semibold text-slate-300">33.30</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">34.10</td>
+                            <td class="py-3 px-3 font-bold text-white">27.280.000 đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">26.64%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+2.40% (+640k)</td>
+                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 15/10 (Chiều 17/10 về)</td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
+                                    <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ
+                                </span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Cắt lỗ: 31.65 (-5%) | Chốt lời: 36.6 - 38.2</span>
+                            </td>
+                        </tr>
 
-                    <!-- Progress bar -->
-                    <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-                        <div id="evalScoreBar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width: 80%;"></div>
-                    </div>
-
-                    <!-- Action Badge -->
-                    <div class="p-3 rounded-lg border font-bold text-sm flex items-center justify-between" id="evalActionBox">
-                        <span id="evalActionText">🔥 MUA ƯU TIÊN (TOP 1 TOÀN THỊ TRƯỜNG)</span>
-                        <span class="text-xs px-2 py-0.5 rounded bg-black/30 font-semibold" id="evalStatus">SIÊU PHẨM SĂN SÓNG</span>
-                    </div>
-
-                    <!-- 4 Trading Key Levels -->
-                    <div class="grid grid-cols-4 gap-2 text-center pt-2">
-                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/60">
-                            <span class="text-[10px] text-slate-400 block">Vùng gom mua</span>
-                            <span class="text-xs font-bold text-cyan-300" id="evalBuyZone">33.84 - 34.10k</span>
-                        </div>
-                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-rose-500/30">
-                            <span class="text-[10px] text-rose-400 block">Cắt lỗ (-5%)</span>
-                            <span class="text-xs font-bold text-rose-400" id="evalStopLoss">32.40k</span>
-                        </div>
-                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-emerald-500/30">
-                            <span class="text-[10px] text-emerald-400 block">Chốt lời</span>
-                            <span class="text-xs font-bold text-emerald-400" id="evalTarget">38.19k (+12%)</span>
-                        </div>
-                        <div class="bg-slate-900/80 p-2.5 rounded-lg border border-indigo-500/30">
-                            <span class="text-[10px] text-indigo-400 block">Tỷ lệ R:R</span>
-                            <span class="text-xs font-bold text-indigo-300" id="evalRR">2.4 : 1</span>
-                        </div>
-                    </div>
-
-                    <!-- Tags list -->
-                    <div class="flex items-center gap-1.5 flex-wrap pt-1 text-xs" id="evalTags">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Right: Dedicated Stock Radar Chart & Quantitative Metrics -->
-                <div class="lg:col-span-5 bg-slate-900/70 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-slate-300 block mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-pie text-cyan-400"></i>
-                            BIỂU ĐỒ SỨC MẠNH 5 TRỤC CỦA MÃ NÀY
-                        </span>
-                        <div class="h-44 relative">
-                            <canvas id="stockRadarChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-2 mt-3 pt-3 border-t border-slate-800 text-center text-xs">
-                        <div class="bg-slate-800/60 p-1.5 rounded">
-                            <span class="text-[10px] text-slate-400 block">Vị thế vs MA20</span>
-                            <span class="font-bold text-white" id="evalMa20">+0.76%</span>
-                        </div>
-                        <div class="bg-slate-800/60 p-1.5 rounded">
-                            <span class="text-[10px] text-slate-400 block">Xung lực RSI</span>
-                            <span class="font-bold text-white" id="evalRsi">54.1</span>
-                        </div>
-                        <div class="bg-slate-800/60 p-1.5 rounded">
-                            <span class="text-[10px] text-slate-400 block">GTGD Bình quân</span>
-                            <span class="font-bold text-white" id="evalVal">95.6 Tỷ</span>
-                        </div>
-                    </div>
-                </div>
+                        <!-- Row 3: TD6 -->
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-3 px-3 font-bold text-white text-sm">
+                                <span class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-bold">TD6</span>
+                                <span class="text-[10px] text-slate-500 block mt-0.5">TC6 sáp nhập</span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-400">300 cp</td>
+                            <td class="py-3 px-3 font-semibold text-slate-300">6.13</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">6.35</td>
+                            <td class="py-3 px-3 font-bold text-white">1.905.000 đ</td>
+                            <td class="py-3 px-3 font-semibold text-slate-400">~1.9%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+3.59% (+66k)</td>
+                            <td class="py-3 px-3 text-emerald-400 font-medium">Khả dụng ngay</td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-3 py-1 rounded-full font-bold">
+                                    <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> CANH BÁN 6.4 - 6.5
+                                </span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Chốt lời dọn gọn danh mục</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- 3. SO SÁNH ĐA CHIỀU (RADAR CHART TỔNG THỂ & HEAD-TO-HEAD BATTLE) -->
+        <!-- ======================================================== -->
+        <!-- 🏆 3. BẢNG MA TRẬN SO SÁNH TOÀN DIỆN CÁC CỔ PHIẾU (HIỂN THỊ TRỰC TIẾP) -->
+        <!-- ======================================================== -->
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl overflow-hidden">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-table-list text-cyan-400"></i>
+                        BẢNG MA TRẬN SO SÁNH CHỈ SỐ KỸ THUẬT & DÒNG TIỀN (TOP CỔ PHIẾU)
+                    </h2>
+                    <p class="text-xs text-slate-400">Trực quan hóa Điểm số, Vị thế giá vs MA20, Xung lực RSI, Khối lượng và Tỷ lệ Lợi nhuận/Rủi ro</p>
+                </div>
+                <!-- Search filter box -->
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-xs text-slate-400"></i>
+                        <input type="text" id="filterInput" onkeyup="filterStockTable()" placeholder="Lọc nhanh mã CP..." class="bg-slate-900 border border-slate-600 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400 w-44">
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-emerald-500"></span> >=75: Mua</span>
+                        <span class="flex items-center gap-1 ml-1"><span class="h-2 w-2 rounded-full bg-amber-500"></span> 60-74: Canh</span>
+                        <span class="flex items-center gap-1 ml-1"><span class="h-2 w-2 rounded-full bg-rose-500"></span> &lt;55: Né</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse" id="matrixTable">
+                    <thead>
+                        <tr class="border-b border-slate-700 bg-slate-900/80 text-slate-300 font-semibold uppercase tracking-wider">
+                            <th class="py-3 px-3">Hạng</th>
+                            <th class="py-3 px-3">Mã CP</th>
+                            <th class="py-3 px-3">Ngành</th>
+                            <th class="py-3 px-3">Giá (k)</th>
+                            <th class="py-3 px-3">+/- Phiên</th>
+                            <th class="py-3 px-3">Vị thế vs MA20</th>
+                            <th class="py-3 px-3">Xung lực RSI</th>
+                            <th class="py-3 px-3">Vol / TB20p</th>
+                            <th class="py-3 px-3">GTGD (Tỷ)</th>
+                            <th class="py-3 px-3">Tỷ lệ R:R</th>
+                            <th class="py-3 px-3">Điểm số</th>
+                            <th class="py-3 px-3 text-center">Khuyến nghị</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#1</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">DCM</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Hóa chất - Phân bón</td>
+                            <td class="py-3 px-3 font-semibold text-white">33.90</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.59%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.01% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">52.8</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 52.75964636809425%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-cyan-400">
+                                    0.61x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">93.2 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.4 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">80</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-emerald-500 h-2 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-buy">
+                                    <i class="fa-solid fa-fire text-emerald-400 mr-1"></i> MUA
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#2</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">DXG</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Bất động sản</td>
+                            <td class="py-3 px-3 font-semibold text-white">10.25</td>
+                            <td class="py-3 px-3 text-emerald-400 font-bold">+2.50%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +1.25% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">47.8</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 47.824857863892426%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    1.62x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">86.4 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                3.7 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">76</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-emerald-500 h-2 rounded-full" style="width: 76%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-buy">
+                                    <i class="fa-solid fa-fire text-emerald-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#3</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">DIG</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Bất động sản</td>
+                            <td class="py-3 px-3 font-semibold text-white">9.60</td>
+                            <td class="py-3 px-3 text-emerald-400 font-bold">+1.05%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.36% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">47.2</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 47.180922743630894%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    1.84x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">38.2 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.8 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">76</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-emerald-500 h-2 rounded-full" style="width: 76%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-buy">
+                                    <i class="fa-solid fa-fire text-emerald-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#4</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">KBC</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">BĐS Khu công nghiệp</td>
+                            <td class="py-3 px-3 font-semibold text-white">25.75</td>
+                            <td class="py-3 px-3 text-amber-300">+0.00%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.59% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">45.5</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 45.47806353873642%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-cyan-400">
+                                    0.54x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">30.2 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.5 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">76</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-emerald-500 h-2 rounded-full" style="width: 76%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-buy">
+                                    <i class="fa-solid fa-fire text-emerald-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#5</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">CTS</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Chứng khoán</td>
+                            <td class="py-3 px-3 font-semibold text-white">20.45</td>
+                            <td class="py-3 px-3 text-emerald-400 font-bold">+6.79%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.11% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">47.7</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 47.66434515144247%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    1.90x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">18.3 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                3.7 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">71</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 71%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#6</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">TCB</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Ngân hàng</td>
+                            <td class="py-3 px-3 font-semibold text-white">32.90</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.30%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.97% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">55.1</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 55.09973408870018%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    0.88x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">602.3 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.4 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">70</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#7</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">MBB</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Ngân hàng</td>
+                            <td class="py-3 px-3 font-semibold text-white">19.90</td>
+                            <td class="py-3 px-3 text-emerald-400 font-bold">+2.84%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +1.92% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">55.8</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 55.79963511564211%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    2.74x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">236.9 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.3 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">70</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#8</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">MSB</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Ngân hàng</td>
+                            <td class="py-3 px-3 font-semibold text-white">14.65</td>
+                            <td class="py-3 px-3 text-amber-300">+0.00%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +3.48% 
+                                <span class="text-[10px] text-slate-500 block">Cao</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">66.9</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 66.9421744255562%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    1.17x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">179.2 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.4 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">70</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#9</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">VGC</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">BĐS Khu công nghiệp</td>
+                            <td class="py-3 px-3 font-semibold text-white">43.40</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.80%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.54% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">54.4</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 54.44895060509579%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-cyan-400">
+                                    0.33x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">27.5 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.4 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">70</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> CANH
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#10</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">HPG</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Thép - Kim loại</td>
+                            <td class="py-3 px-3 font-semibold text-white">20.75</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.24%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.89% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">49.8</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 49.80727891200382%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    1.13x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">387.1 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.8 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">66</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 66%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#11</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">VHC</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Xuất khẩu - Khác</td>
+                            <td class="py-3 px-3 font-semibold text-white">50.70</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.20%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.75% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">48.1</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 48.14706451628598%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-cyan-400">
+                                    0.36x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">17.7 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.3 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">66</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 66%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#12</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">HDB</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Ngân hàng</td>
+                            <td class="py-3 px-3 font-semibold text-white">22.80</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-1.72%</td>
+                            <td class="py-3 px-3 text-amber-400">
+                                +4.83% 
+                                <span class="text-[10px] text-slate-500 block">Cao</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">67.0</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 66.96265420410002%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    1.14x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">357.4 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.4 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">65</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#13</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">GMD</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Xuất khẩu - Khác</td>
+                            <td class="py-3 px-3 font-semibold text-white">53.00</td>
+                            <td class="py-3 px-3 text-amber-300">+0.00%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +1.16% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">54.3</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 54.33426123617846%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    0.84x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">60.1 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.1 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">65</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#14</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">VPB</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Ngân hàng</td>
+                            <td class="py-3 px-3 font-semibold text-white">24.45</td>
+                            <td class="py-3 px-3 text-emerald-400 font-bold">+0.41%</td>
+                            <td class="py-3 px-3 text-amber-400">
+                                +5.46% 
+                                <span class="text-[10px] text-slate-500 block">Cao</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">73.0</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 72.99951204770016%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    1.02x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">520.3 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.4 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">60</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#15</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">HSG</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Thép - Kim loại</td>
+                            <td class="py-3 px-3 font-semibold text-white">10.45</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.48%</td>
+                            <td class="py-3 px-3 text-amber-400">
+                                +3.74% 
+                                <span class="text-[10px] text-slate-500 block">Cao</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">58.3</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 58.3076628977054%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    1.60x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">25.6 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.3 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">60</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-watch">
+                                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#16</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">SZC</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">BĐS Khu công nghiệp</td>
+                            <td class="py-3 px-3 font-semibold text-white">17.45</td>
+                            <td class="py-3 px-3 text-emerald-400 font-bold">+0.58%</td>
+                            <td class="py-3 px-3 text-emerald-400">
+                                +0.52% 
+                                <span class="text-[10px] text-slate-500 block">Sát nền</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">48.6</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 48.62988418275409%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-slate-300">
+                                    0.81x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">4.5 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.5 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">59</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-rose-500 h-2 rounded-full" style="width: 59%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-avoid">
+                                    <i class="fa-solid fa-ban text-rose-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#17</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">PVT</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Dầu khí - Năng lượng</td>
+                            <td class="py-3 px-3 font-semibold text-white">23.65</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-4.25%</td>
+                            <td class="py-3 px-3 text-rose-400">
+                                -1.60% 
+                                <span class="text-[10px] text-slate-500 block">Dưới MA20</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">51.2</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 51.15000665118133%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    1.29x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">192.7 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                2.3 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">58</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-rose-500 h-2 rounded-full" style="width: 58%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-avoid">
+                                    <i class="fa-solid fa-ban text-rose-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#18</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">POW</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Dầu khí - Năng lượng</td>
+                            <td class="py-3 px-3 font-semibold text-white">12.20</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-2.01%</td>
+                            <td class="py-3 px-3 text-rose-400">
+                                -3.21% 
+                                <span class="text-[10px] text-slate-500 block">Dưới MA20</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">33.8</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 33.80922933503285%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    2.05x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">67.7 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">
+                                3.1 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">55</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-rose-500 h-2 rounded-full" style="width: 55%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-avoid">
+                                    <i class="fa-solid fa-ban text-rose-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#19</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">NKG</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Thép - Kim loại</td>
+                            <td class="py-3 px-3 font-semibold text-white">10.50</td>
+                            <td class="py-3 px-3 text-amber-300">+0.00%</td>
+                            <td class="py-3 px-3 text-amber-400">
+                                +8.44% 
+                                <span class="text-[10px] text-slate-500 block">Cao</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">62.1</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 62.13889900572264%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-emerald-400">
+                                    2.13x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">22.9 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.7 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">55</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-rose-500 h-2 rounded-full" style="width: 55%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-avoid">
+                                    <i class="fa-solid fa-ban text-rose-400 mr-1"></i> THEO
+                                </span>
+                            </td>
+                        </tr>
+        
+                        <tr class="hover:bg-slate-800/40 transition stock-row">
+                            <td class="py-3 px-3 font-bold text-slate-400">#20</td>
+                            <td class="py-3 px-3 font-bold text-white text-sm stock-sym">
+                                <span class="bg-slate-800 px-2 py-1 rounded border border-slate-700">DGW</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-300">Bán lẻ - Tiêu dùng</td>
+                            <td class="py-3 px-3 font-semibold text-white">45.05</td>
+                            <td class="py-3 px-3 text-rose-400 font-bold">-0.99%</td>
+                            <td class="py-3 px-3 text-rose-400">
+                                -0.95% 
+                                <span class="text-[10px] text-slate-500 block">Dưới MA20</span>
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-8 font-semibold">51.2</span>
+                                    <div class="w-16 bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-cyan-400 h-1.5 rounded-full" style="width: 51.15712521583864%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3">
+                                <span class="font-medium text-cyan-400">
+                                    0.50x
+                                </span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-slate-300">77.6 tỷ</td>
+                            <td class="py-3 px-3 font-bold text-amber-400">
+                                1.7 : 1
+                            </td>
+                            <td class="py-3 px-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm w-7">53</span>
+                                    <div class="w-20 bg-slate-700 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-rose-500 h-2 rounded-full" style="width: 53%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold badge-avoid">
+                                    <i class="fa-solid fa-ban text-rose-400 mr-1"></i> TẠM
+                                </span>
+                            </td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. SO SÁNH ĐA CHIỀU (RADAR CHART TỔNG THỂ & HEAD-TO-HEAD BATTLE) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Radar Chart: So sánh sức mạnh 4 ứng viên -->
             <div class="lg:col-span-5 bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl">
@@ -233,9 +1143,9 @@
                     <div>
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
                             <i class="fa-solid fa-diagram-project text-indigo-400"></i>
-                            SO SÁNH TƯƠNG QUAN 4 TRỤ CỘT
+                            MA TRẬN SỨC MẠNH CỔ PHIẾU (RADAR)
                         </h2>
-                        <p class="text-xs text-slate-400">TCB (Bank) • DCM (Hóa chất) • KBC (KCN) • HPG (Thép)</p>
+                        <p class="text-xs text-slate-400">So sánh 5 tiêu chí cốt lõi của 4 ứng viên hàng đầu</p>
                     </div>
                     <span class="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded">Thang 100</span>
                 </div>
@@ -262,7 +1172,7 @@
                 </div>
             </div>
 
-            <!-- Head-to-Head Battle: Tại sao chọn mã này thay vì mã khác? -->
+            <!-- Head-to-Head Battle -->
             <div class="lg:col-span-7 bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between mb-3">
@@ -284,10 +1194,10 @@
                         </div>
                         <div class="grid grid-cols-2 gap-3 mt-2 text-xs">
                             <div class="bg-emerald-950/30 border border-emerald-800/40 p-2 rounded">
-                                <span class="font-bold text-emerald-300">✅ TCB:</span> Nằm vững trên MA20 (+1.3%), RSI 56.2 xung lực khỏe, thanh khoản dẫn đầu 598 tỷ/phiên, cấu trúc sóng tăng rõ nét.
+                                <span class="font-bold text-emerald-300">✅ TCB (Đã khớp 900 cp):</span> Vận động trên MA20 (+1.3%), RSI 56.2 xung lực khỏe, thanh khoản dẫn đầu 598 tỷ/phiên.
                             </div>
                             <div class="bg-slate-800/40 border border-slate-700/50 p-2 rounded text-slate-400">
-                                <span class="font-bold text-slate-300">⚠️ MBB:</span> Vận động dưới MA20 (-1.8%), RSI 45.0 còn giằng co, đang nằm dưới cản kênh trên, cần thêm thời gian tích lũy.
+                                <span class="font-bold text-slate-300">⚠️ MBB:</span> Dưới MA20 (-1.8%), RSI 45.0 còn giằng co, đang nằm dưới cản kênh trên, cần tích lũy thêm.
                             </div>
                         </div>
                     </div>
@@ -300,10 +1210,10 @@
                         </div>
                         <div class="grid grid-cols-2 gap-3 mt-2 text-xs">
                             <div class="bg-emerald-950/30 border border-emerald-800/40 p-2 rounded">
-                                <span class="font-bold text-emerald-300">✅ KBC:</span> Đã vượt lấy lại MA20 thành công, phiên test cung cạn vol chỉ 0.52x, R:R hấp dẫn 2.5 : 1.
+                                <span class="font-bold text-emerald-300">✅ KBC:</span> Lấy lại MA20 thành công, phiên test cung cạn vol chỉ 0.52x, R:R hấp dẫn 2.5 : 1.
                             </div>
                             <div class="bg-slate-800/40 border border-slate-700/50 p-2 rounded text-slate-400">
-                                <span class="font-bold text-slate-300">⚠️ IDC:</span> Vẫn nằm dưới MA20 (-0.4%), áp lực cung bán vùng 34k còn lớn, biên độ lợi nhuận ngắn hạn hẹp hơn.
+                                <span class="font-bold text-slate-300">⚠️ IDC:</span> Dưới MA20 (-0.4%), áp lực cung bán vùng 34k còn lớn, biên lợi nhuận ngắn hạn hẹp hơn.
                             </div>
                         </div>
                     </div>
@@ -316,12 +1226,48 @@
                         </div>
                         <div class="grid grid-cols-2 gap-3 mt-2 text-xs">
                             <div class="bg-emerald-950/30 border border-emerald-800/40 p-2 rounded">
-                                <span class="font-bold text-emerald-300">✅ DCM (Top 1):</span> Giá > MA20 > MA50 chuẩn uptrend, tăng +3.18%, test cung hoàn hảo sát MA20, R:R 2.4:1.
+                                <span class="font-bold text-emerald-300">✅ DCM (Đã khớp 800 cp):</span> Giá > MA20 > MA50 chuẩn uptrend, tăng +3.18%, test cung hoàn hảo sát MA20, R:R 2.4:1.
                             </div>
                             <div class="bg-slate-800/40 border border-slate-700/50 p-2 rounded text-slate-400">
                                 <span class="font-bold text-rose-400">⛔ DGC:</span> Gãy MA50 (-6.2%), RSI yếu 41.5, tổ chức xả hàng, tuyệt đối né xa không bắt đáy.
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. KỶ LUẬT CẮT LỖ & BẢO VỆ VỐN -->
+        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-rose-950/30 border border-rose-500/30 rounded-2xl p-5 shadow-xl">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-rose-500/20">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-rose-500/20 text-rose-400 rounded-xl">
+                        <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">KỶ LUẬT CẮT LỖ & BẢO VỆ VỐN (QUY TẮC BẤT BIẾN)</h3>
+                        <p class="text-xs text-slate-400">Nguyên tắc sống còn: Luôn giữ sụt giảm vốn Max Drawdown &lt; 6% toàn danh mục</p>
+                    </div>
+                </div>
+                <span class="text-xs font-bold px-2.5 py-1 bg-rose-500 text-white rounded-full">Không Ngoại Lệ</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <!-- Rule 1 -->
+                <div class="flex items-start gap-3 bg-slate-900/80 p-3 rounded-xl border border-rose-500/20">
+                    <div class="h-6 w-6 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+                    <div>
+                        <span class="font-bold text-white text-sm">Chạm ngưỡng -5.0%: Bán ngay 1/2 vị thế</span>
+                        <p class="text-slate-400 mt-1">Khi cổ phiếu mua về lỗ 5%, lập tức bán 50% số lượng đang giữ để đưa tài khoản về vị thế an toàn. Không chờ hết phiên.</p>
+                    </div>
+                </div>
+
+                <!-- Rule 2 -->
+                <div class="flex items-start gap-3 bg-slate-900/80 p-3 rounded-xl border border-rose-500/20">
+                    <div class="h-6 w-6 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+                    <div>
+                        <span class="font-bold text-white text-sm">Chạm ngưỡng -7% đến -8%: Bán toàn bộ 100%</span>
+                        <p class="text-slate-400 mt-1">Bán sạch toàn bộ vị thế, thu tiền về mặt dứt khoát. <strong>Tuyệt đối cấm trung bình giá xuống</strong> đối với cổ phiếu đang lỗ.</p>
                     </div>
                 </div>
             </div>
@@ -334,144 +1280,28 @@
         Hệ thống Tự động hóa Phân tích & Đánh giá Cổ phiếu • Đồng hành kế hoạch NAV 100tr • Cập nhật: 15/10/2026
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT & CHARTS -->
+    <!-- CHART.JS & TABLE FILTER SCRIPT -->
     <script>
-        const STOCKS_DB = {"DCM": {"symbol": "DCM", "sector": "Hóa chất - Phân bón", "close": 33.9, "pct_change": -0.59, "score": 80, "action": "🔥 MUA ƯU TIÊN (TOP 1)", "status": "SIÊU PHẨM SĂN SÓNG", "rsi": 52.8, "dist_ma20": 0.01, "vol_ratio": 0.61, "val20_bil": 93.2, "spread_5d": 6.78, "rr_ratio": 2.4, "entry_zone": "33.90 - 33.90", "stop_loss": 32.2, "target_price": 37.97, "potential_upside": 12.0, "tags": ["Thanh khoản dồi dào", "Uptrend vững (Giá > MA20 > MA50)", "Sát nền hỗ trợ MA20", "Test cung cạn vol (Rất đẹp)", "RSI xung lực khỏe (50-65)", "Tỷ lệ R:R chuẩn 2.4:1"], "radar": [47, 95, 43, 32, 96]}, "DXG": {"symbol": "DXG", "sector": "Bất động sản", "close": 10.25, "pct_change": 2.5, "score": 76, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 47.8, "dist_ma20": 1.25, "vol_ratio": 1.62, "val20_bil": 86.4, "spread_5d": 9.56, "rr_ratio": 3.7, "entry_zone": "10.12 - 10.25", "stop_loss": 9.74, "target_price": 12.15, "potential_upside": 18.5, "tags": ["Thanh khoản dồi dào", "Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Dòng tiền lớn vào mạnh (1.6x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 3.7:1"], "radar": [43, 95, 100, 20, 100]}, "DIG": {"symbol": "DIG", "sector": "Bất động sản", "close": 9.6, "pct_change": 1.05, "score": 76, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 47.2, "dist_ma20": 0.36, "vol_ratio": 1.84, "val20_bil": 38.2, "spread_5d": 7.6, "rr_ratio": 2.8, "entry_zone": "9.57 - 9.60", "stop_loss": 9.12, "target_price": 10.94, "potential_upside": 14.0, "tags": ["Thanh khoản dồi dào", "Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Dòng tiền lớn vào mạnh (1.8x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.8:1"], "radar": [19, 95, 100, 24, 100]}, "KBC": {"symbol": "KBC", "sector": "BĐS Khu công nghiệp", "close": 25.75, "pct_change": 0.0, "score": 76, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 45.5, "dist_ma20": 0.59, "vol_ratio": 0.54, "val20_bil": 30.2, "spread_5d": 4.27, "rr_ratio": 2.5, "entry_zone": "25.60 - 25.75", "stop_loss": 24.46, "target_price": 28.95, "potential_upside": 12.4, "tags": ["Thanh khoản dồi dào", "Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Test cung cạn vol (Rất đẹp)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.5:1"], "radar": [15, 95, 38, 57, 99]}, "CTS": {"symbol": "CTS", "sector": "Chứng khoán", "close": 20.45, "pct_change": 6.79, "score": 71, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 47.7, "dist_ma20": 0.11, "vol_ratio": 1.9, "val20_bil": 18.3, "spread_5d": 8.07, "rr_ratio": 3.7, "entry_zone": "20.43 - 20.45", "stop_loss": 19.43, "target_price": 24.2, "potential_upside": 18.3, "tags": ["Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Dòng tiền lớn vào mạnh (1.9x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 3.7:1"], "radar": [9, 95, 100, 20, 100]}, "TCB": {"symbol": "TCB", "sector": "Ngân hàng", "close": 32.9, "pct_change": -0.3, "score": 70, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 55.1, "dist_ma20": 0.97, "vol_ratio": 0.88, "val20_bil": 602.3, "spread_5d": 5.47, "rr_ratio": 1.4, "entry_zone": "32.59 - 32.90", "stop_loss": 31.25, "target_price": 35.2, "potential_upside": 7.0, "tags": ["Thanh khoản dồi dào", "Uptrend vững (Giá > MA20 > MA50)", "Sát nền hỗ trợ MA20", "RSI xung lực khỏe (50-65)"], "radar": [100, 95, 61, 45, 56]}, "MBB": {"symbol": "MBB", "sector": "Ngân hàng", "close": 19.9, "pct_change": 2.84, "score": 70, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 55.8, "dist_ma20": 1.92, "vol_ratio": 2.74, "val20_bil": 236.9, "spread_5d": 7.29, "rr_ratio": 1.3, "entry_zone": "19.52 - 19.90", "stop_loss": 18.9, "target_price": 21.2, "potential_upside": 6.5, "tags": ["Thanh khoản dồi dào", "Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Dòng tiền lớn vào mạnh (2.7x vol)", "RSI xung lực khỏe (50-65)"], "radar": [100, 95, 100, 27, 52]}, "MSB": {"symbol": "MSB", "sector": "Ngân hàng", "close": 14.65, "pct_change": 0.0, "score": 70, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 66.9, "dist_ma20": 3.48, "vol_ratio": 1.17, "val20_bil": 179.2, "spread_5d": 4.1, "rr_ratio": 2.4, "entry_zone": "14.16 - 14.65", "stop_loss": 13.92, "target_price": 16.41, "potential_upside": 12.0, "tags": ["Thanh khoản dồi dào", "Uptrend vững (Giá > MA20 > MA50)", "Thanh khoản tích cực", "Tỷ lệ R:R chuẩn 2.4:1"], "radar": [90, 70, 82, 59, 96]}, "VGC": {"symbol": "VGC", "sector": "BĐS Khu công nghiệp", "close": 43.4, "pct_change": -0.8, "score": 70, "action": "✅ CANH MUA RUNG LẮC", "status": "TIỀM NĂNG CAO", "rsi": 54.4, "dist_ma20": 0.54, "vol_ratio": 0.33, "val20_bil": 27.5, "spread_5d": 5.18, "rr_ratio": 1.4, "entry_zone": "43.16 - 43.40", "stop_loss": 41.23, "target_price": 46.35, "potential_upside": 6.8, "tags": ["Uptrend vững (Giá > MA20 > MA50)", "Sát nền hỗ trợ MA20", "Test cung cạn vol (Rất đẹp)", "RSI xung lực khỏe (50-65)"], "radar": [14, 95, 23, 48, 54]}, "HPG": {"symbol": "HPG", "sector": "Thép - Kim loại", "close": 20.75, "pct_change": -0.24, "score": 66, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 49.8, "dist_ma20": 0.89, "vol_ratio": 1.13, "val20_bil": 387.1, "spread_5d": 5.78, "rr_ratio": 1.8, "entry_zone": "20.57 - 20.75", "stop_loss": 19.71, "target_price": 22.65, "potential_upside": 9.2, "tags": ["Thanh khoản dồi dào", "Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Thanh khoản tích cực", "RSI vùng gom giá rẻ"], "radar": [100, 95, 79, 42, 73]}, "VHC": {"symbol": "VHC", "sector": "Xuất khẩu - Khác", "close": 50.7, "pct_change": -0.2, "score": 66, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 48.1, "dist_ma20": 0.75, "vol_ratio": 0.36, "val20_bil": 17.7, "spread_5d": 7.3, "rr_ratio": 2.3, "entry_zone": "50.33 - 50.70", "stop_loss": 48.16, "target_price": 56.5, "potential_upside": 11.4, "tags": ["Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "Test cung cạn vol (Rất đẹp)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.3:1"], "radar": [9, 95, 25, 27, 92]}, "HDB": {"symbol": "HDB", "sector": "Ngân hàng", "close": 22.8, "pct_change": -1.72, "score": 65, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 67.0, "dist_ma20": 4.83, "vol_ratio": 1.14, "val20_bil": 357.4, "spread_5d": 9.21, "rr_ratio": 2.4, "entry_zone": "21.75 - 22.80", "stop_loss": 21.66, "target_price": 25.54, "potential_upside": 12.0, "tags": ["Thanh khoản dồi dào", "Uptrend vững (Giá > MA20 > MA50)", "Thanh khoản tích cực", "Tỷ lệ R:R chuẩn 2.4:1"], "radar": [100, 70, 80, 20, 96]}, "GMD": {"symbol": "GMD", "sector": "Xuất khẩu - Khác", "close": 53.0, "pct_change": 0.0, "score": 65, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 54.3, "dist_ma20": 1.16, "vol_ratio": 0.84, "val20_bil": 60.1, "spread_5d": 9.06, "rr_ratio": 1.1, "entry_zone": "52.39 - 53.00", "stop_loss": 50.35, "target_price": 56.0, "potential_upside": 5.7, "tags": ["Thanh khoản dồi dào", "Uptrend vững (Giá > MA20 > MA50)", "Sát nền hỗ trợ MA20", "RSI xung lực khỏe (50-65)"], "radar": [30, 95, 59, 20, 45]}, "VPB": {"symbol": "VPB", "sector": "Ngân hàng", "close": 24.45, "pct_change": 0.41, "score": 60, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 73.0, "dist_ma20": 5.46, "vol_ratio": 1.02, "val20_bil": 520.3, "spread_5d": 6.95, "rr_ratio": 2.4, "entry_zone": "23.18 - 24.45", "stop_loss": 23.23, "target_price": 27.38, "potential_upside": 12.0, "tags": ["Thanh khoản dồi dào", "Uptrend vững (Giá > MA20 > MA50)", "Thanh khoản tích cực", "RSI quá mua (>70)", "Tỷ lệ R:R chuẩn 2.4:1"], "radar": [100, 70, 71, 30, 96]}, "HSG": {"symbol": "HSG", "sector": "Thép - Kim loại", "close": 10.45, "pct_change": -0.48, "score": 60, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 58.3, "dist_ma20": 3.74, "vol_ratio": 1.6, "val20_bil": 25.6, "spread_5d": 7.66, "rr_ratio": 1.3, "entry_zone": "10.07 - 10.45", "stop_loss": 9.93, "target_price": 11.15, "potential_upside": 6.7, "tags": ["Vượt lại trên MA20", "Dòng tiền lớn vào mạnh (1.6x vol)", "RSI xung lực khỏe (50-65)"], "radar": [13, 70, 100, 23, 54]}, "SZC": {"symbol": "SZC", "sector": "BĐS Khu công nghiệp", "close": 17.45, "pct_change": 0.58, "score": 59, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 48.6, "dist_ma20": 0.52, "vol_ratio": 0.81, "val20_bil": 4.5, "spread_5d": 4.87, "rr_ratio": 2.5, "entry_zone": "17.36 - 17.45", "stop_loss": 16.58, "target_price": 19.59, "potential_upside": 12.3, "tags": ["Thanh khoản thấp", "Vượt lại trên MA20", "Sát nền hỗ trợ MA20", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.5:1"], "radar": [2, 95, 57, 51, 98]}, "PVT": {"symbol": "PVT", "sector": "Dầu khí - Năng lượng", "close": 23.65, "pct_change": -4.25, "score": 58, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 51.2, "dist_ma20": -1.6, "vol_ratio": 1.29, "val20_bil": 192.7, "spread_5d": 9.73, "rr_ratio": 2.3, "entry_zone": "23.41 - 23.65", "stop_loss": 22.47, "target_price": 26.35, "potential_upside": 11.4, "tags": ["Thanh khoản dồi dào", "Hỗ trợ MA50 đỡ", "Thanh khoản tích cực", "RSI xung lực khỏe (50-65)", "Tỷ lệ R:R chuẩn 2.3:1"], "radar": [96, 40, 90, 20, 91]}, "POW": {"symbol": "POW", "sector": "Dầu khí - Năng lượng", "close": 12.2, "pct_change": -2.01, "score": 55, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 33.8, "dist_ma20": -3.21, "vol_ratio": 2.05, "val20_bil": 67.7, "spread_5d": 4.1, "rr_ratio": 3.1, "entry_zone": "12.08 - 12.20", "stop_loss": 11.59, "target_price": 14.1, "potential_upside": 15.6, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (2.0x vol)", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 3.1:1"], "radar": [34, 40, 100, 59, 100]}, "NKG": {"symbol": "NKG", "sector": "Thép - Kim loại", "close": 10.5, "pct_change": 0.0, "score": 55, "action": "👀 THEO DÕI NỀN GIÁ", "status": "TÍCH LŨY CHỜ THÊM", "rsi": 62.1, "dist_ma20": 8.44, "vol_ratio": 2.13, "val20_bil": 22.9, "spread_5d": 16.19, "rr_ratio": 1.7, "entry_zone": "9.68 - 10.50", "stop_loss": 9.98, "target_price": 11.4, "potential_upside": 8.6, "tags": ["Vượt lại trên MA20", "Tăng dốc xa nền (Dễ chỉnh)", "Dòng tiền lớn vào mạnh (2.1x vol)", "RSI xung lực khỏe (50-65)"], "radar": [11, 70, 100, 20, 69]}, "DGW": {"symbol": "DGW", "sector": "Bán lẻ - Tiêu dùng", "close": 45.05, "pct_change": -0.99, "score": 53, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 51.2, "dist_ma20": -0.95, "vol_ratio": 0.5, "val20_bil": 77.6, "spread_5d": 6.88, "rr_ratio": 1.7, "entry_zone": "44.60 - 45.05", "stop_loss": 42.8, "target_price": 48.9, "potential_upside": 8.5, "tags": ["Thanh khoản dồi dào", "Hỗ trợ MA50 đỡ", "Test cung cạn vol (Rất đẹp)", "RSI xung lực khỏe (50-65)"], "radar": [39, 40, 35, 31, 68]}, "TNG": {"symbol": "TNG", "sector": "Xuất khẩu - Khác", "close": 18.1, "pct_change": -1.63, "score": 53, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 58.4, "dist_ma20": 4.93, "vol_ratio": 1.04, "val20_bil": 13.0, "spread_5d": 8.84, "rr_ratio": 1.1, "entry_zone": "17.25 - 18.10", "stop_loss": 17.2, "target_price": 19.1, "potential_upside": 5.5, "tags": ["Thanh khoản thấp", "Uptrend vững (Giá > MA20 > MA50)", "Thanh khoản tích cực", "RSI xung lực khỏe (50-65)"], "radar": [7, 70, 73, 20, 44]}, "CTG": {"symbol": "CTG", "sector": "Ngân hàng", "close": 29.8, "pct_change": 0.85, "score": 51, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 45.5, "dist_ma20": -0.48, "vol_ratio": 1.28, "val20_bil": 202.5, "spread_5d": 4.03, "rr_ratio": 2.1, "entry_zone": "29.50 - 29.80", "stop_loss": 28.31, "target_price": 33.0, "potential_upside": 10.7, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.1:1"], "radar": [100, 40, 90, 60, 86]}, "VCI": {"symbol": "VCI", "sector": "Chứng khoán", "close": 18.85, "pct_change": 1.34, "score": 51, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 41.3, "dist_ma20": -2.37, "vol_ratio": 1.64, "val20_bil": 152.1, "spread_5d": 7.16, "rr_ratio": 4.6, "entry_zone": "18.66 - 18.85", "stop_loss": 17.91, "target_price": 23.15, "potential_upside": 22.8, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (1.6x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 4.6:1"], "radar": [76, 40, 100, 28, 100]}, "PVS": {"symbol": "PVS", "sector": "Dầu khí - Năng lượng", "close": 31.6, "pct_change": -4.24, "score": 51, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 40.8, "dist_ma20": -4.95, "vol_ratio": 1.63, "val20_bil": 115.8, "spread_5d": 11.39, "rr_ratio": 2.3, "entry_zone": "31.28 - 31.60", "stop_loss": 30.02, "target_price": 35.3, "potential_upside": 11.7, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (1.6x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.3:1"], "radar": [58, 40, 100, 20, 94]}, "HCM": {"symbol": "HCM", "sector": "Chứng khoán", "close": 24.0, "pct_change": 3.9, "score": 51, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 48.2, "dist_ma20": -0.03, "vol_ratio": 1.67, "val20_bil": 66.6, "spread_5d": 5.63, "rr_ratio": 2.8, "entry_zone": "23.76 - 24.00", "stop_loss": 22.8, "target_price": 27.35, "potential_upside": 14.0, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (1.7x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.8:1"], "radar": [33, 40, 100, 44, 100]}, "MBS": {"symbol": "MBS", "sector": "Chứng khoán", "close": 15.2, "pct_change": 2.7, "score": 51, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 40.2, "dist_ma20": -2.41, "vol_ratio": 1.44, "val20_bil": 41.7, "spread_5d": 14.47, "rr_ratio": 4.5, "entry_zone": "15.05 - 15.20", "stop_loss": 14.44, "target_price": 18.63, "potential_upside": 22.6, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (1.4x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 4.5:1"], "radar": [21, 40, 100, 20, 100]}, "STB": {"symbol": "STB", "sector": "Ngân hàng", "close": 62.8, "pct_change": -2.79, "score": 50, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 19.0, "dist_ma20": -11.83, "vol_ratio": 2.1, "val20_bil": 198.4, "spread_5d": 9.39, "rr_ratio": 5.2, "entry_zone": "62.17 - 62.80", "stop_loss": 59.66, "target_price": 79.0, "potential_upside": 25.8, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (2.1x vol)", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 5.2:1"], "radar": [99, 40, 100, 20, 100]}, "BID": {"symbol": "BID", "sector": "Ngân hàng", "close": 33.2, "pct_change": 0.3, "score": 50, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 25.7, "dist_ma20": -5.01, "vol_ratio": 0.88, "val20_bil": 117.6, "spread_5d": 3.46, "rr_ratio": 2.8, "entry_zone": "32.87 - 33.20", "stop_loss": 31.54, "target_price": 37.85, "potential_upside": 14.0, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Nền giá siết chặt (Chờ bung)", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 2.8:1"], "radar": [59, 40, 62, 65, 100]}, "IDC": {"symbol": "IDC", "sector": "BĐS Khu công nghiệp", "close": 33.7, "pct_change": 0.0, "score": 48, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 50.7, "dist_ma20": -0.6, "vol_ratio": 0.65, "val20_bil": 47.7, "spread_5d": 8.31, "rr_ratio": 1.2, "entry_zone": "33.36 - 33.70", "stop_loss": 32.02, "target_price": 35.8, "potential_upside": 6.2, "tags": ["Thanh khoản dồi dào", "Hỗ trợ MA50 đỡ", "Test cung cạn vol (Rất đẹp)", "RSI xung lực khỏe (50-65)"], "radar": [24, 40, 45, 20, 50]}, "HAH": {"symbol": "HAH", "sector": "Xuất khẩu - Khác", "close": 48.2, "pct_change": -0.31, "score": 47, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 44.8, "dist_ma20": -3.88, "vol_ratio": 0.69, "val20_bil": 60.1, "spread_5d": 9.85, "rr_ratio": 2.2, "entry_zone": "47.72 - 48.20", "stop_loss": 45.79, "target_price": 53.5, "potential_upside": 11.0, "tags": ["Thanh khoản dồi dào", "Hỗ trợ MA50 đỡ", "Thanh khoản cạn kiệt", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.2:1"], "radar": [30, 40, 48, 20, 88]}, "PDR": {"symbol": "PDR", "sector": "Bất động sản", "close": 11.3, "pct_change": 1.8, "score": 46, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 43.7, "dist_ma20": -0.07, "vol_ratio": 1.39, "val20_bil": 47.2, "spread_5d": 7.52, "rr_ratio": 2.9, "entry_zone": "11.19 - 11.30", "stop_loss": 10.74, "target_price": 12.95, "potential_upside": 14.6, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 2.9:1"], "radar": [24, 40, 97, 25, 100]}, "VHM": {"symbol": "VHM", "sector": "Bất động sản", "close": 58.9, "pct_change": -3.44, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 25.2, "dist_ma20": -12.12, "vol_ratio": 1.26, "val20_bil": 536.5, "spread_5d": 13.07, "rr_ratio": 7.7, "entry_zone": "58.31 - 58.90", "stop_loss": 55.96, "target_price": 81.7, "potential_upside": 38.7, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 7.7:1"], "radar": [100, 40, 89, 20, 100]}, "SHB": {"symbol": "SHB", "sector": "Ngân hàng", "close": 10.4, "pct_change": 0.97, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 33.5, "dist_ma20": -5.99, "vol_ratio": 1.01, "val20_bil": 438.8, "spread_5d": 9.62, "rr_ratio": 3.6, "entry_zone": "10.30 - 10.40", "stop_loss": 9.88, "target_price": 12.25, "potential_upside": 17.8, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 3.6:1"], "radar": [100, 40, 71, 20, 100]}, "SSI": {"symbol": "SSI", "sector": "Chứng khoán", "close": 19.25, "pct_change": 1.85, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 38.4, "dist_ma20": -3.53, "vol_ratio": 1.17, "val20_bil": 389.5, "spread_5d": 5.45, "rr_ratio": 2.6, "entry_zone": "19.06 - 19.25", "stop_loss": 18.29, "target_price": 21.75, "potential_upside": 13.0, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "Tỷ lệ R:R chuẩn 2.6:1"], "radar": [100, 40, 82, 45, 100]}, "BSR": {"symbol": "BSR", "sector": "Dầu khí - Năng lượng", "close": 28.2, "pct_change": -6.31, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 39.4, "dist_ma20": -8.8, "vol_ratio": 1.72, "val20_bil": 329.6, "spread_5d": 14.89, "rr_ratio": 3.7, "entry_zone": "27.92 - 28.20", "stop_loss": 26.79, "target_price": 33.45, "potential_upside": 18.6, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (1.7x vol)", "Tỷ lệ R:R chuẩn 3.7:1"], "radar": [100, 40, 100, 20, 100]}, "VCB": {"symbol": "VCB", "sector": "Ngân hàng", "close": 56.5, "pct_change": 0.36, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 36.8, "dist_ma20": -1.9, "vol_ratio": 0.69, "val20_bil": 193.9, "spread_5d": 1.95, "rr_ratio": 1.7, "entry_zone": "55.94 - 56.50", "stop_loss": 53.68, "target_price": 61.4, "potential_upside": 8.7, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Test cung cạn vol (Rất đẹp)", "Nền giá siết chặt (Chờ bung)"], "radar": [97, 40, 48, 81, 69]}, "ACB": {"symbol": "ACB", "sector": "Ngân hàng", "close": 20.6, "pct_change": 0.73, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 37.7, "dist_ma20": -2.15, "vol_ratio": 0.77, "val20_bil": 157.8, "spread_5d": 2.67, "rr_ratio": 2.5, "entry_zone": "20.39 - 20.60", "stop_loss": 19.57, "target_price": 23.15, "potential_upside": 12.4, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Nền giá siết chặt (Chờ bung)", "Tỷ lệ R:R chuẩn 2.5:1"], "radar": [79, 40, 54, 73, 99]}, "VNM": {"symbol": "VNM", "sector": "Bán lẻ - Tiêu dùng", "close": 57.2, "pct_change": -1.21, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 37.0, "dist_ma20": -3.07, "vol_ratio": 0.93, "val20_bil": 122.0, "spread_5d": 2.62, "rr_ratio": 2.5, "entry_zone": "56.63 - 57.20", "stop_loss": 54.34, "target_price": 64.4, "potential_upside": 12.6, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Nền giá siết chặt (Chờ bung)", "Tỷ lệ R:R chuẩn 2.5:1"], "radar": [61, 40, 65, 74, 100]}, "LPB": {"symbol": "LPB", "sector": "Ngân hàng", "close": 37.2, "pct_change": -2.36, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 26.7, "dist_ma20": -13.57, "vol_ratio": 1.32, "val20_bil": 73.6, "spread_5d": 11.56, "rr_ratio": 10.1, "entry_zone": "36.83 - 37.20", "stop_loss": 35.34, "target_price": 56.0, "potential_upside": 50.5, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 10.1:1"], "radar": [37, 40, 92, 20, 100]}, "ANV": {"symbol": "ANV", "sector": "Xuất khẩu - Khác", "close": 18.45, "pct_change": -1.86, "score": 45, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 61.6, "dist_ma20": 8.95, "vol_ratio": 0.97, "val20_bil": 19.0, "spread_5d": 11.92, "rr_ratio": 1.4, "entry_zone": "16.94 - 18.45", "stop_loss": 17.53, "target_price": 19.7, "potential_upside": 6.8, "tags": ["Uptrend vững (Giá > MA20 > MA50)", "Tăng dốc xa nền (Dễ chỉnh)", "RSI xung lực khỏe (50-65)"], "radar": [10, 70, 68, 20, 54]}, "MSN": {"symbol": "MSN", "sector": "Bán lẻ - Tiêu dùng", "close": 70.4, "pct_change": -1.81, "score": 44, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 48.8, "dist_ma20": -0.8, "vol_ratio": 0.7, "val20_bil": 413.9, "spread_5d": 6.11, "rr_ratio": 1.6, "entry_zone": "69.70 - 70.40", "stop_loss": 66.88, "target_price": 76.1, "potential_upside": 8.1, "tags": ["Thanh khoản dồi dào", "Hỗ trợ MA50 đỡ", "RSI vùng gom giá rẻ"], "radar": [100, 40, 49, 39, 65]}, "MWG": {"symbol": "MWG", "sector": "Bán lẻ - Tiêu dùng", "close": 72.8, "pct_change": -0.95, "score": 44, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 48.3, "dist_ma20": -0.42, "vol_ratio": 0.95, "val20_bil": 211.2, "spread_5d": 4.95, "rr_ratio": 1.2, "entry_zone": "72.07 - 72.80", "stop_loss": 69.16, "target_price": 77.3, "potential_upside": 6.2, "tags": ["Thanh khoản dồi dào", "Hỗ trợ MA50 đỡ", "RSI vùng gom giá rẻ"], "radar": [100, 40, 67, 51, 49]}, "FRT": {"symbol": "FRT", "sector": "Bán lẻ - Tiêu dùng", "close": 141.0, "pct_change": 0.28, "score": 41, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 48.2, "dist_ma20": -1.14, "vol_ratio": 0.34, "val20_bil": 98.7, "spread_5d": 9.93, "rr_ratio": 1.7, "entry_zone": "139.59 - 141.00", "stop_loss": 133.95, "target_price": 152.8, "potential_upside": 8.4, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Test cung cạn vol (Rất đẹp)", "RSI vùng gom giá rẻ"], "radar": [49, 40, 24, 20, 67]}, "PVD": {"symbol": "PVD", "sector": "Dầu khí - Năng lượng", "close": 17.7, "pct_change": -1.67, "score": 41, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 40.5, "dist_ma20": -3.78, "vol_ratio": 0.72, "val20_bil": 70.5, "spread_5d": 6.78, "rr_ratio": 3.1, "entry_zone": "17.52 - 17.70", "stop_loss": 16.81, "target_price": 20.4, "potential_upside": 15.3, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 3.1:1"], "radar": [35, 40, 51, 32, 100]}, "BCM": {"symbol": "BCM", "sector": "BĐS Khu công nghiệp", "close": 38.25, "pct_change": 0.92, "score": 41, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 41.2, "dist_ma20": -2.4, "vol_ratio": 0.68, "val20_bil": 17.6, "spread_5d": 5.62, "rr_ratio": 4.6, "entry_zone": "37.87 - 38.25", "stop_loss": 36.34, "target_price": 47.0, "potential_upside": 22.9, "tags": ["Gãy MA20 & MA50 (Yếu)", "Test cung cạn vol (Rất đẹp)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 4.6:1"], "radar": [9, 40, 48, 44, 100]}, "VIC": {"symbol": "VIC", "sector": "Bất động sản", "close": 218.0, "pct_change": -0.18, "score": 40, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 39.4, "dist_ma20": -4.73, "vol_ratio": 1.31, "val20_bil": 723.0, "spread_5d": 6.28, "rr_ratio": 4.3, "entry_zone": "215.82 - 218.00", "stop_loss": 207.1, "target_price": 265.0, "potential_upside": 21.6, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "Tỷ lệ R:R chuẩn 4.3:1"], "radar": [100, 40, 92, 37, 100]}, "FPT": {"symbol": "FPT", "sector": "Công nghệ - Viễn thông", "close": 58.0, "pct_change": 1.58, "score": 40, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 32.4, "dist_ma20": -6.23, "vol_ratio": 0.85, "val20_bil": 338.0, "spread_5d": 7.24, "rr_ratio": 3.4, "entry_zone": "57.42 - 58.00", "stop_loss": 55.1, "target_price": 68.0, "potential_upside": 17.2, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 3.4:1"], "radar": [100, 40, 60, 28, 100]}, "VND": {"symbol": "VND", "sector": "Chứng khoán", "close": 13.25, "pct_change": 1.92, "score": 40, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 36.0, "dist_ma20": -4.16, "vol_ratio": 1.38, "val20_bil": 128.8, "spread_5d": 7.55, "rr_ratio": 6.4, "entry_zone": "13.12 - 13.25", "stop_loss": 12.59, "target_price": 17.5, "potential_upside": 32.1, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "Tỷ lệ R:R chuẩn 6.4:1"], "radar": [64, 40, 97, 25, 100]}, "KDH": {"symbol": "KDH", "sector": "Bất động sản", "close": 13.65, "pct_change": 1.11, "score": 40, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 38.0, "dist_ma20": -1.54, "vol_ratio": 1.09, "val20_bil": 50.2, "spread_5d": 5.86, "rr_ratio": 5.0, "entry_zone": "13.51 - 13.65", "stop_loss": 12.97, "target_price": 17.09, "potential_upside": 25.2, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "Tỷ lệ R:R chuẩn 5.0:1"], "radar": [25, 40, 76, 41, 100]}, "FTS": {"symbol": "FTS", "sector": "Chứng khoán", "close": 18.7, "pct_change": 3.89, "score": 39, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 43.1, "dist_ma20": -1.67, "vol_ratio": 2.75, "val20_bil": 11.9, "spread_5d": 10.7, "rr_ratio": 5.3, "entry_zone": "18.51 - 18.70", "stop_loss": 17.76, "target_price": 23.7, "potential_upside": 26.7, "tags": ["Thanh khoản thấp", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (2.8x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 5.3:1"], "radar": [6, 40, 100, 20, 100]}, "BSI": {"symbol": "BSI", "sector": "Chứng khoán", "close": 25.4, "pct_change": 6.95, "score": 39, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 46.3, "dist_ma20": -0.24, "vol_ratio": 2.27, "val20_bil": 6.0, "spread_5d": 8.27, "rr_ratio": 3.9, "entry_zone": "25.15 - 25.40", "stop_loss": 24.13, "target_price": 30.4, "potential_upside": 19.7, "tags": ["Thanh khoản thấp", "Gãy MA20 & MA50 (Yếu)", "Dòng tiền lớn vào mạnh (2.3x vol)", "RSI vùng gom giá rẻ", "Tỷ lệ R:R chuẩn 3.9:1"], "radar": [3, 40, 100, 20, 100]}, "PNJ": {"symbol": "PNJ", "sector": "Bán lẻ - Tiêu dùng", "close": 18.2, "pct_change": -2.41, "score": 38, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 20.4, "dist_ma20": -29.65, "vol_ratio": 0.64, "val20_bil": 246.4, "spread_5d": 12.91, "rr_ratio": 30.1, "entry_zone": "18.02 - 18.20", "stop_loss": 17.29, "target_price": 45.55, "potential_upside": 150.3, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản cạn kiệt", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 30.1:1"], "radar": [100, 40, 45, 20, 100]}, "TPB": {"symbol": "TPB", "sector": "Ngân hàng", "close": 11.75, "pct_change": 0.43, "score": 36, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 44.0, "dist_ma20": -1.37, "vol_ratio": 1.22, "val20_bil": 111.3, "spread_5d": 6.38, "rr_ratio": 1.5, "entry_zone": "11.63 - 11.75", "stop_loss": 11.16, "target_price": 12.63, "potential_upside": 7.5, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI vùng gom giá rẻ"], "radar": [56, 40, 86, 36, 60]}, "DPM": {"symbol": "DPM", "sector": "Hóa chất - Phân bón", "close": 21.2, "pct_change": -0.7, "score": 33, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 37.3, "dist_ma20": -4.46, "vol_ratio": 0.63, "val20_bil": 56.7, "spread_5d": 6.37, "rr_ratio": 2.4, "entry_zone": "20.99 - 21.20", "stop_loss": 20.14, "target_price": 23.75, "potential_upside": 12.0, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản cạn kiệt", "Tỷ lệ R:R chuẩn 2.4:1"], "radar": [28, 40, 44, 36, 96]}, "NLG": {"symbol": "NLG", "sector": "Bất động sản", "close": 21.4, "pct_change": 0.94, "score": 33, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 35.2, "dist_ma20": -3.64, "vol_ratio": 0.66, "val20_bil": 30.1, "spread_5d": 7.01, "rr_ratio": 4.3, "entry_zone": "21.19 - 21.40", "stop_loss": 20.33, "target_price": 25.95, "potential_upside": 21.3, "tags": ["Thanh khoản dồi dào", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản cạn kiệt", "Tỷ lệ R:R chuẩn 4.3:1"], "radar": [15, 40, 46, 30, 100]}, "PC1": {"symbol": "PC1", "sector": "Dầu khí - Năng lượng", "close": 18.6, "pct_change": 1.92, "score": 33, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 35.3, "dist_ma20": -5.94, "vol_ratio": 0.52, "val20_bil": 25.2, "spread_5d": 4.57, "rr_ratio": 4.0, "entry_zone": "18.41 - 18.60", "stop_loss": 17.67, "target_price": 22.3, "potential_upside": 19.9, "tags": ["Gãy MA20 & MA50 (Yếu)", "Thanh khoản cạn kiệt", "Tỷ lệ R:R chuẩn 4.0:1"], "radar": [13, 40, 36, 54, 100]}, "VGI": {"symbol": "VGI", "sector": "Công nghệ - Viễn thông", "close": 76.3, "pct_change": 0.26, "score": 33, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 35.6, "dist_ma20": -3.87, "vol_ratio": 0.54, "val20_bil": 19.0, "spread_5d": 4.72, "rr_ratio": 3.2, "entry_zone": "75.54 - 76.30", "stop_loss": 72.48, "target_price": 88.42, "potential_upside": 15.9, "tags": ["Gãy MA20 & MA50 (Yếu)", "Thanh khoản cạn kiệt", "Tỷ lệ R:R chuẩn 3.2:1"], "radar": [10, 40, 38, 53, 100]}, "CTR": {"symbol": "CTR", "sector": "Công nghệ - Viễn thông", "close": 68.1, "pct_change": -0.29, "score": 33, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 25.2, "dist_ma20": -3.92, "vol_ratio": 0.73, "val20_bil": 14.9, "spread_5d": 3.67, "rr_ratio": 3.2, "entry_zone": "67.42 - 68.10", "stop_loss": 64.69, "target_price": 78.9, "potential_upside": 15.9, "tags": ["Thanh khoản thấp", "Gãy MA20 & MA50 (Yếu)", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 3.2:1"], "radar": [7, 40, 51, 63, 100]}, "CMG": {"symbol": "CMG", "sector": "Công nghệ - Viễn thông", "close": 19.25, "pct_change": 0.52, "score": 33, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 18.7, "dist_ma20": -9.24, "vol_ratio": 1.33, "val20_bil": 3.8, "spread_5d": 7.27, "rr_ratio": 6.8, "entry_zone": "19.06 - 19.25", "stop_loss": 18.29, "target_price": 25.75, "potential_upside": 33.8, "tags": ["Thanh khoản thấp", "Gãy MA20 & MA50 (Yếu)", "Thanh khoản tích cực", "RSI quá bán (Hồi phục)", "Tỷ lệ R:R chuẩn 6.8:1"], "radar": [2, 40, 93, 27, 100]}, "DGC": {"symbol": "DGC", "sector": "Hóa chất - Phân bón", "close": 32.75, "pct_change": 0.46, "score": 30, "action": "⛔ TẠM ĐỨNG NGOÀI", "status": "CHƯA ĐẠT TIÊU CHÍ", "rsi": 37.0, "dist_ma20": -5.59, "vol_ratio": 0.7, "val20_bil": 17.9, "spread_5d": 6.41, "rr_ratio": 4.3, "entry_zone": "32.42 - 32.75", "stop_loss": 31.11, "target_price": 39.74, "potential_upside": 21.3, "tags": ["Gãy MA20 & MA50 (Yếu)", "Tỷ lệ R:R chuẩn 4.3:1"], "radar": [9, 40, 49, 36, 100]}};
-        const SORTED_SYMBOLS = ["DCM", "DXG", "DIG", "KBC", "CTS", "TCB", "MBB", "MSB", "VGC", "HPG", "VHC", "HDB", "GMD", "VPB", "HSG", "SZC", "PVT", "POW", "NKG", "DGW", "TNG", "CTG", "VCI", "PVS", "HCM", "MBS", "STB", "BID", "IDC", "HAH", "PDR", "VHM", "SHB", "SSI", "BSR", "VCB", "ACB", "VNM", "LPB", "ANV", "MSN", "MWG", "FRT", "PVD", "BCM", "VIC", "FPT", "VND", "KDH", "FTS", "BSI", "PNJ", "TPB", "DPM", "NLG", "PC1", "VGI", "CTR", "CMG", "DGC"];
-        let stockRadarChartInstance = null;
+        // Table search filter function
+        function filterStockTable() {
+            const input = document.getElementById("filterInput");
+            const filter = input.value.toUpperCase();
+            const rows = document.querySelectorAll("#matrixTable tbody tr.stock-row");
 
-        // Initialize Stock Selector Dropdown
-        const selector = document.getElementById('stockSelect');
-        SORTED_SYMBOLS.forEach(sym => {
-            const s = STOCKS_DB[sym];
-            const opt = document.createElement('option');
-            opt.value = sym;
-            opt.textContent = `${s.symbol} (${s.score}đ) - ${s.sector}`;
-            selector.appendChild(opt);
-        });
-
-        function selectStock(symbol) {
-            if (!STOCKS_DB[symbol]) return;
-            const s = STOCKS_DB[symbol];
-            selector.value = symbol;
-
-            // Update Left Details
-            document.getElementById('evalSector').textContent = `Ngành: ${s.sector}`;
-            document.getElementById('evalSymbol').textContent = s.symbol;
-            
-            const pctSign = s.pct_change >= 0 ? '+' : '';
-            const priceEl = document.getElementById('evalPrice');
-            priceEl.textContent = `${s.close.toFixed(2)}k (${pctSign}${s.pct_change.toFixed(2)}%)`;
-            priceEl.className = s.pct_change >= 0 ? "text-lg font-bold text-emerald-400" : "text-lg font-bold text-rose-400";
-
-            // Score & Bar
-            const scoreEl = document.getElementById('evalScore');
-            scoreEl.innerHTML = `${s.score}<span class="text-sm text-slate-500">/100</span>`;
-            
-            const barEl = document.getElementById('evalScoreBar');
-            barEl.style.width = `${s.score}%`;
-            if (s.score >= 80) {
-                scoreEl.className = "text-3xl font-black text-emerald-400";
-                barEl.className = "bg-emerald-500 h-2.5 rounded-full transition-all duration-500";
-            } else if (s.score >= 70) {
-                scoreEl.className = "text-3xl font-black text-cyan-400";
-                barEl.className = "bg-cyan-500 h-2.5 rounded-full transition-all duration-500";
-            } else if (s.score >= 55) {
-                scoreEl.className = "text-3xl font-black text-amber-400";
-                barEl.className = "bg-amber-500 h-2.5 rounded-full transition-all duration-500";
-            } else {
-                scoreEl.className = "text-3xl font-black text-rose-400";
-                barEl.className = "bg-rose-500 h-2.5 rounded-full transition-all duration-500";
-            }
-
-            // Action Box
-            const actionBox = document.getElementById('evalActionBox');
-            const actionText = document.getElementById('evalActionText');
-            const statusText = document.getElementById('evalStatus');
-            actionText.textContent = s.action;
-            statusText.textContent = s.status;
-
-            if (s.score >= 80) {
-                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-emerald-950/40 border-emerald-500/50 text-emerald-300";
-            } else if (s.score >= 70) {
-                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-cyan-950/40 border-cyan-500/50 text-cyan-300";
-            } else if (s.score >= 55) {
-                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-amber-950/40 border-amber-500/50 text-amber-300";
-            } else {
-                actionBox.className = "p-3 rounded-lg border font-bold text-sm flex items-center justify-between bg-rose-950/40 border-rose-500/50 text-rose-300";
-            }
-
-            // Key Levels
-            document.getElementById('evalBuyZone').textContent = s.entry_zone;
-            document.getElementById('evalStopLoss').textContent = `${s.stop_loss.toFixed(2)}k`;
-            document.getElementById('evalTarget').textContent = `${s.target_price.toFixed(2)}k (+${s.potential_upside}%)`;
-            document.getElementById('evalRR').textContent = `${s.rr_ratio.toFixed(1)} : 1`;
-
-            // Metrics
-            const distSign = s.dist_ma20 >= 0 ? '+' : '';
-            document.getElementById('evalMa20').textContent = `${distSign}${s.dist_ma20}%`;
-            document.getElementById('evalRsi').textContent = s.rsi;
-            document.getElementById('evalVal').textContent = `${s.val20_bil} Tỷ`;
-
-            // Tags
-            const tagsContainer = document.getElementById('evalTags');
-            tagsContainer.innerHTML = '';
-            s.tags.forEach(t => {
-                const span = document.createElement('span');
-                span.className = "px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300";
-                span.textContent = `✓ ${t}`;
-                tagsContainer.appendChild(span);
-            });
-
-            // Update Dedicated Radar Chart
-            updateStockRadar(s);
-        }
-
-        function updateStockRadar(s) {
-            const ctxStock = document.getElementById('stockRadarChart').getContext('2d');
-            if (stockRadarChartInstance) {
-                stockRadarChartInstance.destroy();
-            }
-
-            const chartColor = s.score >= 80 ? '#10b981' : (s.score >= 70 ? '#06b6d4' : (s.score >= 55 ? '#f59e0b' : '#ef4444'));
-            const chartBg = s.score >= 80 ? 'rgba(16, 185, 129, 0.3)' : (s.score >= 70 ? 'rgba(6, 182, 212, 0.3)' : (s.score >= 55 ? 'rgba(245, 158, 11, 0.3)' : 'rgba(239, 68, 68, 0.3)'));
-
-            stockRadarChartInstance = new Chart(ctxStock, {
-                type: 'radar',
-                data: {
-                    labels: ["Thanh khoản", "Xu hướng MA", "Dòng tiền lớn", "Độ siết nền", "Tỷ lệ R:R"],
-                    datasets: [{
-                        label: `${s.symbol} (${s.score}đ)`,
-                        data: s.radar,
-                        backgroundColor: chartBg,
-                        borderColor: chartColor,
-                        borderWidth: 2,
-                        pointBackgroundColor: chartColor
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: { color: 'rgba(148, 163, 184, 0.15)' },
-                            grid: { color: 'rgba(148, 163, 184, 0.15)' },
-                            pointLabels: { color: '#94a3b8', font: { size: 9, weight: '600' } },
-                            ticks: { display: false, min: 0, max: 100 }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: { color: '#cbd5e1', font: { size: 10, weight: 'bold' }, boxWidth: 10 }
-                        }
-                    }
+            rows.forEach(row => {
+                const sym = row.querySelector(".stock-sym").textContent.trim();
+                const sector = row.children[2].textContent.trim();
+                if (sym.toUpperCase().indexOf(filter) > -1 || sector.toUpperCase().indexOf(filter) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
                 }
             });
         }
 
-        // Overall 4-stock comparison radar
-        const ctxOverview = document.getElementById('radarChart').getContext('2d');
-        new Chart(ctxOverview, {
+        // Radar chart 4 pillars
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctx, {
             type: 'radar',
             data: {
                 labels: ["Thanh khoản", "Xu hướng MA", "Dòng tiền lớn", "Độ siết nền", "Tỷ lệ R:R"],
@@ -509,18 +1339,24 @@
                     r: {
                         angleLines: { color: 'rgba(148, 163, 184, 0.15)' },
                         grid: { color: 'rgba(148, 163, 184, 0.15)' },
-                        pointLabels: { color: '#94a3b8', font: { size: 10, weight: '600' } },
+                        pointLabels: {
+                            color: '#94a3b8',
+                            font: { size: 10, weight: '600' }
+                        },
                         ticks: { display: false, min: 0, max: 100 }
                     }
                 },
                 plugins: {
-                    legend: { labels: { color: '#cbd5e1', font: { size: 11, weight: 'bold' }, boxWidth: 12 } }
+                    legend: {
+                        labels: {
+                            color: '#cbd5e1',
+                            font: { size: 11, weight: 'bold' },
+                            boxWidth: 12
+                        }
+                    }
                 }
             }
         });
-
-        // Default to DCM on load
-        selectStock('DCM');
     </script>
 </body>
 </html>
