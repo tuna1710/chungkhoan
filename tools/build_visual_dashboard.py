@@ -15,7 +15,10 @@ from datetime import datetime
 sys.path.append(os.path.dirname(__file__))
 from screener import scan_all_stocks
 
-def generate_visual_dashboard(output_file="/workspace/reports/dashboard.html"):
+def generate_visual_dashboard(output_file=None):
+    if output_file is None:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        output_file = os.path.join(base_dir, "reports", "dashboard.html")
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     today_str = datetime.now().strftime("%d/%m/%Y")
     

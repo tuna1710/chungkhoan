@@ -13,8 +13,11 @@ import json
 import requests
 from datetime import datetime
 
-sys.path.append(os.path.dirname(__file__))
-sys.path.append('/workspace/tools')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if os.path.basename(BASE_DIR) == "tools":
+    BASE_DIR = os.path.dirname(BASE_DIR)
+sys.path.append(BASE_DIR)
+sys.path.append(os.path.join(BASE_DIR, 'tools'))
 from screener import scan_all_stocks
 
 def publish_to_rentry(title, md_content):
@@ -34,7 +37,9 @@ def publish_to_rentry(title, md_content):
         print(f"Lỗi khi push lên Rentry: {e}")
     return None
 
-def generate_morning_report(output_dir="/workspace/reports", push_web=True):
+def generate_morning_report(output_dir=None, push_web=True):
+    if output_dir is None:
+        output_dir = os.path.join(BASE_DIR, "reports")
     os.makedirs(output_dir, exist_ok=True)
     today = datetime.now()
     date_str = today.strftime("%d/%m/%Y")

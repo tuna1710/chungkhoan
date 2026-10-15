@@ -329,7 +329,12 @@ def print_symbol_detail(s):
         print(f"   ✓ {tag}")
     print("=" * 70 + "\n")
 
-def export_report_markdown(results, output_file="/workspace/reports/ket_qua_loc_co_phieu.md"):
+def export_report_markdown(results, output_file=None):
+    if output_file is None:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        if os.path.basename(base_dir) == "tools":
+            base_dir = os.path.dirname(base_dir)
+        output_file = os.path.join(base_dir, "reports", "ket_qua_loc_co_phieu.md")
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     today_str = datetime.now().strftime("%d/%m/%Y %H:%M")
     
