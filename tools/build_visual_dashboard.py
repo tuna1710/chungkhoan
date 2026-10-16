@@ -61,6 +61,14 @@ def generate_visual_dashboard(output_file=None):
                         parts = fname.replace("ban_tin_sang_", "").replace(".md", "").split("_")
                         date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
                         display_name = f"Bản tin sáng {date_label}"
+                    elif fname.startswith("ban_tin_trua_"):
+                        parts = fname.replace("ban_tin_trua_", "").replace(".md", "").split("_")
+                        date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
+                        display_name = f"Bản tin trưa {date_label}"
+                    elif fname.startswith("ban_tin_chieu_"):
+                        parts = fname.replace("ban_tin_chieu_", "").replace(".md", "").split("_")
+                        date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
+                        display_name = f"Bản tin chiều {date_label}"
                     elif "kich_ban" in fname:
                         display_name = "Kịch bản chiến lược 14/10"
                     elif "ket_qua_loc" in fname:
@@ -146,7 +154,7 @@ def generate_visual_dashboard(output_file=None):
                 </div>
                 <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
                     <span class="text-xs text-slate-400">Tiền mặt / CP:</span>
-                    <span class="text-sm font-bold text-cyan-400">44tr (44%) / 56tr (56%)</span>
+                    <span class="text-sm font-bold text-cyan-400">0tr (0%) / 102tr (100%)</span>
                 </div>
             </div>
         </div>
@@ -172,11 +180,11 @@ def generate_visual_dashboard(output_file=None):
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-xs font-medium text-slate-400">Danh Mục Đang Nắm Giữ</p>
-                        <h3 class="text-lg font-bold text-emerald-400 mt-1">TCB (900) & DCM (800)</h3>
+                        <h3 class="text-lg font-bold text-emerald-400 mt-1">NBC, TCB, DCM</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i class="fa-solid fa-bullseye"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Khớp giá đỏ tối ưu (TCB 32.64, DCM 33.30). Hàng về chiều 17/10.</p>
+                <p class="text-xs text-slate-400 mt-3">Khớp NBC 5.5k @ 8.30; TCB 900 @ 32.64; DCM 800 @ 33.30.</p>
             </div>
             <!-- Card 3 -->
             <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 shadow-lg hover:border-slate-600 transition">
@@ -187,18 +195,18 @@ def generate_visual_dashboard(output_file=None):
                     </div>
                     <span class="p-2 rounded-lg bg-rose-500/10 text-rose-400"><i class="fa-solid fa-shield-halved"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">TCB cắt lỗ 31.00; DCM cắt lỗ 31.65. Chạm -5% bán 1/2 không gồng lỗ.</p>
+                <p class="text-xs text-slate-400 mt-3">NBC cắt lỗ 7.90; TCB cắt lỗ 31.00; DCM cắt lỗ 31.65. Chạm -5% bán 1/2.</p>
             </div>
             <!-- Card 4 -->
             <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 shadow-lg hover:border-slate-600 transition">
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-xs font-medium text-slate-400">Sức Mua Tiền Mặt</p>
-                        <h3 class="text-lg font-bold text-cyan-400 mt-1">43.984.000 VNĐ</h3>
+                        <h3 class="text-lg font-bold text-cyan-400 mt-1">0 VNĐ (Full Cổ)</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-cyan-500/10 text-cyan-400"><i class="fa-solid fa-wallet"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Chiếm 43.98% NAV. Tạm dừng mua mới, giữ tiền mặt dự phòng an toàn.</p>
+                <p class="text-xs text-slate-400 mt-3">Chiếm 0% NAV. Đã giải ngân đủ vị thế, tuyệt đối dừng mua mới.</p>
             </div>
         </div>
 
@@ -212,10 +220,10 @@ def generate_visual_dashboard(output_file=None):
                         <i class="fa-solid fa-wallet text-emerald-400"></i>
                         THEO DÕI VỊ THẾ DANH MỤC THỰC CHIẾN & KHUYẾN NGHỊ HÀNH ĐỘNG
                     </h2>
-                    <p class="text-xs text-slate-400">Tổng tài sản NAV: 100.000.000 VNĐ • Đã giải ngân Đợt 1 thành công 2 mã trụ cột</p>
+                    <p class="text-xs text-slate-400">Tổng tài sản NAV: 100.000.000 VNĐ • Đã giải ngân hoàn tất 100% NAV vào 3 mã chiến lược</p>
                 </div>
                 <div class="flex items-center gap-2 text-xs">
-                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold">56% Cổ phiếu / 44% Tiền mặt</span>
+                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold">100% Cổ phiếu / 0% Tiền mặt</span>
                 </div>
             </div>
 
@@ -235,7 +243,28 @@ def generate_visual_dashboard(output_file=None):
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-800">
-                        <!-- Row 1: TCB -->
+                        <!-- Row 1: NBC -->
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="py-3 px-3 font-bold text-white text-sm">
+                                <span class="bg-amber-950/60 text-amber-300 px-2.5 py-1 rounded border border-amber-500/40 font-black">NBC</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Than Núi Béo (HNX)</span>
+                            </td>
+                            <td class="py-3 px-3 font-bold text-white">5.500 cp</td>
+                            <td class="py-3 px-3 font-semibold text-slate-300">8.30</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">8.35</td>
+                            <td class="py-3 px-3 font-bold text-white">45.925.000 đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">45.65%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+0.60% (+275k)</td>
+                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 16/10 (Chiều 20/10 về)</td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
+                                    <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ T+0
+                                </span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Cắt lỗ: 7.90 (-5%) | Chốt lời: 9.10 - 9.60</span>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2: TCB -->
                         <tr class="hover:bg-slate-800/40 transition">
                             <td class="py-3 px-3 font-bold text-white text-sm">
                                 <span class="bg-indigo-950/60 text-indigo-300 px-2.5 py-1 rounded border border-indigo-500/40 font-black">TCB</span>
@@ -243,11 +272,11 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                             <td class="py-3 px-3 font-bold text-white">900 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">32.64</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">33.20</td>
-                            <td class="py-3 px-3 font-bold text-white">29.880.000 đ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">32.90</td>
+                            <td class="py-3 px-3 font-bold text-white">29.610.000 đ</td>
                             <td class="py-3 px-3 font-semibold text-cyan-400">29.38%</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">+1.72% (+504k)</td>
-                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 15/10 (Chiều 17/10 về)</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+0.80% (+234k)</td>
+                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 15/10 (Chiều 19/10 về)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
                                     <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ
@@ -256,7 +285,7 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                         </tr>
 
-                        <!-- Row 2: DCM -->
+                        <!-- Row 3: DCM -->
                         <tr class="hover:bg-slate-800/40 transition">
                             <td class="py-3 px-3 font-bold text-white text-sm">
                                 <span class="bg-emerald-950/60 text-emerald-300 px-2.5 py-1 rounded border border-emerald-500/40 font-black">DCM</span>
@@ -264,11 +293,11 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                             <td class="py-3 px-3 font-bold text-white">800 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">33.30</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">34.10</td>
-                            <td class="py-3 px-3 font-bold text-white">27.280.000 đ</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">33.60</td>
+                            <td class="py-3 px-3 font-bold text-white">26.880.000 đ</td>
                             <td class="py-3 px-3 font-semibold text-cyan-400">26.64%</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">+2.40% (+640k)</td>
-                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 15/10 (Chiều 17/10 về)</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+0.90% (+240k)</td>
+                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 15/10 (Chiều 19/10 về)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
                                     <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ
@@ -277,7 +306,7 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                         </tr>
 
-                        <!-- Row 3: TD6 -->
+                        <!-- Row 4: TD6 -->
                         <tr class="hover:bg-slate-800/40 transition">
                             <td class="py-3 px-3 font-bold text-white text-sm">
                                 <span class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-bold">TD6</span>

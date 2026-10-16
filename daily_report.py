@@ -37,16 +37,29 @@ def publish_to_rentry(title, md_content):
         print(f"Lỗi khi push lên Rentry: {e}")
     return None
 
-def generate_morning_report(output_dir=None, push_web=True):
+def generate_morning_report(output_dir=None, push_web=True, session="sang"):
     if output_dir is None:
         output_dir = os.path.join(BASE_DIR, "reports")
     os.makedirs(output_dir, exist_ok=True)
     today = datetime.now()
     date_str = today.strftime("%d/%m/%Y")
     file_date_str = today.strftime("%d_%m_%Y")
-    output_file = os.path.join(output_dir, f"ban_tin_sang_{file_date_str}.md")
-
-    print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN CHIẾN LƯỢC ĐẦU NGÀY ({date_str})...")
+    
+    if session == "trua":
+        output_file = os.path.join(output_dir, f"ban_tin_trua_{file_date_str}.md")
+        report_title = f"BẢN TIN TỔNG KẾT PHIÊN SÁNG & CHIẾN LƯỢC PHIÊN CHIỀU ({date_str})"
+        time_label = f"11h35 - {date_str}"
+        print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN TRƯA ({date_str})...")
+    elif session == "chieu":
+        output_file = os.path.join(output_dir, f"ban_tin_chieu_{file_date_str}.md")
+        report_title = f"BẢN TIN TỔNG KẾT SAU GIỜ ĐÓNG CỬA PHIÊN ({date_str})"
+        time_label = f"15h05 - {date_str}"
+        print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN CHIỀU ({date_str})...")
+    else:
+        output_file = os.path.join(output_dir, f"ban_tin_sang_{file_date_str}.md")
+        report_title = f"BẢN TIN CHIẾN LƯỢC ĐẦU NGÀY & THEO DÕI DANH MỤC ({date_str})"
+        time_label = f"08h30 - {date_str}"
+        print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN CHIẾN LƯỢC ĐẦU NGÀY ({date_str})...")
 
     # 1. Quét thị trường tìm mã Mua & Cắt lỗ
     results = scan_all_stocks()
@@ -78,8 +91,8 @@ def generate_morning_report(output_dir=None, push_web=True):
     cash_pct = 0.0
     stock_pct = 100.0
 
-    md_content = f"""# 📊 BẢN TIN CHIẾN LƯỢC & THEO DÕI DANH MỤC THỰC CHIẾN ({date_str})
-**Thời gian:** 08h30 - {date_str} | **Chiến lược:** Cân bằng chủ động săn sóng ngành  
+    md_content = f"""# 📊 {report_title}
+**Thời gian:** {time_label} | **Chiến lược:** Cân bằng chủ động săn sóng ngành  
 **Quy mô vốn:** 100.000.000 VNĐ | **Mục tiêu 3 tháng:** +10% đến +15% (110 - 115 triệu)  
 **Tỷ lệ tài sản hiện tại:** **{cash_pct:.2f}% Tiền mặt** ({cash_val:,} VNĐ) | **{stock_pct:.2f}% Cổ phiếu** ({stock_total_val:,} VNĐ)  
 
@@ -170,4 +183,19 @@ def generate_morning_report(output_dir=None, push_web=True):
     return output_file, web_url
 
 if __name__ == "__main__":
-    generate_morning_report()
+    import argparse
+    parser = argparse.ArgumentParser(description="Tạo báo cáo thị trường theo phiên")
+    parser.add_argument("--session", choices=["sang", "trua", "chieu", "auto"], default="auto", help="Phiên báo cáo")
+    args = parser.parse_args()
+    
+    session = args.session
+    if session == "auto":
+        now_hour = (datetime.utcnow().hour + 7) % 24
+        if now_hour < 11:
+            session = "sang"
+        elif now_hour < 14:
+            session = "trua"
+        else:
+            session = "chieu"
+            
+    generate_morning_report(session=session)
