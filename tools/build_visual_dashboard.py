@@ -10,6 +10,7 @@ và TÍCH HỢP TÍNH NĂNG CHỌN XEM LẠI BÁO CÁO CŨ THEO TỪNG NGÀY (AR
 import os
 import sys
 import json
+import re
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -67,41 +68,53 @@ def generate_visual_dashboard(output_file=None):
     dcm_s = s_dict.get('DCM', {'score': 80, 'dist_ma20': 2.1, 'rsi': 60.5, 'val20_bil': 120.0, 'vol_ratio': 1.15, 'rr_ratio': 2.4})
     dgc_s = s_dict.get('DGC', {'score': 48, 'dist_ma20': -6.2, 'rsi': 41.5, 'val20_bil': 95.0, 'vol_ratio': 0.70, 'rr_ratio': 1.2})
 
-    # Đọc kho báo cáo lịch sử theo ngày
+    def get_report_sort_key(filename):
+        m = re.search(r"ban_tin_(sang|trua|chieu)_(\d{1,2})_(\d{1,2})_(\d{4})", filename)
+        if m:
+            sess, d, mth, y = m.groups()
+            sess_order = {"chieu": 3, "trua": 2, "sang": 1}.get(sess, 0)
+            return (datetime(int(y), int(mth), int(d)), sess_order)
+        if "kich_ban" in filename:
+            return (datetime(2026, 10, 14), 0.5)
+        if "ket_qua" in filename:
+            return (datetime(2026, 10, 14), 0.0)
+        return (datetime(2020, 1, 1), 0)
+
+    # Đọc kho báo cáo lịch sử theo ngày (sắp xếp từ gần nhất đến xa hơn)
     reports_dir = os.path.join(BASE_DIR, "reports")
     past_reports = {}
     if os.path.exists(reports_dir):
-        for fname in sorted(os.listdir(reports_dir), reverse=True):
-            if fname.endswith(".md"):
-                filepath = os.path.join(reports_dir, fname)
-                try:
-                    with open(filepath, "r", encoding="utf-8") as f:
-                        md_text = f.read()
-                    if fname.startswith("ban_tin_sang_"):
-                        parts = fname.replace("ban_tin_sang_", "").replace(".md", "").split("_")
-                        date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
-                        display_name = f"Bản tin sáng {date_label}"
-                    elif fname.startswith("ban_tin_trua_"):
-                        parts = fname.replace("ban_tin_trua_", "").replace(".md", "").split("_")
-                        date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
-                        display_name = f"Bản tin trưa {date_label}"
-                    elif fname.startswith("ban_tin_chieu_"):
-                        parts = fname.replace("ban_tin_chieu_", "").replace(".md", "").split("_")
-                        date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
-                        display_name = f"Bản tin chiều {date_label}"
-                    elif "kich_ban" in fname:
-                        display_name = "Kịch bản chiến lược 14/10"
-                    elif "ket_qua_loc" in fname:
-                        display_name = "Kết quả bộ lọc cổ phiếu"
-                    else:
-                        display_name = fname.replace(".md", "")
-                    
-                    past_reports[fname] = {
-                        "name": display_name,
-                        "content": md_text
-                    }
-                except Exception:
-                    pass
+        md_files = [f for f in os.listdir(reports_dir) if f.endswith(".md")]
+        for fname in sorted(md_files, key=get_report_sort_key, reverse=True):
+            filepath = os.path.join(reports_dir, fname)
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    md_text = f.read()
+                if fname.startswith("ban_tin_sang_"):
+                    parts = fname.replace("ban_tin_sang_", "").replace(".md", "").split("_")
+                    date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
+                    display_name = f"Bản tin sáng {date_label}"
+                elif fname.startswith("ban_tin_trua_"):
+                    parts = fname.replace("ban_tin_trua_", "").replace(".md", "").split("_")
+                    date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
+                    display_name = f"Bản tin trưa {date_label}"
+                elif fname.startswith("ban_tin_chieu_"):
+                    parts = fname.replace("ban_tin_chieu_", "").replace(".md", "").split("_")
+                    date_label = f"{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) == 3 else fname
+                    display_name = f"Bản tin chiều {date_label}"
+                elif "kich_ban" in fname:
+                    display_name = "Kịch bản chiến lược 14/10"
+                elif "ket_qua_loc" in fname:
+                    display_name = "Kết quả bộ lọc cổ phiếu"
+                else:
+                    display_name = fname.replace(".md", "")
+                
+                past_reports[fname] = {
+                    "name": display_name,
+                    "content": md_text
+                }
+            except Exception:
+                pass
 
     past_reports_json = json.dumps(past_reports, ensure_ascii=False)
 
