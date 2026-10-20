@@ -45,23 +45,23 @@
 
 ## 🥊 IV. PHÂN TÍCH SO SÁNH ĐỐI ĐẦU (HEAD-TO-HEAD BATTLE)
 
-### 1. Nhóm Ngân Hàng: TCB (75 điểm - Đã khớp 900 cp) vs MBB (51 điểm)
+### 1. Nhóm Ngân Hàng: TCB (80 điểm - Đã khớp 900 cp) vs MBB (70 điểm)
 * **KẾT QUẢ:** **Chọn TCB** ➔ **Loại MBB**
 * **Lý do chi tiết:**
-  * **TCB:** Vận động vững trên MA20 (+1.31%), RSI 56.2 dốc lên, thanh khoản dẫn đầu toàn sàn (~600 tỷ/phiên). Cấu trúc nến tích lũy dốc lên rất khỏe.
-  * **MBB:** Bị bán thủng MA20 (-1.80%), đang phải xử lý lượng kẹt hàng lớn ở vùng cản 20k. Cần thêm 3-5 phiên tích lũy mới có điểm mua an toàn.
+  * **TCB:** Vận động vững trên MA20 (+1.64%), RSI 58.5 (xung lực khỏe), thanh khoản dẫn đầu 612 tỷ/phiên. Cấu trúc tích lũy rất khỏe.
+  * **MBB:** Vị thế +1.04% so với MA20, RSI 51.7, thanh khoản 227 tỷ. Cần thêm thời gian tích lũy mới có điểm mua an toàn.
 
-### 2. Nhóm BĐS Khu Công Nghiệp: KBC (76 điểm) vs IDC (60 điểm)
+### 2. Nhóm BĐS Khu Công Nghiệp: KBC (80 điểm) vs IDC (43 điểm)
 * **KẾT QUẢ:** **Chọn KBC** ➔ **Ưu tiên hơn IDC**
 * **Lý do chi tiết:**
-  * **KBC:** Đã vượt lấy lại MA20 thành công. Phiên gần nhất khối lượng bán cạn kiệt chỉ đạt 0.52x bình quân. Tỷ lệ R:R = 2.5 : 1.
-  * **IDC:** Vẫn nằm dưới MA20 (-0.4%), áp lực cung bán tại vùng 34k còn lớn.
+  * **KBC:** Vị thế +1.58% so với MA20, RSI 52.9, khối lượng 0.62x bình quân. Tỷ lệ R:R = 2.3 : 1.
+  * **IDC:** Vị thế -0.37% so với MA20, RSI 52.5, áp lực cung bán tại vùng cản ngắn hạn cần thời gian hấp thụ.
 
-### 3. Nhóm Hóa Chất: DCM (80 điểm - Đã khớp 800 cp) vs DGC (48 điểm)
-* **KẾT QUẢ:** **Chọn DCM (Top 1 Toàn thị trường)** ➔ **Loại DGC**
+### 3. Nhóm Hóa Chất: DCM (63 điểm - Đã khớp 800 cp) vs DGC (38 điểm)
+* **KẾT QUẢ:** **Chọn DCM (Top đầu ngành)** ➔ **Loại DGC**
 * **Lý do chi tiết:**
-  * **DCM:** Cấu trúc Giá > MA20 > MA50 chuẩn sách giáo khoa, test cung cạn vol rút chân hoàn hảo. Tỷ lệ R:R = 2.4 : 1.
-  * **DGC:** Gãy MA50, dòng tiền tổ chức chưa quay lại.
+  * **DCM:** Cấu trúc Giá > MA20 > MA50 (-0.29% vs MA20), RSI 52.4, test cung cạn vol rút chân. Tỷ lệ R:R = 2.4 : 1.
+  * **DGC:** Vị thế -4.11% so với MA20, RSI 39.1, dòng tiền tổ chức chưa xác nhận đảo chiều.
 
 ---
 

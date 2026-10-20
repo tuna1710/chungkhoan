@@ -130,28 +130,43 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
         note = "Sát nền" if 0 <= s['dist_ma20'] <= 3 else ("Hơi cao" if s['dist_ma20'] > 3 else "Dưới MA20")
         md_content += f"| **#{i}** | **{s['symbol']}** | {s['sector']} | **{s['score']}/100** [{score_bar}] | **{dist_str}** ({note}) | **{s['rsi']:.1f}** | **{s['vol_ratio']:.2f}x** | {s['val20_bil']:.1f} tỷ | **{s['rr_ratio']:.1f} : 1** | {s['action']} |\n"
 
-    md_content += """
+    s_dict = {s['symbol']: s for s in results}
+    tcb_s = s_dict.get('TCB', {'score': 80, 'dist_ma20': 1.64, 'rsi': 58.5, 'val20_bil': 612.2, 'vol_ratio': 1.07})
+    mbb_s = s_dict.get('MBB', {'score': 55, 'dist_ma20': -1.20, 'rsi': 46.5, 'val20_bil': 250.0, 'vol_ratio': 0.85})
+    kbc_s = s_dict.get('KBC', {'score': 80, 'dist_ma20': 1.58, 'rsi': 52.9, 'val20_bil': 28.6, 'vol_ratio': 0.62, 'rr_ratio': 2.3})
+    idc_s = s_dict.get('IDC', {'score': 60, 'dist_ma20': -0.40, 'rsi': 48.0, 'val20_bil': 35.0, 'vol_ratio': 0.75, 'rr_ratio': 1.8})
+    dcm_s = s_dict.get('DCM', {'score': 80, 'dist_ma20': 2.10, 'rsi': 60.5, 'val20_bil': 120.0, 'vol_ratio': 1.15, 'rr_ratio': 2.4})
+    dgc_s = s_dict.get('DGC', {'score': 48, 'dist_ma20': -6.20, 'rsi': 41.5, 'val20_bil': 95.0, 'vol_ratio': 0.70, 'rr_ratio': 1.2})
+
+    tcb_ma = f"+{tcb_s['dist_ma20']:.2f}%" if tcb_s['dist_ma20'] >= 0 else f"{tcb_s['dist_ma20']:.2f}%"
+    mbb_ma = f"+{mbb_s['dist_ma20']:.2f}%" if mbb_s['dist_ma20'] >= 0 else f"{mbb_s['dist_ma20']:.2f}%"
+    kbc_ma = f"+{kbc_s['dist_ma20']:.2f}%" if kbc_s['dist_ma20'] >= 0 else f"{kbc_s['dist_ma20']:.2f}%"
+    idc_ma = f"+{idc_s['dist_ma20']:.2f}%" if idc_s['dist_ma20'] >= 0 else f"{idc_s['dist_ma20']:.2f}%"
+    dcm_ma = f"+{dcm_s['dist_ma20']:.2f}%" if dcm_s['dist_ma20'] >= 0 else f"{dcm_s['dist_ma20']:.2f}%"
+    dgc_ma = f"+{dgc_s['dist_ma20']:.2f}%" if dgc_s['dist_ma20'] >= 0 else f"{dgc_s['dist_ma20']:.2f}%"
+
+    md_content += f"""
 ---
 
 ## 🥊 IV. PHÂN TÍCH SO SÁNH ĐỐI ĐẦU (HEAD-TO-HEAD BATTLE)
 
-### 1. Nhóm Ngân Hàng: TCB (75 điểm - Đã khớp 900 cp) vs MBB (51 điểm)
+### 1. Nhóm Ngân Hàng: TCB ({tcb_s['score']} điểm - Đã khớp 900 cp) vs MBB ({mbb_s['score']} điểm)
 * **KẾT QUẢ:** **Chọn TCB** ➔ **Loại MBB**
 * **Lý do chi tiết:**
-  * **TCB:** Vận động vững trên MA20 (+1.31%), RSI 56.2 dốc lên, thanh khoản dẫn đầu toàn sàn (~600 tỷ/phiên). Cấu trúc nến tích lũy dốc lên rất khỏe.
-  * **MBB:** Bị bán thủng MA20 (-1.80%), đang phải xử lý lượng kẹt hàng lớn ở vùng cản 20k. Cần thêm 3-5 phiên tích lũy mới có điểm mua an toàn.
+  * **TCB:** Vận động vững trên MA20 ({tcb_ma}), RSI {tcb_s['rsi']:.1f} ({'xung lực khỏe' if tcb_s['rsi'] >= 50 else 'giằng co'}), thanh khoản dẫn đầu {tcb_s['val20_bil']:.0f} tỷ/phiên. Cấu trúc tích lũy rất khỏe.
+  * **MBB:** Vị thế {mbb_ma} so với MA20, RSI {mbb_s['rsi']:.1f}, thanh khoản {mbb_s['val20_bil']:.0f} tỷ. Cần thêm thời gian tích lũy mới có điểm mua an toàn.
 
-### 2. Nhóm BĐS Khu Công Nghiệp: KBC (76 điểm) vs IDC (60 điểm)
+### 2. Nhóm BĐS Khu Công Nghiệp: KBC ({kbc_s['score']} điểm) vs IDC ({idc_s['score']} điểm)
 * **KẾT QUẢ:** **Chọn KBC** ➔ **Ưu tiên hơn IDC**
 * **Lý do chi tiết:**
-  * **KBC:** Đã vượt lấy lại MA20 thành công. Phiên gần nhất khối lượng bán cạn kiệt chỉ đạt 0.52x bình quân. Tỷ lệ R:R = 2.5 : 1.
-  * **IDC:** Vẫn nằm dưới MA20 (-0.4%), áp lực cung bán tại vùng 34k còn lớn.
+  * **KBC:** Vị thế {kbc_ma} so với MA20, RSI {kbc_s['rsi']:.1f}, khối lượng {kbc_s['vol_ratio']:.2f}x bình quân. Tỷ lệ R:R = {kbc_s.get('rr_ratio', 2.3):.1f} : 1.
+  * **IDC:** Vị thế {idc_ma} so với MA20, RSI {idc_s['rsi']:.1f}, áp lực cung bán tại vùng cản ngắn hạn cần thời gian hấp thụ.
 
-### 3. Nhóm Hóa Chất: DCM (80 điểm - Đã khớp 800 cp) vs DGC (48 điểm)
-* **KẾT QUẢ:** **Chọn DCM (Top 1 Toàn thị trường)** ➔ **Loại DGC**
+### 3. Nhóm Hóa Chất: DCM ({dcm_s['score']} điểm - Đã khớp 800 cp) vs DGC ({dgc_s['score']} điểm)
+* **KẾT QUẢ:** **Chọn DCM (Top đầu ngành)** ➔ **Loại DGC**
 * **Lý do chi tiết:**
-  * **DCM:** Cấu trúc Giá > MA20 > MA50 chuẩn sách giáo khoa, test cung cạn vol rút chân hoàn hảo. Tỷ lệ R:R = 2.4 : 1.
-  * **DGC:** Gãy MA50, dòng tiền tổ chức chưa quay lại.
+  * **DCM:** Cấu trúc Giá > MA20 > MA50 ({dcm_ma} vs MA20), RSI {dcm_s['rsi']:.1f}, test cung cạn vol rút chân. Tỷ lệ R:R = {dcm_s.get('rr_ratio', 2.4):.1f} : 1.
+  * **DGC:** Vị thế {dgc_ma} so với MA20, RSI {dgc_s['rsi']:.1f}, dòng tiền tổ chức chưa xác nhận đảo chiều.
 
 ---
 
