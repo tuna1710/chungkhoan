@@ -102,12 +102,12 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
 | Mã CP | Khối lượng | Giá vốn | Thị giá | Giá trị TT (VNĐ) | Lãi/Lỗ (%) | Trạng thái / Ngày về | Khuyến nghị hành động cụ thể |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **NBC** *(Than Núi Béo)* | **5,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10 (T+0)<br>*(Về chiều Thứ Ba 20/10)* | **NẮM GIỮ T+0**.<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Cắt lỗ dứt khoát: **7.60** (thủng đáy).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
-| **TCB** | **900** | **32.64** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 15/10 (T+1)<br>*(Về chiều Thứ Hai 19/10)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
-| **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10 (T+1)<br>*(Về chiều Thứ Hai 19/10)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.65** (thủng bán 1/2).<br>• Chốt lời 1: **36.60** (+10%).<br>• Chốt lời 2: **38.20** (+14.7%). |
-| **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (T+0) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
+| **NBC** *(Than Núi Béo)* | **5,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10<br>*(Chiều nay 20/10 hàng về)* | **NẮM GIỮ CHỦ ĐỘNG**.<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Cắt lỗ dứt khoát: **7.60** (thủng đáy).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
+| **TCB** | **900** | **32.64** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
+| **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.65** (thủng bán 1/2).<br>• Chốt lời 1: **36.60** (+10%).<br>• Chốt lời 2: **38.20** (+14.7%). |
+| **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (Khả dụng) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
 
-* **Đánh giá sức khỏe danh mục:** Tài khoản đã giải ngân trọn vẹn 100% NAV vào 3 mã trọng tâm: TCB (Ngân hàng), DCM (Phân bón) và NBC (Than). Tỷ lệ tiền mặt hiện tại là 0%, do đó nguyên tắc kỷ luật số 1 lúc này là **TUYỆT ĐỐI KHÔNG MUA THÊM BẤT KỲ MÃ NÀO**, kiên nhẫn nắm giữ chờ hàng về và thực thi đúng các mốc Stop-loss / Take-profit đã định sẵn.
+* **Đánh giá sức khỏe danh mục:** Tài khoản đã giải ngân trọn vẹn 100% NAV vào 3 mã trọng tâm: TCB (Ngân hàng), DCM (Phân bón) và NBC (Than). TCB và DCM đã về tài khoản sẵn sàng giao dịch, NBC sẽ khả dụng vào chiều nay 20/10. Tỷ lệ tiền mặt hiện tại là 0%, nguyên tắc kỷ luật số 1 lúc này là **TUYỆT ĐỐI KHÔNG MUA THÊM BẤT KỲ MÃ NÀO**, kiên nhẫn nắm giữ và thực thi đúng các mốc Stop-loss / Take-profit đã định sẵn.
 
 ---
 
@@ -157,9 +157,9 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
 ## 💰 V. KẾ HOẠCH HÀNH ĐỘNG DỨT KHOÁT CHO TÀI KHOẢN 100 TRIỆU
 
-### 1. Kế hoạch giải ngân tiếp theo (Sức mua tiền mặt: 43.98 triệu VNĐ)
-* Danh mục đã hoàn tất Đợt 1 với 2 mã trụ cột (TCB & DCM ~ 56 triệu).
-* **Chiến lược:** Tạm dừng mở vị thế mua mới, kiên nhẫn quan sát hàng về (chiều 17/10). Chỉ gia tăng tỷ trọng khi cổ phiếu có lãi đệm (> 5%) và dòng tiền bùng nổ vượt đỉnh.
+### 1. Kế hoạch quản trị vị thế & giải ngân tiếp theo
+* Danh mục đã hoàn tất phân bổ 100% NAV vào 3 mã chiến lược: TCB (Ngân hàng), DCM (Phân bón), NBC (Than).
+* **Chiến lược:** Tạm dừng mở vị thế mua mới vì tỷ lệ tiền mặt là 0%. TCB và DCM đã về tài khoản, NBC về chiều nay 20/10. Toàn bộ danh mục đã chủ động kiểm soát rủi ro. Chỉ xem xét chốt lời từng phần khi đạt mục tiêu hoặc gia tăng khi cổ phiếu bứt phá mạnh.
 
 ### 2. Thẻ Cắt Lỗ & Bảo Vệ Vốn (Kỷ luật thép)
 * **Nguyên tắc -5%:** Bất kỳ cổ phiếu nào chạm mức lỗ -5.0% ➔ **BÁN 1/2 NGAY LẬP TỨC**.

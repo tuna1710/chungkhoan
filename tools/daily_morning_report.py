@@ -37,16 +37,29 @@ def publish_to_rentry(title, md_content):
         print(f"Lỗi khi push lên Rentry: {e}")
     return None
 
-def generate_morning_report(output_dir=None, push_web=True):
+def generate_morning_report(output_dir=None, push_web=True, session="sang"):
     if output_dir is None:
         output_dir = os.path.join(BASE_DIR, "reports")
     os.makedirs(output_dir, exist_ok=True)
     today = datetime.now()
     date_str = today.strftime("%d/%m/%Y")
     file_date_str = today.strftime("%d_%m_%Y")
-    output_file = os.path.join(output_dir, f"ban_tin_sang_{file_date_str}.md")
-
-    print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN CHIẾN LƯỢC ĐẦU NGÀY ({date_str})...")
+    
+    if session == "trua":
+        output_file = os.path.join(output_dir, f"ban_tin_trua_{file_date_str}.md")
+        report_title = f"BẢN TIN TỔNG KẾT PHIÊN SÁNG & CHIẾN LƯỢC PHIÊN CHIỀU ({date_str})"
+        time_label = f"11h35 - {date_str}"
+        print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN TRƯA ({date_str})...")
+    elif session == "chieu":
+        output_file = os.path.join(output_dir, f"ban_tin_chieu_{file_date_str}.md")
+        report_title = f"BẢN TIN TỔNG KẾT SAU GIỜ ĐÓNG CỬA PHIÊN ({date_str})"
+        time_label = f"15h05 - {date_str}"
+        print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN CHIỀU ({date_str})...")
+    else:
+        output_file = os.path.join(output_dir, f"ban_tin_sang_{file_date_str}.md")
+        report_title = f"BẢN TIN CHIẾN LƯỢC ĐẦU NGÀY & THEO DÕI DANH MỤC ({date_str})"
+        time_label = f"08h30 - {date_str}"
+        print(f"\n🚀 ĐANG KHỞI TẠO BẢN TIN CHIẾN LƯỢC ĐẦU NGÀY ({date_str})...")
 
     # 1. Quét thị trường tìm mã Mua & Cắt lỗ
     results = scan_all_stocks()
@@ -54,7 +67,7 @@ def generate_morning_report(output_dir=None, push_web=True):
     top_buys = [s for s in results if s['score'] >= 70][:5]
     top_avoids = [s for s in results if s['score'] < 52 and s['val20_bil'] >= 50][:4]
 
-    # Dữ liệu thị giá thực tế của DCM & TCB
+    # Dữ liệu thị giá thực tế của DCM, TCB, NBC
     dcm_data = next((s for s in results if s['symbol'] == 'DCM'), None)
     dcm_price = dcm_data['close'] if dcm_data else 33.30
     dcm_pct = ((dcm_price - 33.30) / 33.30) * 100
@@ -63,16 +76,23 @@ def generate_morning_report(output_dir=None, push_web=True):
     tcb_price = tcb_data['close'] if tcb_data else 32.64
     tcb_pct = ((tcb_price - 32.64) / 32.64) * 100
 
+    # Lấy thị giá NBC (Than Núi Béo)
+    from screener import fetch_stock_ohlcv
+    nbc_df = fetch_stock_ohlcv('NBC', days=60)
+    nbc_price = float(nbc_df['close'].iloc[-1]) if nbc_df is not None and not nbc_df.empty else 8.40
+    nbc_pct = ((nbc_price - 8.30) / 8.30) * 100
+
     dcm_val = int(800 * dcm_price * 1000)
     tcb_val = int(900 * tcb_price * 1000)
-    stock_total_val = dcm_val + tcb_val
-    cash_val = 43984000
+    nbc_val = int(5500 * nbc_price * 1000)
+    stock_total_val = dcm_val + tcb_val + nbc_val
+    cash_val = 0
     nav_current = cash_val + stock_total_val
-    cash_pct = (cash_val / nav_current) * 100
-    stock_pct = (stock_total_val / nav_current) * 100
+    cash_pct = 0.0
+    stock_pct = 100.0
 
-    md_content = f"""# 📊 BẢN TIN CHIẾN LƯỢC & THEO DÕI DANH MỤC THỰC CHIẾN ({date_str})
-**Thời gian:** 08h30 - {date_str} | **Chiến lược:** Cân bằng chủ động săn sóng ngành  
+    md_content = f"""# 📊 {report_title}
+**Thời gian:** {time_label} | **Chiến lược:** Cân bằng chủ động săn sóng ngành  
 **Quy mô vốn:** 100.000.000 VNĐ | **Mục tiêu 3 tháng:** +10% đến +15% (110 - 115 triệu)  
 **Tỷ lệ tài sản hiện tại:** **{cash_pct:.2f}% Tiền mặt** ({cash_val:,} VNĐ) | **{stock_pct:.2f}% Cổ phiếu** ({stock_total_val:,} VNĐ)  
 
@@ -82,11 +102,12 @@ def generate_morning_report(output_dir=None, push_web=True):
 
 | Mã CP | Khối lượng | Giá vốn | Thị giá | Giá trị TT (VNĐ) | Lãi/Lỗ (%) | Trạng thái / Ngày về | Khuyến nghị hành động cụ thể |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **TCB** | **900** | **32.64** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 15/10 (T+0)<br>*(Hàng về chiều 17/10)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
-| **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10 (T+0)<br>*(Hàng về chiều 17/10)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.65** (thủng bán 1/2).<br>• Chốt lời 1: **36.60** (+10%).<br>• Chốt lời 2: **38.20** (+14.7%). |
-| **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (T+0) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
+| **NBC** *(Than Núi Béo)* | **5,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10<br>*(Chiều nay 20/10 hàng về)* | **NẮM GIỮ CHỦ ĐỘNG**.<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Cắt lỗ dứt khoát: **7.60** (thủng đáy).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
+| **TCB** | **900** | **32.64** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
+| **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.65** (thủng bán 1/2).<br>• Chốt lời 1: **36.60** (+10%).<br>• Chốt lời 2: **38.20** (+14.7%). |
+| **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (Khả dụng) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
 
-* **Đánh giá sức khỏe danh mục:** Đã hoàn tất mở vị thế Đợt 1 cho 2 mã trụ cột (TCB 900 cp, DCM 800 cp) tại các vùng giá chiết khấu tối ưu. Tài khoản giữ vững 44 triệu tiền mặt (44%), bảo vệ an toàn cho NAV và kiên nhẫn chờ hàng về chiều Thứ Sáu (17/10).
+* **Đánh giá sức khỏe danh mục:** Tài khoản đã giải ngân trọn vẹn 100% NAV vào 3 mã trọng tâm: TCB (Ngân hàng), DCM (Phân bón) và NBC (Than). TCB và DCM đã về tài khoản sẵn sàng giao dịch, NBC sẽ khả dụng vào chiều nay 20/10. Tỷ lệ tiền mặt hiện tại là 0%, nguyên tắc kỷ luật số 1 lúc này là **TUYỆT ĐỐI KHÔNG MUA THÊM BẤT KỲ MÃ NÀO**, kiên nhẫn nắm giữ và thực thi đúng các mốc Stop-loss / Take-profit đã định sẵn.
 
 ---
 
@@ -136,9 +157,9 @@ def generate_morning_report(output_dir=None, push_web=True):
 
 ## 💰 V. KẾ HOẠCH HÀNH ĐỘNG DỨT KHOÁT CHO TÀI KHOẢN 100 TRIỆU
 
-### 1. Kế hoạch giải ngân tiếp theo (Sức mua tiền mặt: 43.98 triệu VNĐ)
-* Danh mục đã hoàn tất Đợt 1 với 2 mã trụ cột (TCB & DCM ~ 56 triệu).
-* **Chiến lược:** Tạm dừng mở vị thế mua mới, kiên nhẫn quan sát hàng về (chiều 17/10). Chỉ gia tăng tỷ trọng khi cổ phiếu có lãi đệm (> 5%) và dòng tiền bùng nổ vượt đỉnh.
+### 1. Kế hoạch quản trị vị thế & giải ngân tiếp theo
+* Danh mục đã hoàn tất phân bổ 100% NAV vào 3 mã chiến lược: TCB (Ngân hàng), DCM (Phân bón), NBC (Than).
+* **Chiến lược:** Tạm dừng mở vị thế mua mới vì tỷ lệ tiền mặt là 0%. TCB và DCM đã về tài khoản, NBC về chiều nay 20/10. Toàn bộ danh mục đã chủ động kiểm soát rủi ro. Chỉ xem xét chốt lời từng phần khi đạt mục tiêu hoặc gia tăng khi cổ phiếu bứt phá mạnh.
 
 ### 2. Thẻ Cắt Lỗ & Bảo Vệ Vốn (Kỷ luật thép)
 * **Nguyên tắc -5%:** Bất kỳ cổ phiếu nào chạm mức lỗ -5.0% ➔ **BÁN 1/2 NGAY LẬP TỨC**.
@@ -162,4 +183,19 @@ def generate_morning_report(output_dir=None, push_web=True):
     return output_file, web_url
 
 if __name__ == "__main__":
-    generate_morning_report()
+    import argparse
+    parser = argparse.ArgumentParser(description="Tạo báo cáo thị trường theo phiên")
+    parser.add_argument("--session", choices=["sang", "trua", "chieu", "auto"], default="auto", help="Phiên báo cáo")
+    args = parser.parse_args()
+    
+    session = args.session
+    if session == "auto":
+        now_hour = (datetime.utcnow().hour + 7) % 24
+        if now_hour < 11:
+            session = "sang"
+        elif now_hour < 14:
+            session = "trua"
+        else:
+            session = "chieu"
+            
+    generate_morning_report(session=session)
