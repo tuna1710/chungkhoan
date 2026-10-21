@@ -2,12 +2,12 @@ name: Daily Stock Workflow & Live Dashboard
 
 on:
   schedule:
-    # 1. 01:30 UTC = 08:30 sáng VN (Bản tin chiến lược trước giờ mở cửa)
-    - cron: '30 1 * * 1-5'
-    # 2. 04:35 UTC = 11:35 trưa VN (Cập nhật sau khi kết thúc phiên sáng)
-    - cron: '35 4 * * 1-5'
-    # 3. 08:05 UTC = 15:05 chiều VN (Tổng kết toàn diện sau khi đóng cửa phiên)
-    - cron: '5 8 * * 1-5'
+    # 1. 01:20 UTC = 08:20 sáng VN (Tránh khung giờ nghẽn tải :30 của GitHub)
+    - cron: '20 1 * * 1-5'
+    # 2. 04:25 UTC = 11:25 trưa VN (Trước phiên chiều)
+    - cron: '25 4 * * 1-5'
+    # 3. 08:08 UTC = 15:08 chiều VN (Sau giờ đóng cửa ATC)
+    - cron: '8 8 * * 1-5'
   workflow_dispatch: # Cho phép kích hoạt thủ công từ tab Actions trên GitHub bất cứ lúc nào
 
 jobs:
