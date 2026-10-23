@@ -13,7 +13,7 @@ import json
 import requests
 from datetime import datetime
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = "/workspace" if os.path.exists("/workspace") else os.path.dirname(os.path.realpath(__file__))
 if os.path.basename(BASE_DIR) == "tools":
     BASE_DIR = os.path.dirname(BASE_DIR)
 sys.path.append(BASE_DIR)
@@ -174,7 +174,7 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
 ### 1. Kế hoạch quản trị vị thế & giải ngân tiếp theo
 * Danh mục đã hoàn tất phân bổ 100% NAV vào 3 mã chiến lược: TCB (Ngân hàng), DCM (Phân bón), NBC (Than).
-* **Chiến lược:** Tạm dừng mở vị thế mua mới vì tỷ lệ tiền mặt là 0%. TCB và DCM đã về tài khoản, NBC về chiều nay 20/10. Toàn bộ danh mục đã chủ động kiểm soát rủi ro. Chỉ xem xét chốt lời từng phần khi đạt mục tiêu hoặc gia tăng khi cổ phiếu bứt phá mạnh.
+* **Chiến lược:** Tạm dừng mở vị thế mua mới vì tỷ lệ tiền mặt là 0%. Hiện tại toàn bộ 100% cổ phiếu trong danh mục (TCB, DCM, NBC) đều đã về tài khoản và sẵn sàng giao dịch (T+0). Toàn bộ danh mục đã chủ động kiểm soát rủi ro. Chỉ xem xét chốt lời từng phần khi đạt mục tiêu hoặc canh hạ tỷ trọng nếu chạm ngưỡng phòng thủ.
 
 ### 2. Thẻ Cắt Lỗ & Bảo Vệ Vốn (Kỷ luật thép)
 * **Nguyên tắc -5%:** Bất kỳ cổ phiếu nào chạm mức lỗ -5.0% ➔ **BÁN 1/2 NGAY LẬP TỨC**.
