@@ -68,6 +68,37 @@ def generate_visual_dashboard(output_file=None):
     dcm_s = s_dict.get('DCM', {'score': 80, 'dist_ma20': 2.1, 'rsi': 60.5, 'val20_bil': 120.0, 'vol_ratio': 1.15, 'rr_ratio': 2.4})
     dgc_s = s_dict.get('DGC', {'score': 48, 'dist_ma20': -6.2, 'rsi': 41.5, 'val20_bil': 95.0, 'vol_ratio': 0.70, 'rr_ratio': 1.2})
 
+    # Dữ liệu thị giá và danh mục thực tế
+    dcm_data = next((s for s in results if s['symbol'] == 'DCM'), None)
+    dcm_price = dcm_data['close'] if dcm_data else 35.50
+    dcm_pct = ((dcm_price - 33.30) / 33.30) * 100
+    dcm_val = int(800 * dcm_price * 1000)
+    dcm_profit = dcm_val - int(800 * 33.30 * 1000)
+
+    tcb_data = next((s for s in results if s['symbol'] == 'TCB'), None)
+    tcb_price = tcb_data['close'] if tcb_data else 34.20
+    tcb_pct = ((tcb_price - 32.64) / 32.64) * 100
+    tcb_val = int(900 * tcb_price * 1000)
+    tcb_profit = tcb_val - int(900 * 32.64 * 1000)
+
+    from screener import fetch_stock_ohlcv
+    nbc_df = fetch_stock_ohlcv('NBC', days=60)
+    nbc_price = float(nbc_df['close'].iloc[-1]) if nbc_df is not None and not nbc_df.empty else 8.40
+    nbc_pct = ((nbc_price - 8.30) / 8.30) * 100
+    nbc_val = int(5500 * nbc_price * 1000)
+    nbc_profit = nbc_val - int(5500 * 8.30 * 1000)
+
+    td6_price = 6.35
+    td6_val = int(300 * td6_price * 1000)
+    td6_profit = td6_val - int(300 * 6.13 * 1000)
+    td6_pct = ((td6_price - 6.13) / 6.13) * 100
+
+    total_portfolio_val = nbc_val + tcb_val + dcm_val + td6_val
+    nbc_weight = (nbc_val / total_portfolio_val) * 100
+    tcb_weight = (tcb_val / total_portfolio_val) * 100
+    dcm_weight = (dcm_val / total_portfolio_val) * 100
+    td6_weight = (td6_val / total_portfolio_val) * 100
+
     def get_report_sort_key(filename):
         m = re.search(r"ban_tin_(sang|trua|chieu)_(\d{1,2})_(\d{1,2})_(\d{4})", filename)
         if m:
@@ -187,7 +218,7 @@ def generate_visual_dashboard(output_file=None):
                 </div>
                 <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
                     <span class="text-xs text-slate-400">Tiền mặt / CP:</span>
-                    <span class="text-sm font-bold text-cyan-400">0tr (0%) / 102tr (100%)</span>
+                    <span class="text-sm font-bold text-cyan-400">0tr (0%) / {total_portfolio_val/1000000:.1f}tr (100%)</span>
                 </div>
             </div>
         </div>
@@ -284,11 +315,11 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                             <td class="py-3 px-3 font-bold text-white">5.500 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">8.30</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">8.35</td>
-                            <td class="py-3 px-3 font-bold text-white">45.925.000 đ</td>
-                            <td class="py-3 px-3 font-semibold text-cyan-400">45.65%</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">+0.60% (+275k)</td>
-                            <td class="py-3 px-3 text-amber-300 font-medium">Khớp 16/10 (Chiều 20/10 về TK)</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{nbc_price:.2f}</td>
+                            <td class="py-3 px-3 font-bold text-white">{nbc_val:,} đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">{nbc_weight:.2f}%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{nbc_pct:+.2f}% ({nbc_profit:+,.0f} đ)</td>
+                            <td class="py-3 px-3 text-emerald-400 font-medium">Khớp 16/10 (Đã về TK - Sẵn sàng GD)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
                                     <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ
@@ -305,10 +336,10 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                             <td class="py-3 px-3 font-bold text-white">900 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">32.64</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">32.90</td>
-                            <td class="py-3 px-3 font-bold text-white">29.610.000 đ</td>
-                            <td class="py-3 px-3 font-semibold text-cyan-400">29.38%</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">+0.80% (+234k)</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{tcb_price:.2f}</td>
+                            <td class="py-3 px-3 font-bold text-white">{tcb_val:,} đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">{tcb_weight:.2f}%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{tcb_pct:+.2f}% ({tcb_profit:+,.0f} đ)</td>
                             <td class="py-3 px-3 text-emerald-400 font-medium">Khớp 15/10 (Đã về TK - Sẵn sàng GD)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
@@ -326,10 +357,10 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                             <td class="py-3 px-3 font-bold text-white">800 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">33.30</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">33.60</td>
-                            <td class="py-3 px-3 font-bold text-white">26.880.000 đ</td>
-                            <td class="py-3 px-3 font-semibold text-cyan-400">26.64%</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">+0.90% (+240k)</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{dcm_price:.2f}</td>
+                            <td class="py-3 px-3 font-bold text-white">{dcm_val:,} đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">{dcm_weight:.2f}%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{dcm_pct:+.2f}% ({dcm_profit:+,.0f} đ)</td>
                             <td class="py-3 px-3 text-emerald-400 font-medium">Khớp 15/10 (Đã về TK - Sẵn sàng GD)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
@@ -347,11 +378,11 @@ def generate_visual_dashboard(output_file=None):
                             </td>
                             <td class="py-3 px-3 font-medium text-slate-400">300 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">6.13</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">6.35</td>
-                            <td class="py-3 px-3 font-bold text-white">1.905.000 đ</td>
-                            <td class="py-3 px-3 font-semibold text-slate-400">~1.9%</td>
-                            <td class="py-3 px-3 font-bold text-emerald-400">+3.59% (+66k)</td>
-                            <td class="py-3 px-3 text-emerald-400 font-medium">Khả dụng ngay</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{td6_price:.2f}</td>
+                            <td class="py-3 px-3 font-bold text-white">{td6_val:,} đ</td>
+                            <td class="py-3 px-3 font-semibold text-slate-400">{td6_weight:.2f}%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">{td6_pct:+.2f}% ({td6_profit:+,.0f} đ)</td>
+                            <td class="py-3 px-3 text-emerald-400 font-medium">Khả dụng ngay (Sẵn sàng GD)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-3 py-1 rounded-full font-bold">
                                     <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> CANH BÁN 6.4 - 6.5
