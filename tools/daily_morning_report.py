@@ -84,12 +84,13 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
     dcm_val = int(800 * dcm_price * 1000)
     tcb_val = int(900 * tcb_price * 1000)
-    nbc_val = int(5500 * nbc_price * 1000)
-    stock_total_val = dcm_val + tcb_val + nbc_val
-    cash_val = 0
+    nbc_val = int(4500 * nbc_price * 1000)
+    td6_val = int(300 * 6.35 * 1000)
+    stock_total_val = dcm_val + tcb_val + nbc_val + td6_val
+    cash_val = 8600000  # Thu về từ chốt lời 1.000 cp NBC @ 8.60
     nav_current = cash_val + stock_total_val
-    cash_pct = 0.0
-    stock_pct = 100.0
+    cash_pct = (cash_val / nav_current) * 100
+    stock_pct = (stock_total_val / nav_current) * 100
 
     md_content = f"""# 📊 {report_title}
 **Thời gian:** {time_label} | **Chiến lược:** Cân bằng chủ động săn sóng ngành  
@@ -102,12 +103,12 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
 | Mã CP | Khối lượng | Giá vốn | Thị giá | Giá trị TT (VNĐ) | Lãi/Lỗ (%) | Trạng thái / Ngày về | Khuyến nghị hành động cụ thể |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **NBC** *(Than Núi Béo)* | **5,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10<br>*(Đã về TK - Sẵn sàng GD)* | **NẮM GIỮ CHỦ ĐỘNG**.<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Cắt lỗ dứt khoát: **7.60** (thủng đáy).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
+| **NBC** *(Than Núi Béo)* | **4,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10<br>*(Đã chốt 1k @ 8.6, còn 4.5k T+0)* | **NẮM GIỮ 4.500 CP CÒN LẠI**.<br>• Đã chốt lời 1.000 cp @ 8.60 (+300.000đ, thu 8.6tr tiền).<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
 | **TCB** | **900** | **32.64** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
-| **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.65** (thủng bán 1/2).<br>• Chốt lời 1: **36.60** (+10%).<br>• Chốt lời 2: **38.20** (+14.7%). |
+| **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Kê chốt 1/3 vùng **36.0 - 36.5**.<br>• Nâng chặn lãi: **34.00** (vốn 33.30). |
 | **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (Khả dụng) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
 
-* **Đánh giá sức khỏe danh mục:** Tài khoản đã giải ngân 100% NAV vào 3 mã trọng tâm: TCB (Ngân hàng), DCM (Phân bón) và NBC (Than). Hiện tại toàn bộ 100% cổ phiếu trong danh mục đều đã về tài khoản và sẵn sàng giao dịch (T+0). Tỷ lệ tiền mặt hiện tại là 0%, nguyên tắc kỷ luật số 1 lúc này là **TUYỆT ĐỐI KHÔNG MUA THÊM BẤT KỲ MÃ NÀO**, kiên nhẫn nắm giữ và thực thi đúng các mốc Stop-loss / Take-profit đã định sẵn.
+* **Đánh giá sức khỏe danh mục:** Tài khoản đang phân bổ vào 3 mã trọng tâm: TCB (Ngân hàng), DCM (Phân bón) và NBC (Than). Đã thực hiện chốt lời 1 phần NBC (1.000 cp @ 8.60) bỏ túi 300.000 VNĐ lợi nhuận và mở lại **8.600.000 VNĐ tiền mặt** (~8.1% NAV). Toàn bộ cổ phiếu còn lại trong danh mục đều đã về tài khoản và sẵn sàng giao dịch (T+0). Ưu tiên giữ tiền mặt dự phòng, tuân thủ chặt chẽ các mốc Stop-loss / Take-profit đã định sẵn.
 
 ---
 
@@ -173,8 +174,8 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 ## 💰 V. KẾ HOẠCH HÀNH ĐỘNG DỨT KHOÁT CHO TÀI KHOẢN 100 TRIỆU
 
 ### 1. Kế hoạch quản trị vị thế & giải ngân tiếp theo
-* Danh mục đã hoàn tất phân bổ 100% NAV vào 3 mã chiến lược: TCB (Ngân hàng), DCM (Phân bón), NBC (Than).
-* **Chiến lược:** Tạm dừng mở vị thế mua mới vì tỷ lệ tiền mặt là 0%. Hiện tại toàn bộ 100% cổ phiếu trong danh mục (TCB, DCM, NBC) đều đã về tài khoản và sẵn sàng giao dịch (T+0). Toàn bộ danh mục đã chủ động kiểm soát rủi ro. Chỉ xem xét chốt lời từng phần khi đạt mục tiêu hoặc canh hạ tỷ trọng nếu chạm ngưỡng phòng thủ.
+* Danh mục đang nắm giữ: TCB (900 cp), DCM (800 cp), NBC (4,500 cp) và **8.600.000 VNĐ tiền mặt khả dụng** (thu về từ chốt lời 1.000 cp NBC @ 8.60).
+* **Chiến lược:** Tiếp tục nắm giữ các vị thế khỏe đã có đệm lãi an toàn, canh chốt lời từng phần theo chiều giá tăng (TCB mục tiêu 35.9, DCM kê 36.0 - 36.5, NBC còn 4,500 cp canh 9.10 - 9.60). Lượng tiền mặt 8.6 triệu giữ chủ động chờ điểm mua bổ sung khi VN-Index test thành công 1.700 điểm.
 
 ### 2. Thẻ Cắt Lỗ & Bảo Vệ Vốn (Kỷ luật thép)
 * **Nguyên tắc -5%:** Bất kỳ cổ phiếu nào chạm mức lỗ -5.0% ➔ **BÁN 1/2 NGAY LẬP TỨC**.

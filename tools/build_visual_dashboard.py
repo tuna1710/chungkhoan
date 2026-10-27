@@ -85,19 +85,22 @@ def generate_visual_dashboard(output_file=None):
     nbc_df = fetch_stock_ohlcv('NBC', days=60)
     nbc_price = float(nbc_df['close'].iloc[-1]) if nbc_df is not None and not nbc_df.empty else 8.40
     nbc_pct = ((nbc_price - 8.30) / 8.30) * 100
-    nbc_val = int(5500 * nbc_price * 1000)
-    nbc_profit = nbc_val - int(5500 * 8.30 * 1000)
+    nbc_val = int(4500 * nbc_price * 1000)
+    nbc_profit = nbc_val - int(4500 * 8.30 * 1000)
 
     td6_price = 6.35
     td6_val = int(300 * td6_price * 1000)
     td6_profit = td6_val - int(300 * 6.13 * 1000)
     td6_pct = ((td6_price - 6.13) / 6.13) * 100
 
-    total_portfolio_val = nbc_val + tcb_val + dcm_val + td6_val
+    cash_val = 8600000  # Thu về từ việc chốt lời 1.000 cp NBC @ 8.60
+    total_stock_val = nbc_val + tcb_val + dcm_val + td6_val
+    total_portfolio_val = total_stock_val + cash_val
     nbc_weight = (nbc_val / total_portfolio_val) * 100
     tcb_weight = (tcb_val / total_portfolio_val) * 100
     dcm_weight = (dcm_val / total_portfolio_val) * 100
     td6_weight = (td6_val / total_portfolio_val) * 100
+    cash_weight = (cash_val / total_portfolio_val) * 100
 
     def get_report_sort_key(filename):
         m = re.search(r"ban_tin_(sang|trua|chieu)_(\d{1,2})_(\d{1,2})_(\d{4})", filename)
@@ -218,7 +221,7 @@ def generate_visual_dashboard(output_file=None):
                 </div>
                 <div class="bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 flex items-center gap-2">
                     <span class="text-xs text-slate-400">Tiền mặt / CP:</span>
-                    <span class="text-sm font-bold text-cyan-400">0tr (0%) / {total_portfolio_val/1000000:.1f}tr (100%)</span>
+                    <span class="text-sm font-bold text-cyan-400">{cash_val/1000000:.1f}tr ({cash_weight:.0f}%) / {total_stock_val/1000000:.1f}tr ({100-cash_weight:.0f}%)</span>
                 </div>
             </div>
         </div>
@@ -248,7 +251,7 @@ def generate_visual_dashboard(output_file=None):
                     </div>
                     <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i class="fa-solid fa-bullseye"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Khớp NBC 5.5k @ 8.30; TCB 900 @ 32.64; DCM 800 @ 33.30.</p>
+                <p class="text-xs text-slate-400 mt-3">NBC 4.5k @ 8.30 (đã chốt 1k @ 8.60); TCB 900 @ 32.64; DCM 800 @ 33.30.</p>
             </div>
             <!-- Card 3 -->
             <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 shadow-lg hover:border-slate-600 transition">
@@ -266,11 +269,11 @@ def generate_visual_dashboard(output_file=None):
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-xs font-medium text-slate-400">Sức Mua Tiền Mặt</p>
-                        <h3 class="text-lg font-bold text-cyan-400 mt-1">0 VNĐ (Full Cổ)</h3>
+                        <h3 class="text-lg font-bold text-cyan-400 mt-1">{cash_val:,} đ ({cash_weight:.1f}%)</h3>
                     </div>
                     <span class="p-2 rounded-lg bg-cyan-500/10 text-cyan-400"><i class="fa-solid fa-wallet"></i></span>
                 </div>
-                <p class="text-xs text-slate-400 mt-3">Chiếm 0% NAV. Đã giải ngân đủ vị thế, tuyệt đối dừng mua mới.</p>
+                <p class="text-xs text-slate-400 mt-3">Thu về từ chốt lời 1.000 cp NBC @ 8.60 (+300k). Sẵn sàng giải ngân mới.</p>
             </div>
         </div>
 
@@ -284,10 +287,10 @@ def generate_visual_dashboard(output_file=None):
                         <i class="fa-solid fa-wallet text-emerald-400"></i>
                         THEO DÕI VỊ THẾ DANH MỤC THỰC CHIẾN & KHUYẾN NGHỊ HÀNH ĐỘNG
                     </h2>
-                    <p class="text-xs text-slate-400">Tổng tài sản NAV: 100.000.000 VNĐ • Đã giải ngân hoàn tất 100% NAV vào 3 mã chiến lược</p>
+                    <p class="text-xs text-slate-400">Tổng tài sản NAV: {total_portfolio_val:,} VNĐ • Đang giữ 3 mã chiến lược + Tiền mặt dự phòng</p>
                 </div>
                 <div class="flex items-center gap-2 text-xs">
-                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold">100% Cổ phiếu / 0% Tiền mặt</span>
+                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold">{100 - cash_weight:.1f}% Cổ phiếu / {cash_weight:.1f}% Tiền mặt</span>
                 </div>
             </div>
 
@@ -313,18 +316,18 @@ def generate_visual_dashboard(output_file=None):
                                 <span class="bg-amber-950/60 text-amber-300 px-2.5 py-1 rounded border border-amber-500/40 font-black">NBC</span>
                                 <span class="text-[10px] text-slate-400 block mt-0.5">Than Núi Béo (HNX)</span>
                             </td>
-                            <td class="py-3 px-3 font-bold text-white">5.500 cp</td>
+                            <td class="py-3 px-3 font-bold text-white">4.500 cp</td>
                             <td class="py-3 px-3 font-semibold text-slate-300">8.30</td>
                             <td class="py-3 px-3 font-bold text-emerald-400">{nbc_price:.2f}</td>
                             <td class="py-3 px-3 font-bold text-white">{nbc_val:,} đ</td>
                             <td class="py-3 px-3 font-semibold text-cyan-400">{nbc_weight:.2f}%</td>
                             <td class="py-3 px-3 font-bold text-emerald-400">{nbc_pct:+.2f}% ({nbc_profit:+,.0f} đ)</td>
-                            <td class="py-3 px-3 text-emerald-400 font-medium">Khớp 16/10 (Đã về TK - Sẵn sàng GD)</td>
+                            <td class="py-3 px-3 text-emerald-400 font-medium">Đã chốt 1k @ 8.60 (+300k)<br>Còn 4.5k (T+0)</td>
                             <td class="py-3 px-3 text-center">
                                 <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
-                                    <i class="fa-solid fa-lock mr-1"></i> TIẾP TỤC NẮM GIỮ
+                                    <i class="fa-solid fa-lock mr-1"></i> GIỮ 4.500 CP CÒN LẠI
                                 </span>
-                                <span class="text-[10px] text-slate-400 block mt-1">Cắt lỗ: 7.90 (-5%) | Chốt lời: 9.10 - 9.60</span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Cắt lỗ: 7.90 (-5%) | Chốt lời tiếp: 9.10 - 9.60</span>
                             </td>
                         </tr>
 
@@ -388,6 +391,27 @@ def generate_visual_dashboard(output_file=None):
                                     <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> CANH BÁN 6.4 - 6.5
                                 </span>
                                 <span class="text-[10px] text-slate-400 block mt-1">Chốt lời dọn gọn danh mục</span>
+                            </td>
+                        </tr>
+
+                        <!-- Row 5: Tiền mặt -->
+                        <tr class="bg-slate-900/40 hover:bg-slate-800/40 transition">
+                            <td class="py-3 px-3 font-bold text-white text-sm">
+                                <span class="bg-cyan-950/60 text-cyan-300 px-2.5 py-1 rounded border border-cyan-500/40 font-black">TIỀN MẶT</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Sức mua khả dụng</span>
+                            </td>
+                            <td class="py-3 px-3 font-medium text-cyan-300">-</td>
+                            <td class="py-3 px-3 font-semibold text-slate-300">-</td>
+                            <td class="py-3 px-3 font-bold text-cyan-400">-</td>
+                            <td class="py-3 px-3 font-bold text-cyan-300">{cash_val:,} đ</td>
+                            <td class="py-3 px-3 font-semibold text-cyan-400">{cash_weight:.2f}%</td>
+                            <td class="py-3 px-3 font-bold text-emerald-400">+300.000 đ (lãi NBC)</td>
+                            <td class="py-3 px-3 text-cyan-400 font-medium">Khả dụng 100%</td>
+                            <td class="py-3 px-3 text-center">
+                                <span class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 px-3 py-1 rounded-full font-bold">
+                                    <i class="fa-solid fa-wallet mr-1"></i> SẴN SÀNG GIẢI NGÂN
+                                </span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Thu về từ chốt lời 1.000 NBC @ 8.60</span>
                             </td>
                         </tr>
                     </tbody>

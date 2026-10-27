@@ -3,16 +3,17 @@
 
 ## 1. THÔNG SỐ TỔNG QUAN TÀI KHOẢN
 - **Vốn ban đầu (NAV 0):** `100,000,000 VNĐ` (Một trăm triệu đồng)
-- **NAV hiện tại:** `~102,000,000 VNĐ` (Bao gồm giá trị tạm tính các vị thế)
-- **Tỷ suất sinh lời lũy kế:** `+0.55%` (Mục tiêu 3 tháng: +10% đến +15% <=> 110 - 115 triệu VNĐ)
+- **NAV hiện tại:** `~106,000,000 VNĐ` (Bao gồm tiền mặt và giá trị thị trường các vị thế)
+- **Lợi nhuận đã hiện thực hóa (Realized Profit):** `+300,000 VNĐ` (Từ lệnh chốt lời 1,000 cp NBC @ 8.60)
+- **Tỷ suất sinh lời lũy kế:** `+5.5%` đến `+6.0%` (Mục tiêu 3 tháng: +10% đến +15% <=> 110 - 115 triệu VNĐ)
 - **Mức sụt giảm tối đa ghi nhận (Max Drawdown):** `0.00%` (Giới hạn: < 6%)
-- **Tỷ lệ Tiền mặt / Cổ phiếu hiện tại:** `~0% Cash / ~100% Stock` (Đã giải ngân trọn vẹn danh mục)
-  - Tiền mặt khả dụng: `~0 VNĐ`
-  - Tổng giá trị cổ phiếu giải ngân: `101,666,000 VNĐ`
-    * DCM: `26,640,000 VNĐ` (800 cp @ 33.30)
+- **Cơ cấu tài sản hiện tại:**
+  - **Tiền mặt khả dụng:** `8,600,000 VNĐ` (~8.1% NAV) - *Mới thu về từ chốt lời 1,000 cp NBC*
+  - **Tổng giá trị cổ phiếu (theo giá vốn):** `95,205,000 VNĐ` (~91.9% NAV)
+    * NBC: `37,350,000 VNĐ` (4,500 cp @ 8.30)
     * TCB: `29,376,000 VNĐ` (900 cp @ 32.64)
-    * NBC: `45,650,000 VNĐ` (5,500 cp @ 8.30)
-    * TD6 (TC6): `1,905,000 VNĐ` (300 cp lẻ)
+    * DCM: `26,640,000 VNĐ` (800 cp @ 33.30)
+    * TD6 (TC6): `1,839,000 VNĐ` (300 cp lẻ @ 6.13)
 
 ---
 
@@ -20,62 +21,60 @@
 
 | Mã CP | Số lượng | Giá vốn (k) | Giá hiện tại (k) | Giá trị vốn (VNĐ) | Giá trị TT (VNĐ) | Lãi/Lỗ (%) | Tỷ trọng NAV | Trạng thái / Ngày về |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **NBC** *(Than Núi Béo)* | 5,500 | **8.30** | 8.40 | 45,650,000 | 46,200,000 | +1.20% | 45.65% | Đang nắm giữ (T+0, Đã về TK - Sẵn sàng GD) |
-| **TCB** | 900 | **32.64** | 34.20 | 29,376,000 | 30,780,000 | +4.78% | 29.38% | Đang nắm giữ (T+0, Đã về TK - Sẵn sàng GD) |
-| **DCM** | 800 | **33.30** | 35.50 | 26,640,000 | 28,400,000 | +6.61% | 26.64% | Đang nắm giữ (T+0, Đã về TK - Sẵn sàng GD) |
-| **TD6** *(TC6)* | 300 | 6.13 | 6.35 | 1,839,000 | 1,905,000 | +3.59% | ~1.9% *(Khoản lẻ)* | Sẵn sàng giao dịch (Canh bán 6.4 - 6.5) |
+| **NBC** *(Than Núi Béo)* | **4,500** | **8.30** | **8.40** | 37,350,000 | 37,800,000 | +1.20% | ~35.7% | Đang nắm giữ T+0 (Đã chốt lời 1,000 cp @ 8.60 ngày 27/10) |
+| **TCB** | 900 | **32.64** | 33.80 | 29,376,000 | 30,420,000 | +3.55% | ~28.7% | Đang nắm giữ (T+0, Đã về TK - Sẵn sàng GD) |
+| **DCM** | 800 | **33.30** | 35.40 | 26,640,000 | 28,320,000 | +6.31% | ~26.7% | Đang nắm giữ (T+0, Đã về TK - Sẵn sàng GD) |
+| **TD6** *(TC6)* | 300 | 6.13 | 6.35 | 1,839,000 | 1,905,000 | +3.59% | ~1.8% *(Khoản lẻ)* | Sẵn sàng giao dịch (Canh bán 6.35 - 6.5) |
+
+### 💵 LỊCH SỬ CHỐT LỜI / ĐÓNG VỊ THẾ (REALIZED PROFIT)
+
+| Ngày | Mã CP | Khối lượng | Giá mua | Giá bán | Tiền thu về | Lợi nhuận (VNĐ) | Tỷ suất (%) | Ghi chú |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **27/10/2026** | **NBC** | **1,000** | **8.30** | **8.60** | **8,600,000 VNĐ** | **+300,000 VNĐ** | **+3.61%** | Chốt lời chủ động 1 phần (1,000/5,500 cp) bỏ túi lợi nhuận, thu hồi 8.6tr tiền mặt |
 
 ---
 
 ## 3. NHẬT KÝ LỆNH CHI TIẾT
 
-| STT | Ngày đặt | Mã CP | Khối lượng | Giá đặt/khớp | Trạng thái | Lý do mua | Giá cắt lỗ (-5%) | Giá mục tiêu | Lãi/Lỗ (%) | Ghi chú |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **01** | 14/10 | **TCB** | 900 | **32.64** | **ĐÃ KHỚP** | Tích lũy MA20 cạn vol, đón BCTC Q3 | 31.00 (-5.0%) | 35.9 - 38.0 (+10% - 16%) | +0.80% | Khớp 900 cp @ 32.64 |
-| **02** | 15/10 | **DCM** | 800 | **33.30** | **ĐÃ KHỚP** | Top 1 bộ lọc (80đ), test cung cạn vol sát MA20, sóng Phân bón | 31.65 (-5.0%) | 37.3 - 38.2 (+12% - 15%) | 0.00% | Khớp 800 cp vùng giá 33.30 |
-| **03** | 16/10 | **NBC** | 5,500 | **8.30** | **ĐÃ KHỚP** | Bật nền tích lũy ngắn hạn ngành than | 7.90 (-5.0%) | 9.10 - 9.60 (+10% - 15%) | +1.20% | Khớp 5,500 cp giá 8.30 |
+| STT | Ngày đặt | Mã CP | Chiều | Khối lượng | Giá đặt/khớp | Trạng thái | Lý do / Chiến lược | Lãi/Lỗ (%) | Lãi/Lỗ thực (VNĐ) | Ghi chú |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- | :---: | :---: | :--- |
+| **01** | 14/10 | **TCB** | Mua | 900 | **32.64** | **ĐÃ KHỚP** | Tích lũy MA20 cạn vol, đón BCTC Q3 | +3.55% | - | Khớp 900 cp @ 32.64 |
+| **02** | 15/10 | **DCM** | Mua | 800 | **33.30** | **ĐÃ KHỚP** | Top 1 bộ lọc (80đ), test cung cạn vol sát MA20 | +6.31% | - | Khớp 800 cp @ 33.30 |
+| **03** | 16/10 | **NBC** | Mua | 5,500 | **8.30** | **ĐÃ KHỚP** | Bật nền tích lũy ngắn hạn ngành than | +1.20% | - | Khớp 5,500 cp @ 8.30 |
+| **04** | **27/10** | **NBC** | **Bán** | **1,000** | **8.60** | **ĐÃ KHỚP** | **Chốt lời chủ động 1 phần (1.000 cp) tại vùng cản ngắn hạn, thu tiền về** | **+3.61%** | **+300,000 VNĐ** | Đã bán 1,000 cp @ 8.60; còn giữ 4,500 cp |
 
 ---
 
 ## 4. KẾ HOẠCH QUẢN TRỊ RỦI RO & KỶ LUẬT THÉP CHO TỪNG VỊ THẾ
 
-### 🔹 Vị thế 1: Cổ phiếu NBC (Than Núi Béo - 5,500 cp @ 8.30)
-- **Tổng vốn giải ngân:** 45,650,000 VNĐ (~45% NAV).
-- **Ngày hàng về (T+2.5):** Chiều Thứ Ba (20/10/2026).
-- **Kịch bản Cắt lỗ (Bảo vệ vốn):**
-  * **Ngưỡng 1 (-5.0% = 7.90k):** Bán ngay 1/2 vị thế (2,700 cp), chặn mức lỗ tối đa **-1,080,000 VNĐ**.
-  * **Ngưỡng 2 (-7.5% = 7.68k - thủng đáy 7.70k):** Bán toàn bộ 2,800 cp còn lại, tuyệt đối không gồng lỗ hay trung bình giá.
-- **Kịch bản Chốt lời:**
-  * **Mục tiêu 1 (+9.6% ~ 9.10k - đỉnh cũ tháng 9):** Chốt lời chủ động 1/2 vị thế (2,700 cp) (+2,160,000 VNĐ).
-  * **Mục tiêu 2 (+15.6% ~ 9.60k - cản MA200):** Chốt lời toàn bộ phần còn lại (+3,500,000 VNĐ).
-- **Tỷ lệ Lợi nhuận / Rủi ro (R:R):** `(9.10 - 8.30) / (8.30 - 7.90) = 0.80 / 0.40 = 2.0 : 1` (Đạt chuẩn tối thiểu >= 2.0).
-- **Lưu ý giao dịch:** Sàn HNX biên độ 10%, thanh khoản trung bình 30k - 70k cp/phiên nên khi chốt lời/cắt lỗ cần rải lệnh bán chủ động, tránh bán tháo quét lệnh MP gây trượt giá.
+### 🔹 Vị thế 1: Cổ phiếu NBC (Than Núi Béo - Còn 4,500 cp @ 8.30)
+- **Tổng vốn giải ngân còn lại:** 37,350,000 VNĐ (~35% NAV).
+- **Thực hiện:** Đã chốt lời 1,000 cp @ 8.60 ngày 27/10 (+300,000 VNĐ), thu hồi 8.6 triệu VNĐ tiền mặt.
+- **Kịch bản cho 4,500 cp còn lại:**
+  * **Kịch bản Chốt lời:**
+    * **Mục tiêu 1 (+9.6% ~ 9.10k - đỉnh cũ):** Chốt tiếp 2,000 cp (+1,600,000 VNĐ).
+    * **Mục tiêu 2 (+15.6% ~ 9.60k - cản MA200):** Chốt lời toàn bộ 2,500 cp còn lại (+3,250,000 VNĐ).
+  * **Kịch bản Bảo vệ vốn (Cắt lỗ / Chặn lãi):**
+    * **Ngưỡng 1 (-5.0% = 7.90k):** Bán 1/2 vị thế còn lại (2,200 cp).
+    * **Ngưỡng 2 (7.60k - thủng đáy):** Bán dứt khoát toàn bộ phần còn lại.
+- **Tỷ lệ Lợi nhuận / Rủi ro (R:R):** `(9.10 - 8.30) / (8.30 - 7.90) = 0.80 / 0.40 = 2.0 : 1`.
 
 ### 🔹 Vị thế 2: Cổ phiếu TCB (Ngân hàng - 900 cp @ 32.64)
 - **Tổng vốn giải ngân:** 29,376,000 VNĐ.
-- **Ngày hàng về (T+2.5):** Chiều Thứ Hai (19/10/2026).
-- **Kịch bản Cắt lỗ:**
-  * **Ngưỡng 1 (-5.0% = 31.00k):** Bán ngay 1/2 vị thế (450 cp), chặn lỗ tối đa **-738,000 VNĐ**.
-  * **Ngưỡng 2 (-7.0% = 30.20k):** Bán toàn bộ 450 cp còn lại.
-- **Kịch bản Chốt lời:**
-  * **Mục tiêu 1 (+10.0% ~ 35.90k):** Chốt lời chủ động 1/2 vị thế (450 cp).
-  * **Mục tiêu 2 (+15% đến +16.4% ~ 37.50 - 38.00k):** Chốt lời phần còn lại (450 cp).
-- **Tỷ lệ Lợi nhuận / Rủi ro (R:R):** `2.96 : 1`.
+- **Tình trạng:** Đã về tài khoản (T+0, sẵn sàng bán).
+- **Kịch bản Cắt lỗ:** Ngưỡng -5% = 31.00k (Bán 1/2), -7% = 30.20k (Bán hết).
+- **Kịch bản Chốt lời:** Mục tiêu 1: 35.90k (+10%), Mục tiêu 2: 37.50 - 38.00k (+15%).
 
 ### 🔹 Vị thế 3: Cổ phiếu DCM (Hóa chất/Phân bón - 800 cp @ 33.30)
 - **Tổng vốn giải ngân:** 26,640,000 VNĐ.
-- **Ngày hàng về (T+2.5):** Chiều Thứ Hai (19/10/2026).
-- **Kịch bản Cắt lỗ:**
-  * **Ngưỡng 1 (-5.0% = 31.65k):** Bán 1/2 vị thế (400 cp), chặn lỗ tối đa **-660,000 VNĐ**.
-  * **Ngưỡng 2 (-7.0% = 30.95k):** Bán toàn bộ 400 cp còn lại.
-- **Kịch bản Chốt lời:**
-  * **Mục tiêu 1 (+10.0% ~ 36.60k):** Chốt lời 1/2 vị thế (400 cp).
-  * **Mục tiêu 2 (+12% - 15% ~ 37.30 - 38.20k):** Chốt lời 400 cp còn lại.
-- **Tỷ lệ Lợi nhuận / Rủi ro (R:R):** `2.97 : 1`.
+- **Tình trạng:** Đã về tài khoản (T+0, sẵn sàng bán). Lãi > +6%.
+- **Kế hoạch hành động:**
+  * Kê bán trước 1/3 (300 cp) tại vùng 36.0 - 36.5 (+8% đến +10%).
+  * Nâng điểm chặn lãi (Trailing Stop) cho 500 cp còn lại lên 34.00 (bảo toàn lãi tối thiểu +2.1%).
 
 ---
 
-## 5. ĐÁNH GIÁ ĐỊNH KỲ CUỐI TUẦN
-- **Tuần 1 (14/10 - 18/10):** Đã giải ngân đủ 100% danh mục gồm 3 mã chính: **TCB (900 cp @ 32.64)**, **DCM (800 cp @ 33.30)** và **NBC (5,500 cp @ 8.30)**. Tài khoản đã đạt trạng thái Full cổ phiếu (0% tiền mặt), do đó bước tiếp theo là **tuyệt đối KHÔNG MỞ MUA THÊM**, kiên nhẫn theo dõi hàng về tuần tới và tuân thủ chặt chẽ các mốc cắt lỗ / chốt lời đã đề ra.
-- **Tuần 2 (21/10 - 25/10):** Đang cập nhật...
-- **Tuần 3 (28/10 - 01/11):** Đang cập nhật...
+## 5. ĐÁNH GIÁ ĐỊNH KỲ & THEO DÕI DÒNG TIỀN
+- **Tuần 1 (14/10 - 18/10):** Giải ngân đủ 3 mã: TCB (900 cp), DCM (800 cp), NBC (5,500 cp).
+- **Tuần 2 (21/10 - 25/10):** Cả 3 vị thế đều về tài khoản T+0 an toàn, danh mục tăng trưởng tốt (+5.38%), không có mã nào vi phạm cắt lỗ.
+- **Tuần 3 (26/10 - 31/10):** Ngày 27/10 thực hiện chốt lời đợt 1 mã **NBC (1,000 cp @ 8.60)**, hiện thực hóa +300.000 VNĐ tiền lời, giải phóng **8.600.000 VNĐ tiền mặt**. Tiếp tục nắm giữ 4,500 cp NBC còn lại cùng TCB và DCM.
