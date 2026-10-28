@@ -1,7 +1,7 @@
 # 📊 BẢN TIN TỔNG KẾT SAU GIỜ ĐÓNG CỬA PHIÊN (28/10/2026)
 **Thời gian:** 15h05 - 28/10/2026 | **Chiến lược:** Cân bằng chủ động săn sóng ngành  
 **Quy mô vốn:** 100.000.000 VNĐ | **Mục tiêu 3 tháng:** +10% đến +15% (110 - 115 triệu)  
-**Tỷ lệ tài sản hiện tại:** **0.00% Tiền mặt** (0 VNĐ) | **100.00% Cổ phiếu** (103,639,999 VNĐ)  
+**Tỷ lệ tài sản hiện tại:** **0.00% Tiền mặt** (0 VNĐ) | **100.00% Cổ phiếu** (93,586,999 VNĐ)  
 
 ---
 
@@ -10,7 +10,7 @@
 | Mã CP | Khối lượng | Giá vốn | Thị giá | Giá trị TT (VNĐ) | Lãi/Lỗ (%) | Trạng thái / Ngày về | Khuyến nghị hành động cụ thể |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
 | **NBC** *(Than Núi Béo)* | **5,500** | **8.30** | **8.30** | **45,650,000 VNĐ** | **+0.00%** | Khớp 16/10<br>*(Đã về TK - Sẵn sàng GD)* | **NẮM GIỮ CHỦ ĐỘNG**.<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Cắt lỗ dứt khoát: **7.60** (thủng đáy).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
-| **TCB** | **900** | **32.64** | **33.50** | **30,150,000 VNĐ** | **+2.63%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
+| **TCB** | **900** | **32.64** | **22.33** | **20,097,000 VNĐ** | **-31.59%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
 | **DCM** | **800** | **33.30** | **34.80** | **27,839,999 VNĐ** | **+4.50%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.65** (thủng bán 1/2).<br>• Chốt lời 1: **36.60** (+10%).<br>• Chốt lời 2: **38.20** (+14.7%). |
 | **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (Khả dụng) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
 
@@ -34,7 +34,7 @@
 | **#2** | **MSN** | Bán lẻ - Tiêu dùng | **85/100** [████████░░] | **+2.02%** (Sát nền) | **60.3** | **0.86x** | 415.3 tỷ | **2.4 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
 | **#3** | **HDB** | Ngân hàng | **85/100** [████████░░] | **+2.57%** (Sát nền) | **61.0** | **1.40x** | 390.5 tỷ | **2.4 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
 | **#4** | **VNM** | Bán lẻ - Tiêu dùng | **81/100** [████████░░] | **+0.61%** (Sát nền) | **47.7** | **1.21x** | 113.3 tỷ | **2.1 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
-| **#5** | **TCB** | Ngân hàng | **80/100** [████████░░] | **+1.18%** (Sát nền) | **55.0** | **1.38x** | 609.5 tỷ | **1.0 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
+| **#5** | **TCB** | Ngân hàng | **80/100** [████████░░] | **+1.16%** (Sát nền) | **55.0** | **1.38x** | 406.3 tỷ | **1.0 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
 | **#6** | **MBB** | Ngân hàng | **80/100** [████████░░] | **+1.21%** (Sát nền) | **50.7** | **0.66x** | 226.4 tỷ | **1.5 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
 | **#7** | **VCB** | Ngân hàng | **80/100** [████████░░] | **+1.46%** (Sát nền) | **53.8** | **2.02x** | 183.4 tỷ | **1.4 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
 | **#8** | **DCM** | Hóa chất - Phân bón | **80/100** [████████░░] | **+1.90%** (Sát nền) | **55.9** | **0.74x** | 74.5 tỷ | **2.4 : 1** | 🔥 MUA ƯU TIÊN (TOP 1) |
@@ -48,7 +48,7 @@
 ### 1. Nhóm Ngân Hàng: TCB (80 điểm - Đã khớp 900 cp) vs MBB (80 điểm)
 * **KẾT QUẢ:** **Chọn TCB** ➔ **Loại MBB**
 * **Lý do chi tiết:**
-  * **TCB:** Vận động vững trên MA20 (+1.18%), RSI 55.0 (xung lực khỏe), thanh khoản dẫn đầu 609 tỷ/phiên. Cấu trúc tích lũy rất khỏe.
+  * **TCB:** Vận động vững trên MA20 (+1.16%), RSI 55.0 (xung lực khỏe), thanh khoản dẫn đầu 406 tỷ/phiên. Cấu trúc tích lũy rất khỏe.
   * **MBB:** Vị thế +1.21% so với MA20, RSI 50.7, thanh khoản 226 tỷ. Cần thêm thời gian tích lũy mới có điểm mua an toàn.
 
 ### 2. Nhóm BĐS Khu Công Nghiệp: KBC (55 điểm) vs IDC (70 điểm)
