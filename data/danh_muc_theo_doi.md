@@ -32,8 +32,8 @@
 
 | Mã CP | Ngành | Vùng giá hiện tại | Vùng gom / Hỗ trợ | Kháng cự / Giá mục tiêu | Cắt lỗ (Stop-loss) | Trạng thái kỹ thuật |
 | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **NBC** | Khai khoáng - Than | **8.40** | Đã khớp 8.30 (16/10) | 9.10 - 9.60 (+10% - 15%) | 7.90 (-5.0%) | Nắm giữ T+0 (4,500 cp, đã chốt 1,000 cp @ 8.60), bật nền ngắn hạn |
+| **NBC** | Khai khoáng - Than | **8.40** | Đã khớp 8.30 (16/10) | 9.10 - 9.60 (+10% - 15%) | 7.90 (-5.0%) | Nắm giữ T+0 (1,500 cp, đã chốt 1,000 @ 8.60 & 3,000 @ 8.40), bật nền ngắn hạn |
 | **DCM** | Hóa chất - Phân bón | **33.30** | Đã khớp 33.30 (15/10) | 37.30 - 38.20 (+12% - 15%) | 31.65 (-5.0%) | Nắm giữ T+1 (800 cp), test cung cạn vol sát MA20 |
-| **TCB** | Ngân hàng | **32.90** | Đã khớp 32.64 (15/10) | 35.90 - 38.00 (+10% - 16%) | 31.00 (-5.0%) | Nắm giữ T+1 (900 cp), tích lũy siết nền MA20 |
+| **TCB** | Ngân hàng | **21.55** | Đã khớp 21.76 (sau chia 50%) | 23.95 - 25.30 (+10% - 16%) | 20.70 (-5.0%) | Nắm giữ T+0 (1,350 cp sau cổ tức 50% ngày 30/10), tích lũy siết nền MA20 |
 | **FPT** | Công nghệ | *Đang cập nhật* | Trendline hỗ trợ | Đỉnh thời đại mới | -5% từ điểm mua | Kênh tăng giá trung hạn bền vững |
 | **IDC** | BĐS KCN | *Đang cập nhật* | Vùng biên dưới hộp Darvas | Biên trên hộp Darvas | -5% từ điểm mua | Tích lũy tích cực trên MA50 |

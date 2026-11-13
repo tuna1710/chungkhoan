@@ -73,8 +73,8 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
     dcm_pct = ((dcm_price - 33.30) / 33.30) * 100
 
     tcb_data = next((s for s in results if s['symbol'] == 'TCB'), None)
-    tcb_price = tcb_data['close'] if tcb_data else 32.64
-    tcb_pct = ((tcb_price - 32.64) / 32.64) * 100
+    tcb_price = tcb_data['close'] if tcb_data else 21.76
+    tcb_pct = ((tcb_price - 21.76) / 21.76) * 100
 
     # Lấy thị giá NBC (Than Núi Béo)
     from screener import fetch_stock_ohlcv
@@ -83,11 +83,10 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
     nbc_pct = ((nbc_price - 8.30) / 8.30) * 100
 
     dcm_val = int(800 * dcm_price * 1000)
-    tcb_val = int(900 * tcb_price * 1000)
-    nbc_val = int(4500 * nbc_price * 1000)
-    td6_val = int(300 * 6.35 * 1000)
-    stock_total_val = dcm_val + tcb_val + nbc_val + td6_val
-    cash_val = 8600000  # Thu về từ chốt lời 1.000 cp NBC @ 8.60
+    tcb_val = int(1350 * tcb_price * 1000)
+    nbc_val = int(1500 * nbc_price * 1000)
+    stock_total_val = dcm_val + tcb_val + nbc_val
+    cash_val = 35639000  # 8.6tr (1k NBC @ 8.6) + 1.839tr (300 TD6 @ 6.13) + 25.2tr (3k NBC @ 8.4)
     nav_current = cash_val + stock_total_val
     cash_pct = (cash_val / nav_current) * 100
     stock_pct = (stock_total_val / nav_current) * 100
@@ -103,12 +102,11 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
 | Mã CP | Khối lượng | Giá vốn | Thị giá | Giá trị TT (VNĐ) | Lãi/Lỗ (%) | Trạng thái / Ngày về | Khuyến nghị hành động cụ thể |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **NBC** *(Than Núi Béo)* | **4,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10<br>*(Đã chốt 1k @ 8.6, còn 4.5k T+0)* | **NẮM GIỮ 4.500 CP CÒN LẠI**.<br>• Đã chốt lời 1.000 cp @ 8.60 (+300.000đ, thu 8.6tr tiền).<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
-| **TCB** | **900** | **32.64** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **31.00** (thủng bán 1/2).<br>• Chốt lời 1: **35.90** (+10%).<br>• Chốt lời 2: **37.50 - 38.00** (+15%). |
+| **NBC** *(Than Núi Béo)* | **1,500** | **8.30** | **{nbc_price:.2f}** | **{nbc_val:,} VNĐ** | **{nbc_pct:+.2f}%** | Khớp 16/10<br>*(Đã chốt 1k @ 8.6 & 3k @ 8.4, còn 1.5k)* | **NẮM GIỮ 1.500 CP CÒN LẠI**.<br>• Đã chốt 4.000 cp (lãi thực +600.000đ).<br>• Chặn lỗ -5%: **7.90** (thủng bán 1/2).<br>• Chốt lời 1: **9.10** (+9.6%).<br>• Chốt lời 2: **9.60** (+15.6%). |
+| **TCB** | **1,350** | **21.76** | **{tcb_price:.2f}** | **{tcb_val:,} VNĐ** | **{tcb_pct:+.2f}%** | Khớp 14/10<br>*(Đã nhận +450 cp cổ tức 50%)* | **TIẾP TỤC NẮM GIỮ**.<br>• Chặn lỗ -5%: **20.70** (thủng bán 1/2); -7%: **20.20**.<br>• Chốt lời 1: **23.95** (+10%).<br>• Chốt lời 2: **25.00 - 25.30** (+15% - 16%). |
 | **DCM** | **800** | **33.30** | **{dcm_price:.2f}** | **{dcm_val:,} VNĐ** | **{dcm_pct:+.2f}%** | Khớp 15/10<br>*(Đã về TK - Sẵn sàng GD)* | **TIẾP TỤC NẮM GIỮ**.<br>• Kê chốt 1/3 vùng **36.0 - 36.5**.<br>• Nâng chặn lãi: **34.00** (vốn 33.30). |
-| **TD6** *(TC6)* | **300** | **6.13** | **6.35** | **1,905,000 VNĐ** | **+3.59%** | Sẵn sàng GD (Khả dụng) | **CANH BÁN CHỐT LỜI vùng 6.4 - 6.5** để dọn gọn danh mục, thu hồi tiền. |
 
-* **Đánh giá sức khỏe danh mục:** Tài khoản đang phân bổ vào 3 mã trọng tâm: TCB (Ngân hàng), DCM (Phân bón) và NBC (Than). Đã thực hiện chốt lời 1 phần NBC (1.000 cp @ 8.60) bỏ túi 300.000 VNĐ lợi nhuận và mở lại **8.600.000 VNĐ tiền mặt** (~8.1% NAV). Toàn bộ cổ phiếu còn lại trong danh mục đều đã về tài khoản và sẵn sàng giao dịch (T+0). Ưu tiên giữ tiền mặt dự phòng, tuân thủ chặt chẽ các mốc Stop-loss / Take-profit đã định sẵn.
+* **Đánh giá sức khỏe danh mục:** Tài khoản đang phân bổ vào 3 mã trọng tâm: TCB (Ngân hàng - 1,350 cp sau chia cổ tức 50%), DCM (Phân bón - 800 cp) và NBC (Than - còn 1,500 cp). Đã bán hết 300 cp lẻ TD6 (@ 6.13, hòa vốn) và chốt lời thêm 3,000 cp NBC (@ 8.40, +300.000đ), nâng tổng lãi đã thực hiện lên **+600.000 VNĐ** và lượng **tiền mặt khả dụng lên 35.639.000 VNĐ** (~34.9% NAV). Toàn bộ cổ phiếu còn lại đều đã về tài khoản (T+0). Ưu tiên giữ tỷ trọng tiền mặt an toàn, tuân thủ chặt chẽ các mốc Stop-loss / Take-profit đã định sẵn.
 
 ---
 
@@ -151,7 +149,7 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 
 ## 🥊 IV. PHÂN TÍCH SO SÁNH ĐỐI ĐẦU (HEAD-TO-HEAD BATTLE)
 
-### 1. Nhóm Ngân Hàng: TCB ({tcb_s['score']} điểm - Đã khớp 900 cp) vs MBB ({mbb_s['score']} điểm)
+### 1. Nhóm Ngân Hàng: TCB ({tcb_s['score']} điểm - Đang giữ 1,350 cp) vs MBB ({mbb_s['score']} điểm)
 * **KẾT QUẢ:** **Chọn TCB** ➔ **Loại MBB**
 * **Lý do chi tiết:**
   * **TCB:** Vận động vững trên MA20 ({tcb_ma}), RSI {tcb_s['rsi']:.1f} ({'xung lực khỏe' if tcb_s['rsi'] >= 50 else 'giằng co'}), thanh khoản dẫn đầu {tcb_s['val20_bil']:.0f} tỷ/phiên. Cấu trúc tích lũy rất khỏe.
@@ -174,8 +172,8 @@ def generate_morning_report(output_dir=None, push_web=True, session="sang"):
 ## 💰 V. KẾ HOẠCH HÀNH ĐỘNG DỨT KHOÁT CHO TÀI KHOẢN 100 TRIỆU
 
 ### 1. Kế hoạch quản trị vị thế & giải ngân tiếp theo
-* Danh mục đang nắm giữ: TCB (900 cp), DCM (800 cp), NBC (4,500 cp) và **8.600.000 VNĐ tiền mặt khả dụng** (thu về từ chốt lời 1.000 cp NBC @ 8.60).
-* **Chiến lược:** Tiếp tục nắm giữ các vị thế khỏe đã có đệm lãi an toàn, canh chốt lời từng phần theo chiều giá tăng (TCB mục tiêu 35.9, DCM kê 36.0 - 36.5, NBC còn 4,500 cp canh 9.10 - 9.60). Lượng tiền mặt 8.6 triệu giữ chủ động chờ điểm mua bổ sung khi VN-Index test thành công 1.700 điểm.
+* Danh mục đang nắm giữ: TCB (1,350 cp @ 21.76), DCM (800 cp @ 33.30), NBC (1,500 cp @ 8.30) và **35.639.000 VNĐ tiền mặt khả dụng**.
+* **Chiến lược:** Tiếp tục nắm giữ các vị thế khỏe, canh chốt lời từng phần theo chiều giá tăng (TCB mục tiêu 23.95 - 25.30, DCM kê 36.0 - 36.5, NBC còn 1,500 cp canh 9.10 - 9.60). Lượng tiền mặt 35.64 triệu giữ chủ động chờ điểm mua bổ sung khi VN-Index test thành công 1.700 điểm.
 
 ### 2. Thẻ Cắt Lỗ & Bảo Vệ Vốn (Kỷ luật thép)
 * **Nguyên tắc -5%:** Bất kỳ cổ phiếu nào chạm mức lỗ -5.0% ➔ **BÁN 1/2 NGAY LẬP TỨC**.
